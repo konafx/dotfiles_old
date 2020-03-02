@@ -19,6 +19,11 @@
     },
     {
       "type": "git",
+      "path": "github.com/dense-analysis/ale",
+      "version": "634c81fd465269f59e3db878fe8405828e6d2da9"
+    },
+    {
+      "type": "git",
       "path": "github.com/heavenshell/vim-jsdoc",
       "version": "b23073449d1df98ecfe73828079115e0d1d7573b"
     },
@@ -30,27 +35,32 @@
     {
       "type": "git",
       "path": "github.com/iamcco/markdown-preview.nvim",
-      "version": "9be1ff405a1bc17d8875c18517135b6167acc315"
+      "version": "019ad30da8be8277e3dbcfa92b38f3387ae714fc"
     },
     {
       "type": "git",
       "path": "github.com/junegunn/fzf",
-      "version": "2a60edcd52df0c913ea8a93efec4027b9a758a5b"
+      "version": "dca56da0ef8589d6e7d00c5aaa073d9adb2dd650"
     },
     {
       "type": "git",
       "path": "github.com/junegunn/fzf.vim",
-      "version": "467c3277884240f7b5430f8f4d600e3415c38f3b"
+      "version": "48a2d80a24d19bfaafd91005786653bc49303c62"
     },
     {
       "type": "git",
       "path": "github.com/mattn/vim-lsp-settings",
-      "version": "42b7d395f17c1b677a53d8bec593365614e3ea7c"
+      "version": "4b216f58f1d1718219164f617111022a38f1cba7"
     },
     {
       "type": "git",
       "path": "github.com/moll/vim-node",
       "version": "ede047791792b9530ba1ae73ed86e9671cdd96b8"
+    },
+    {
+      "type": "git",
+      "path": "github.com/nvie/vim-flake8",
+      "version": "ce9ac790430699d346aa074d7f339f2e738284e3"
     },
     {
       "type": "git",
@@ -75,12 +85,12 @@
     {
       "type": "git",
       "path": "github.com/prabirshrestha/asyncomplete.vim",
-      "version": "c3b7078fd4e932148cbb896b461e929285ea6a9e"
+      "version": "5713fa6a1ee8de62ff8f1b5f03823f1daa824ac4"
     },
     {
       "type": "git",
       "path": "github.com/prabirshrestha/vim-lsp",
-      "version": "415f6e685f3c421574f02f955dc1a3c3118fa4dd"
+      "version": "80ec75e1da775990dd82f48819acbf0d39f90327"
     },
     {
       "type": "git",
@@ -90,7 +100,7 @@
     {
       "type": "git",
       "path": "github.com/scrooloose/nerdtree",
-      "version": "07612557ebb4118ef4a337faa7033d0270773c71"
+      "version": "e67324fdea7a192c7ce1b4c6b3c3b9f82f11eee7"
     },
     {
       "type": "git",
@@ -100,12 +110,12 @@
     {
       "type": "git",
       "path": "github.com/tpope/vim-fugitive",
-      "version": "98f67310aa3ae324d725a3b6b68a63e5a48372f4"
+      "version": "c452181975761f8b055b88eb1c98f736323510fd"
     },
     {
       "type": "git",
       "path": "github.com/vim-airline/vim-airline",
-      "version": "7e00ee1107d0ed24ac09af51e576ea7d85e114a3"
+      "version": "0b2683464877c1e39d0c67427c7fdc4bc6697d15"
     },
     {
       "type": "git",
@@ -120,6 +130,7 @@
         "github.com/Xuyuanp/nerdtree-git-plugin",
         "github.com/alvan/vim-closetag",
         "github.com/dag/vim-fish",
+        "github.com/dense-analysis/ale",
         "github.com/heavenshell/vim-jsdoc",
         "github.com/heavenshell/vim-pydocstring",
         "github.com/iamcco/markdown-preview.nvim",
@@ -127,6 +138,7 @@
         "github.com/junegunn/fzf.vim",
         "github.com/mattn/vim-lsp-settings",
         "github.com/moll/vim-node",
+        "github.com/nvie/vim-flake8",
         "github.com/pangloss/vim-javascript",
         "github.com/posva/vim-vue",
         "github.com/prabirshrestha/async.vim",

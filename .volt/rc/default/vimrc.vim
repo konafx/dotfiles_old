@@ -78,6 +78,11 @@ set hlsearch
 " clear hylight
 nmap <Esc><Esc> :nohlsearch<CR><Esc>
 
+" python_venv_path
+if isdirectory(expand($PYENV_ROOT))
+    let g:python3_host_prog = expand("$PYENV_ROOT/versions/vim/bin/python")
+endif
+
 " json processer
 command! -nargs=? Jq call s:Jq(<f-args>)
 function! s:Jq(...)
