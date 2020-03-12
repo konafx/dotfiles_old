@@ -12,6 +12,9 @@ function! s:on_load_post()
     " Python
     " flake8をLinterとして登録
     let g:ale_linters = {
+      \ 'html': [],
+      \ 'css': ['stylelint'],
+      \ 'javascript': ['eslint'],
       \ 'python': ['flake8'],
       \ }
     " Fixerを登録

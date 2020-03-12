@@ -30,7 +30,7 @@ hi SpecialKey ctermfg=59
 
 " indent 2にするマン……
 if has("autocmd")
-  autocmd FileType vim,html,xhtml,vue setlocal tabstop=2  "markup lang
+  autocmd FileType vim,html,xhtml,javascript,vue setlocal tabstop=2 softtabstop=2 shiftwidth=2 "markup lang
 endif
 
 " ## cache

@@ -35,12 +35,12 @@
     {
       "type": "git",
       "path": "github.com/iamcco/markdown-preview.nvim",
-      "version": "019ad30da8be8277e3dbcfa92b38f3387ae714fc"
+      "version": "d5f3dc23d24a7f7ac5e2431dc7975340d93c5fb2"
     },
     {
       "type": "git",
       "path": "github.com/junegunn/fzf",
-      "version": "dca56da0ef8589d6e7d00c5aaa073d9adb2dd650"
+      "version": "6db15e86937029b4a4565b2ae73a3c6bae5ef4ba"
     },
     {
       "type": "git",
@@ -50,7 +50,7 @@
     {
       "type": "git",
       "path": "github.com/mattn/vim-lsp-settings",
-      "version": "4b216f58f1d1718219164f617111022a38f1cba7"
+      "version": "864f68ddf2973cebe6463948219bc603b309575e"
     },
     {
       "type": "git",
@@ -90,7 +90,7 @@
     {
       "type": "git",
       "path": "github.com/prabirshrestha/vim-lsp",
-      "version": "80ec75e1da775990dd82f48819acbf0d39f90327"
+      "version": "5537feca35b6c481f1862a5275f016d7aa60b381"
     },
     {
       "type": "git",
@@ -110,12 +110,12 @@
     {
       "type": "git",
       "path": "github.com/tpope/vim-fugitive",
-      "version": "c452181975761f8b055b88eb1c98f736323510fd"
+      "version": "d102dd92fd9afeb23806ee92c3ab5b64d71fac2e"
     },
     {
       "type": "git",
       "path": "github.com/vim-airline/vim-airline",
-      "version": "0b2683464877c1e39d0c67427c7fdc4bc6697d15"
+      "version": "4e2546a2098954b74cbc612f573826f13d6fb88e"
     },
     {
       "type": "git",
