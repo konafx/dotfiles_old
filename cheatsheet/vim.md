@@ -39,3 +39,13 @@
     - `HJKL`: Move to the left/bottom/top/right
         - Using it, switch vertical/horizontal
     - `T`: Move to newtab
+
+## Etc...
+### コマンドラインのCtrl-R
+yankしたものをコマンドラインに貼り付けられる
+
+- `Ctrl-R`
+    - `"`: Paste
+    - `Ctrl-A`: Paste カーソル下の単語 （空白まで）
+    - `Ctrl-W`: カーソル下のキーワード
+    - `Ctrl-F`: カーソルしたのファイル名
