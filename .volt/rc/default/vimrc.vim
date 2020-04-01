@@ -9,8 +9,9 @@ set expandtab
 " 4 spaces are tab
 set tabstop=4
 
-" input tab, insert 4 spaces
-set softtabstop=4
+" Tab押下→space何個
+" 0→tabstopの値を参照
+set softtabstop=0
 
 " インデントに使う空白数
 set shiftwidth=4
@@ -30,7 +31,11 @@ hi SpecialKey ctermfg=59
 
 " indent 2にするマン……
 if has("autocmd")
-  autocmd FileType vim,html,xhtml,javascript,vue setlocal tabstop=2 softtabstop=2 shiftwidth=2 "markup lang
+  filetype plugin on
+  filetype indent on
+  autocmd FileType html,xhtml         setlocal ts=2 sts=2 sw=0
+  autocmd FileType javascript         setlocal ts=2 sts=2 sw=0
+  autocmd FileType vue                setlocal ts=2 sts=2 sw=0
 endif
 
 " ## cache
@@ -80,7 +85,7 @@ nmap <Esc><Esc> :nohlsearch<CR><Esc>
 
 " python_venv_path
 if isdirectory(expand($PYENV_ROOT))
-    let g:python3_host_prog = expand("$PYENV_ROOT/versions/vim/bin/python")
+  let g:python3_host_prog = expand("$PYENV_ROOT/versions/vim/bin/python")
 endif
 
 " json processer
