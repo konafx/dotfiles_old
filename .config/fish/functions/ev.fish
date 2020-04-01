@@ -1,5 +1,5 @@
 function __ev_find_my_vimrc -d "Search my vimrc"
-    if command -q volt;and test -e $VOLTPATH/rc/(volt list -f "{{ .CurrentProfileName }}")/vimrc.vim
+    if command -q volt; and test -e $VOLTPATH/rc/(volt list -f "{{ .CurrentProfileName }}")/vimrc.vim
         printf "%s" $VOLTPATH/rc/(volt list -f "{{ .CurrentProfileName }}")/vimrc.vim
         return
     else if test -e $HOME/.vim/vimrc
