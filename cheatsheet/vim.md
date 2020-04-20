@@ -40,6 +40,10 @@
         - Using it, switch vertical/horizontal
     - `T`: Move to newtab
 
+## Tab
+- `gt`: go to next tab
+- `gT`: go to preview tab
+
 ## Etc...
 ### コマンドラインのCtrl-R
 yankしたものをコマンドラインに貼り付けられる
