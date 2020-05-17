@@ -1,4 +1,3 @@
-thefuck --alias | source
 if type -q thefuck
   set -q __tf_func; or __tf_updt
   eval $__tf_func

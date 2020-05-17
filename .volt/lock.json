@@ -10,7 +10,7 @@
     {
       "type": "git",
       "path": "github.com/alvan/vim-closetag",
-      "version": "9f13011738e11d6f926a641d774635fa415f1b6e"
+      "version": "90cf416c03ed841ad7f3d44f4d6f3192f216176a"
     },
     {
       "type": "git",
@@ -20,37 +20,37 @@
     {
       "type": "git",
       "path": "github.com/dense-analysis/ale",
-      "version": "634c81fd465269f59e3db878fe8405828e6d2da9"
+      "version": "c2b01f0e28b4f007d01373821ba19dcfa440f9c2"
     },
     {
       "type": "git",
       "path": "github.com/heavenshell/vim-jsdoc",
-      "version": "b23073449d1df98ecfe73828079115e0d1d7573b"
+      "version": "df3e56c6c78fda3f26e896fa9425219aa48b75ca"
     },
     {
       "type": "git",
       "path": "github.com/heavenshell/vim-pydocstring",
-      "version": "c2a4032917e844a5815f4d6cdf4a6727688a4d72"
+      "version": "1d387a4f1a83181eb010c8275a51985753b87995"
     },
     {
       "type": "git",
       "path": "github.com/iamcco/markdown-preview.nvim",
-      "version": "019ad30da8be8277e3dbcfa92b38f3387ae714fc"
+      "version": "54e62f96cd47aad0f29ec57f3d9a0825deab74f4"
     },
     {
       "type": "git",
       "path": "github.com/junegunn/fzf",
-      "version": "dca56da0ef8589d6e7d00c5aaa073d9adb2dd650"
+      "version": "e6d33f77da8cc36786c814f499f6cb3405e8c4c1"
     },
     {
       "type": "git",
       "path": "github.com/junegunn/fzf.vim",
-      "version": "48a2d80a24d19bfaafd91005786653bc49303c62"
+      "version": "3925db8307ed3ed102eefdebfa4073396c2c347b"
     },
     {
       "type": "git",
       "path": "github.com/mattn/vim-lsp-settings",
-      "version": "4b216f58f1d1718219164f617111022a38f1cba7"
+      "version": "d80068547dd1da6a4479fc401c37aa3cf534d42c"
     },
     {
       "type": "git",
@@ -65,12 +65,12 @@
     {
       "type": "git",
       "path": "github.com/nvie/vim-flake8",
-      "version": "ce9ac790430699d346aa074d7f339f2e738284e3"
+      "version": "0c7cf6dc038223b44e3c0a702fe2acf997768e8a"
     },
     {
       "type": "git",
       "path": "github.com/pangloss/vim-javascript",
-      "version": "db595656304959dcc3805cf63ea9a430e3f01e8f"
+      "version": "92a2b46bf37bd5cd2fe421ff850728420895801b"
     },
     {
       "type": "git",
@@ -80,32 +80,32 @@
     {
       "type": "git",
       "path": "github.com/prabirshrestha/async.vim",
-      "version": "f67ecb5a1120d0d0fb9312afcf262c829b218ca2"
+      "version": "42371b5fb2cc07254295ff6beb3ca7cf235b7ede"
     },
     {
       "type": "git",
       "path": "github.com/prabirshrestha/asyncomplete-lsp.vim",
-      "version": "5c470ae8e58c8762dc4c669b38fa5649b57f53e3"
+      "version": "a7a6af2b86fdcc10f012ced3ed57c51d5df32f23"
     },
     {
       "type": "git",
       "path": "github.com/prabirshrestha/asyncomplete.vim",
-      "version": "5713fa6a1ee8de62ff8f1b5f03823f1daa824ac4"
+      "version": "91ac1f6e6ff4952aef6004880f7129ca6d3f4823"
     },
     {
       "type": "git",
       "path": "github.com/prabirshrestha/vim-lsp",
-      "version": "80ec75e1da775990dd82f48819acbf0d39f90327"
+      "version": "a943fe558da5fdeb06c7c6901b192e1d9f63b086"
     },
     {
       "type": "git",
       "path": "github.com/reireias/vim-cheatsheet",
-      "version": "d5106072fb30558c59a0938fb8b3327004f41ed0"
+      "version": "35a8d57e53abc210b1baa9377965ffe360b84334"
     },
     {
       "type": "git",
       "path": "github.com/scrooloose/nerdtree",
-      "version": "e67324fdea7a192c7ce1b4c6b3c3b9f82f11eee7"
+      "version": "4cc6097ecb18b52c023a9487c2cf3220290ba0a1"
     },
     {
       "type": "git",
@@ -115,7 +115,7 @@
     {
       "type": "git",
       "path": "github.com/tpope/vim-fugitive",
-      "version": "c452181975761f8b055b88eb1c98f736323510fd"
+      "version": "caf3b1d5696e8d39a905e48f1e89d8c0c565168c"
     },
     {
       "type": "git",
@@ -125,12 +125,12 @@
     {
       "type": "git",
       "path": "github.com/vim-airline/vim-airline",
-      "version": "0b2683464877c1e39d0c67427c7fdc4bc6697d15"
+      "version": "aa46603214a7d1e88bcb140594011f7304934ead"
     },
     {
       "type": "git",
       "path": "github.com/vim-airline/vim-airline-themes",
-      "version": "9772475fcc24bee50c884aba20161465211520c8"
+      "version": "3fb676b8729a98817f561ef1554c0ad1a514c96a"
     }
   ],
   "profiles": [
