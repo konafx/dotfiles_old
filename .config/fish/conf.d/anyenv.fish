@@ -1,4 +1,4 @@
-status --is-interactive; and source (anyenv init - --no-rehash |psub)
+status --is-interactive; and source (anyenv init - --no-rehash fish |psub)
 # command -q (anyenv root)/plugins/anyenv-lazyload/bin/anyenv-lazyload
 # and status -- is-interactive; and eval "(anyenv lazyload | psub)"
 
