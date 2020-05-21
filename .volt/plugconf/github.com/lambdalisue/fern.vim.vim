@@ -8,6 +8,9 @@ endfunction
 " Plugin configuration like the code written in vimrc.
 " This configuration is executed *after* a plugin is loaded.
 function! s:on_load_post()
+  " show hidden files
+  let g:fern#default_hidden=1
+  noremap <S-t> :Fern . -drawer -toggle<CR>
 endfunction
 
 " This function determines when a plugin is loaded.

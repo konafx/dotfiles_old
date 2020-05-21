@@ -20,7 +20,7 @@
     {
       "type": "git",
       "path": "github.com/dense-analysis/ale",
-      "version": "69d96aa9d9998a64ae7dacd700966ada6e30216f"
+      "version": "7ff87a942b8a6c2cf50b7cf34f9b98421508f542"
     },
     {
       "type": "git",
@@ -145,7 +145,7 @@
     {
       "type": "git",
       "path": "github.com/vim-airline/vim-airline",
-      "version": "aa46603214a7d1e88bcb140594011f7304934ead"
+      "version": "f244ff9987a01afe2e6d5c8b99319dd86c703942"
     },
     {
       "type": "git",
@@ -181,7 +181,6 @@
         "github.com/prabirshrestha/vim-lsp",
         "github.com/reireias/vim-cheatsheet",
         "github.com/ryanoasis/vim-devicons",
-        "github.com/scrooloose/nerdtree",
         "github.com/thinca/vim-quickrun",
         "github.com/tpope/vim-fugitive",
         "github.com/tpope/vim-surround",
