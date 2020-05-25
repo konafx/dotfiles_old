@@ -38,6 +38,7 @@ if has("autocmd")
   autocmd FileType html,xhtml         setlocal ts=2 sts=2 sw=0
   autocmd FileType javascript         setlocal ts=2 sts=2 sw=0
   autocmd FileType vue                setlocal ts=2 sts=2 sw=0
+  autocmd FileType vim                setlocal ts=2 sts=2 sw=0
 endif
 
 " ## cache
@@ -99,4 +100,18 @@ function! s:Jq(...)
       let l:arg = a:1
   endif
   execute "%! jq \"" . l:arg . "\""
+endfunction
+
+" project vimrc
+augroup vimrc-local
+  autocmd!
+  autocmd BufNewFile,BufReadPost * call s:vimrc_local(expand('<aflie>:p:h'))
+  autocmd BufReadPre .vimrc.local setfiletype=vim
+augroup END
+
+function! s:vimrc_local(loc)
+  let files = findfile('.vimrc.local', escape(a:loc, ' ') . ';', -1)
+  for i in reverse(filter(files, 'filereadable(v:val)'))
+    source `=i`
+  endfor
 endfunction
