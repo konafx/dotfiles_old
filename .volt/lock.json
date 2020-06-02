@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "current_profile_name": "default",
+  "current_profile_name": "ginatest",
   "repos": [
     {
       "type": "git",
@@ -20,7 +20,7 @@
     {
       "type": "git",
       "path": "github.com/dense-analysis/ale",
-      "version": "7ff87a942b8a6c2cf50b7cf34f9b98421508f542"
+      "version": "7265ceb6d050d1a4642741d248f11e4f2abd37e1"
     },
     {
       "type": "git",
@@ -30,22 +30,22 @@
     {
       "type": "git",
       "path": "github.com/heavenshell/vim-pydocstring",
-      "version": "1d387a4f1a83181eb010c8275a51985753b87995"
+      "version": "2c40f63bde0da613850b4cb62669eb7b4a50f73b"
     },
     {
       "type": "git",
       "path": "github.com/iamcco/markdown-preview.nvim",
-      "version": "ea2979c58fa83f401ec341c721ca1c38c909469a"
+      "version": "faacfbcefe88badb0a5bee3290ec690373552f2b"
     },
     {
       "type": "git",
       "path": "github.com/junegunn/fzf",
-      "version": "97a725fbd0e54cbc07e4d72661ea2bd2bb7c01c1"
+      "version": "f81feb1e69e5cb75797d50817752ddfe4933cd68"
     },
     {
       "type": "git",
       "path": "github.com/junegunn/fzf.vim",
-      "version": "a74605b81d0dc2b28d35d9a1ab414dbdcbe3f45b"
+      "version": "5aa5977d744d1183806079d307f023b0c5ceaaef"
     },
     {
       "type": "git",
@@ -60,17 +60,22 @@
     {
       "type": "git",
       "path": "github.com/lambdalisue/fern.vim",
-      "version": "cf0645ee90cd424b7b716a66381c5be90a8963dd"
+      "version": "abf1671e158b26024b69a7ff07cd6fa822e82c2b"
+    },
+    {
+      "type": "git",
+      "path": "github.com/lambdalisue/gina.vim",
+      "version": "dd5340ea5ed7ec377d11c0d8b2eae547c49d8be4"
     },
     {
       "type": "git",
       "path": "github.com/mattn/vim-lsp-settings",
-      "version": "4cdf390d7184b5e38af834518156791385de7f34"
+      "version": "cab3dc1fcc642f9afecd1fe619da78073c05fa34"
     },
     {
       "type": "git",
       "path": "github.com/mattn/vim-sonictemplate",
-      "version": "ddec9aa4370bacad939f702e8a9f396fc57c0a02"
+      "version": "9f1fe53a5cc0d0de5455b8d3a6c8ff51be228447"
     },
     {
       "type": "git",
@@ -100,7 +105,7 @@
     {
       "type": "git",
       "path": "github.com/prabirshrestha/asyncomplete-lsp.vim",
-      "version": "a7a6af2b86fdcc10f012ced3ed57c51d5df32f23"
+      "version": "0357e956fa143b3824c6a032c5b6c9b7ef744c23"
     },
     {
       "type": "git",
@@ -110,7 +115,7 @@
     {
       "type": "git",
       "path": "github.com/prabirshrestha/vim-lsp",
-      "version": "a943fe558da5fdeb06c7c6901b192e1d9f63b086"
+      "version": "db85c226cd77f0661dc3809abf736fb1110f1b62"
     },
     {
       "type": "git",
@@ -120,7 +125,7 @@
     {
       "type": "git",
       "path": "github.com/ryanoasis/vim-devicons",
-      "version": "d12c9b468ab67e8ea57b1f31cb43c43118b15e34"
+      "version": "15b532ebd4455d9d099e9ccebab09915e0562754"
     },
     {
       "type": "git",
@@ -135,7 +140,7 @@
     {
       "type": "git",
       "path": "github.com/tpope/vim-fugitive",
-      "version": "caf3b1d5696e8d39a905e48f1e89d8c0c565168c"
+      "version": "27a5c3abd211c2784513dab4db082fa414ad0967"
     },
     {
       "type": "git",
@@ -145,7 +150,7 @@
     {
       "type": "git",
       "path": "github.com/vim-airline/vim-airline",
-      "version": "f244ff9987a01afe2e6d5c8b99319dd86c703942"
+      "version": "d221dc531298f467a6901861b0360741c2a387b0"
     },
     {
       "type": "git",
@@ -169,6 +174,7 @@
         "github.com/lambdalisue/fern-mapping-project-top.vim",
         "github.com/lambdalisue/fern-renderer-devicons.vim",
         "github.com/lambdalisue/fern.vim",
+        "github.com/lambdalisue/gina.vim",
         "github.com/mattn/vim-lsp-settings",
         "github.com/mattn/vim-sonictemplate",
         "github.com/moll/vim-node",
@@ -186,6 +192,15 @@
         "github.com/tpope/vim-surround",
         "github.com/vim-airline/vim-airline",
         "github.com/vim-airline/vim-airline-themes"
+      ]
+    },
+    {
+      "name": "ginatest",
+      "repos_path": [
+        "github.com/lambdalisue/fern-mapping-project-top.vim",
+        "github.com/lambdalisue/fern-renderer-devicons.vim",
+        "github.com/lambdalisue/fern.vim",
+        "github.com/lambdalisue/gina.vim"
       ]
     }
   ]
