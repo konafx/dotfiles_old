@@ -16,6 +16,7 @@ function! s:on_load_post()
       \ 'css': ['stylelint'],
       \ 'javascript': ['eslint'],
       \ 'python': ['flake8'],
+      \ 'java': ['javac', 'sbtserver'],
       \ }
     " Fixerを登録
     let g:ale_fixers = {
@@ -36,6 +37,10 @@ function! s:on_load_post()
     map <Space> <Subleader>
     nnoremap <Subleader>, ,
     xnoremap <Subleader>, ,
+
+    let g:ale_sign_error = '!!'
+    let g:ale_sign_warning = '=='
+    let g:ale_sign_info = '--'
 endfunction
 
 " This function determines when a plugin is loaded.
@@ -44,7 +49,7 @@ endfunction
 " * 'start' (a plugin will be loaded at VimEnter event)
 " * 'filetype=<filetypes>' (a plugin will be loaded at FileType event)
 " * 'excmd=<excmds>' (a plugin will be loaded at CmdUndefined event)
-" <filetypes> and <excmds> can be multiple values separated by comma.
+~ <filetypes> and <excmds> can be multiple values separated by comma.
 "
 " This function must contain 'return "<str>"' code.
 " (the argument of :return must be string literal)
