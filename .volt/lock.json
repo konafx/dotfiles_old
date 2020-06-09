@@ -1,7 +1,12 @@
 {
   "version": 2,
-  "current_profile_name": "ginatest",
+  "current_profile_name": "default",
   "repos": [
+    {
+      "type": "git",
+      "path": "github.com/TaDaa/vimade",
+      "version": "832b944bc27e343b0208ec7b8271e9a617bf8a36"
+    },
     {
       "type": "git",
       "path": "github.com/Xuyuanp/nerdtree-git-plugin",
@@ -94,6 +99,11 @@
     },
     {
       "type": "git",
+      "path": "github.com/pixelneo/vim-python-docstring",
+      "version": "1661e63913ed464d3dbf010b21dc690d52593249"
+    },
+    {
+      "type": "git",
       "path": "github.com/posva/vim-vue",
       "version": "c424294e769b26659176065f9713c395731f7b3a"
     },
@@ -162,12 +172,12 @@
     {
       "name": "default",
       "repos_path": [
+        "github.com/TaDaa/vimade",
         "github.com/Xuyuanp/nerdtree-git-plugin",
         "github.com/alvan/vim-closetag",
         "github.com/dag/vim-fish",
         "github.com/dense-analysis/ale",
         "github.com/heavenshell/vim-jsdoc",
-        "github.com/heavenshell/vim-pydocstring",
         "github.com/iamcco/markdown-preview.nvim",
         "github.com/junegunn/fzf",
         "github.com/junegunn/fzf.vim",
@@ -180,6 +190,7 @@
         "github.com/moll/vim-node",
         "github.com/nvie/vim-flake8",
         "github.com/pangloss/vim-javascript",
+        "github.com/pixelneo/vim-python-docstring",
         "github.com/posva/vim-vue",
         "github.com/prabirshrestha/async.vim",
         "github.com/prabirshrestha/asyncomplete-lsp.vim",
