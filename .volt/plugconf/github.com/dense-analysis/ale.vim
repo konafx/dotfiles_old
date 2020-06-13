@@ -49,7 +49,7 @@ endfunction
 " * 'start' (a plugin will be loaded at VimEnter event)
 " * 'filetype=<filetypes>' (a plugin will be loaded at FileType event)
 " * 'excmd=<excmds>' (a plugin will be loaded at CmdUndefined event)
-~ <filetypes> and <excmds> can be multiple values separated by comma.
+" <filetypes> and <excmds> can be multiple values separated by comma.
 "
 " This function must contain 'return "<str>"' code.
 " (the argument of :return must be string literal)
