@@ -57,3 +57,4 @@
 .vim/sonictemplate,.vim/sonictemplate
 .tmux.conf,.tmux.conf
 .bashrc,.bashrc
+.config/procs/config.toml,.config/procs/config.toml
