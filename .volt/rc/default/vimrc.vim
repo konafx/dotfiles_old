@@ -39,6 +39,7 @@ if has("autocmd")
   autocmd FileType javascript         setlocal ts=2 sts=2 sw=0
   autocmd FileType vue                setlocal ts=2 sts=2 sw=0
   autocmd FileType vim                setlocal ts=2 sts=2 sw=0
+  autocmd FileType python             setlocal cinwords=if,elif,else,for,while,try,except,finally,def,class
 endif
 
 " ## cache
