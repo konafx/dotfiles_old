@@ -25,12 +25,12 @@
     {
       "type": "git",
       "path": "github.com/dense-analysis/ale",
-      "version": "1428c7b29e50af56f53ee1d587679d97a027dd72"
+      "version": "834d6f9c48ce349a4c3d72e98bd0de81aaa84042"
     },
     {
       "type": "git",
       "path": "github.com/heavenshell/vim-jsdoc",
-      "version": "3b88595805ac7c0499dc05bc8aa5cc7909c6f5b7"
+      "version": "ca3c880f77b4cec6b14d9436b07f4152bebc2712"
     },
     {
       "type": "git",
@@ -40,17 +40,17 @@
     {
       "type": "git",
       "path": "github.com/iamcco/markdown-preview.nvim",
-      "version": "faacfbcefe88badb0a5bee3290ec690373552f2b"
+      "version": "c0f708e5128f9f20b8e4018ceafbc4a941d985d6"
     },
     {
       "type": "git",
       "path": "github.com/junegunn/fzf",
-      "version": "06d63a862e900dcc6ee6c2335120cc8cb939698f"
+      "version": "4ec144c969efa6df1cd4d00a5f73f7613dc962fe"
     },
     {
       "type": "git",
       "path": "github.com/junegunn/fzf.vim",
-      "version": "8f1e73b598d27d78dfb5843be19a73b6a3b222b1"
+      "version": "2bf85d25e203a536edb2c072c0d41b29e8e4cc1b"
     },
     {
       "type": "git",
@@ -65,7 +65,7 @@
     {
       "type": "git",
       "path": "github.com/lambdalisue/fern.vim",
-      "version": "b5b8a0718415c2a7a19830d75928f69212e650c2"
+      "version": "f3a8d531f9b2f13ee3daad644887bb4d979fd01a"
     },
     {
       "type": "git",
@@ -75,7 +75,7 @@
     {
       "type": "git",
       "path": "github.com/mattn/vim-lsp-settings",
-      "version": "b5f75fcf6cfa0880fb377605c5c22ac247aa1b32"
+      "version": "f267543158949733942d3ceacbecc0584d17ed80"
     },
     {
       "type": "git",
@@ -115,7 +115,7 @@
     {
       "type": "git",
       "path": "github.com/prabirshrestha/async.vim",
-      "version": "42371b5fb2cc07254295ff6beb3ca7cf235b7ede"
+      "version": "6102020b4690f05ab6509a37fa25bc53e2d799a9"
     },
     {
       "type": "git",
@@ -125,12 +125,12 @@
     {
       "type": "git",
       "path": "github.com/prabirshrestha/asyncomplete.vim",
-      "version": "75f25b059f4fd6d5b560a4b1ce78ccd0b760b632"
+      "version": "b618d5753e3e8edf1def6bdf0d864cdaf9d22a57"
     },
     {
       "type": "git",
       "path": "github.com/prabirshrestha/vim-lsp",
-      "version": "33dcddfbe663b5b38ef8e5ec0f1201afe801687a"
+      "version": "327b9d12d665f634be199fbbd2904cbffa47a49f"
     },
     {
       "type": "git",
@@ -145,7 +145,7 @@
     {
       "type": "git",
       "path": "github.com/ryanoasis/vim-devicons",
-      "version": "84ec4562c21882dfe80b779cd645c607ec9d9727"
+      "version": "50eb8e2d88be4e8bbcd8e5ddccbe499b3a1f473d"
     },
     {
       "type": "git",
@@ -170,7 +170,7 @@
     {
       "type": "git",
       "path": "github.com/vim-airline/vim-airline",
-      "version": "ee85ed4c673b859cf8c3626a6669b8e3cd2392fa"
+      "version": "8be6a2ecd560e17229c53c111eb5775cc5008f36"
     },
     {
       "type": "git",
