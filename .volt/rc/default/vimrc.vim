@@ -116,3 +116,11 @@ function! s:vimrc_local(loc)
     source `=i`
   endfor
 endfunction
+
+" WSLでyank-to-clipboard
+if system('uname -a | grep microsoft') != ''
+  augroup myYank
+    autocmd!
+    autocmd TextYankPost * :call system('clip.exe', @")
+  augroup END
+endif
