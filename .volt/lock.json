@@ -19,6 +19,16 @@
     },
     {
       "type": "git",
+      "path": "github.com/bkad/CamelCaseMotion",
+      "version": "de439d7c06cffd0839a29045a103fe4b44b15cdc"
+    },
+    {
+      "type": "git",
+      "path": "github.com/brooth/far.vim",
+      "version": "2a8a9c22237d224f2c24680901b61b6f9bffb061"
+    },
+    {
+      "type": "git",
       "path": "github.com/dag/vim-fish",
       "version": "50b95cbbcd09c046121367d49039710e9dc9c15f"
     },
@@ -30,7 +40,7 @@
     {
       "type": "git",
       "path": "github.com/heavenshell/vim-jsdoc",
-      "version": "ca3c880f77b4cec6b14d9436b07f4152bebc2712"
+      "version": "1aaa33774783630e21426ad1ffd7a389be59abd0"
     },
     {
       "type": "git",
@@ -45,7 +55,7 @@
     {
       "type": "git",
       "path": "github.com/junegunn/fzf",
-      "version": "4ec144c969efa6df1cd4d00a5f73f7613dc962fe"
+      "version": "bdde69d011436abdf9e90dff584981e83775d834"
     },
     {
       "type": "git",
@@ -74,8 +84,13 @@
     },
     {
       "type": "git",
+      "path": "github.com/lambdalisue/reword.vim",
+      "version": "13ada205b1950671b8ccb2cfce831ab5b587add8"
+    },
+    {
+      "type": "git",
       "path": "github.com/mattn/vim-lsp-settings",
-      "version": "f267543158949733942d3ceacbecc0584d17ed80"
+      "version": "458de9338638417ded27d3e7a8798e122d0abf71"
     },
     {
       "type": "git",
@@ -120,17 +135,17 @@
     {
       "type": "git",
       "path": "github.com/prabirshrestha/asyncomplete-lsp.vim",
-      "version": "86a34a86b48c50bd210a2bc006cf946d1984bc48"
+      "version": "684c34453db9dcbed5dbf4769aaa6521530a23e0"
     },
     {
       "type": "git",
       "path": "github.com/prabirshrestha/asyncomplete.vim",
-      "version": "b618d5753e3e8edf1def6bdf0d864cdaf9d22a57"
+      "version": "bb8a9924b703b3663d3be07d326055e44d22179a"
     },
     {
       "type": "git",
       "path": "github.com/prabirshrestha/vim-lsp",
-      "version": "327b9d12d665f634be199fbbd2904cbffa47a49f"
+      "version": "11b13507002e42adf77b35ed63b4164ecc5d5b8a"
     },
     {
       "type": "git",
@@ -145,7 +160,7 @@
     {
       "type": "git",
       "path": "github.com/ryanoasis/vim-devicons",
-      "version": "50eb8e2d88be4e8bbcd8e5ddccbe499b3a1f473d"
+      "version": "c08e526760c0403d307583afdf7110fbaf98577f"
     },
     {
       "type": "git",
@@ -159,8 +174,18 @@
     },
     {
       "type": "git",
+      "path": "github.com/tobyS/pdv",
+      "version": "0e4b5aa689400246069953147ce53905c912087d"
+    },
+    {
+      "type": "git",
+      "path": "github.com/tobyS/vmustache",
+      "version": "d39f77bafef57ba7af304c74b3cfc91a83fd86e0"
+    },
+    {
+      "type": "git",
       "path": "github.com/tpope/vim-fugitive",
-      "version": "27a5c3abd211c2784513dab4db082fa414ad0967"
+      "version": "1da7c133b109cd329060174a104e325e4d6bcc82"
     },
     {
       "type": "git",
@@ -170,12 +195,12 @@
     {
       "type": "git",
       "path": "github.com/vim-airline/vim-airline",
-      "version": "8be6a2ecd560e17229c53c111eb5775cc5008f36"
+      "version": "ba9b3e183929263bffc44592e5c9a92d2ab8a62d"
     },
     {
       "type": "git",
       "path": "github.com/vim-airline/vim-airline-themes",
-      "version": "3fb676b8729a98817f561ef1554c0ad1a514c96a"
+      "version": "04fa4fc40f21d9490954213c1ee06c7fdea66a6d"
     }
   ],
   "profiles": [
@@ -185,6 +210,8 @@
         "github.com/TaDaa/vimade",
         "github.com/Xuyuanp/nerdtree-git-plugin",
         "github.com/alvan/vim-closetag",
+        "github.com/bkad/CamelCaseMotion",
+        "github.com/brooth/far.vim",
         "github.com/dag/vim-fish",
         "github.com/dense-analysis/ale",
         "github.com/heavenshell/vim-jsdoc",
@@ -195,6 +222,7 @@
         "github.com/lambdalisue/fern-renderer-devicons.vim",
         "github.com/lambdalisue/fern.vim",
         "github.com/lambdalisue/gina.vim",
+        "github.com/lambdalisue/reword.vim",
         "github.com/mattn/vim-lsp-settings",
         "github.com/mattn/vim-sonictemplate",
         "github.com/moll/vim-node",
@@ -211,6 +239,8 @@
         "github.com/rhysd/clever-f.vim",
         "github.com/ryanoasis/vim-devicons",
         "github.com/thinca/vim-quickrun",
+        "github.com/tobyS/pdv",
+        "github.com/tobyS/vmustache",
         "github.com/tpope/vim-fugitive",
         "github.com/tpope/vim-surround",
         "github.com/vim-airline/vim-airline",
