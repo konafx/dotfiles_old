@@ -40,7 +40,7 @@
     {
       "type": "git",
       "path": "github.com/dense-analysis/ale",
-      "version": "834d6f9c48ce349a4c3d72e98bd0de81aaa84042"
+      "version": "b3c6db173a019c37c83d4600c0c68872e91086dd"
     },
     {
       "type": "git",
@@ -55,12 +55,12 @@
     {
       "type": "git",
       "path": "github.com/iamcco/markdown-preview.nvim",
-      "version": "c0f708e5128f9f20b8e4018ceafbc4a941d985d6"
+      "version": "2646ebd8a78d3bf9e6255313694e20559d2b88b2"
     },
     {
       "type": "git",
       "path": "github.com/junegunn/fzf",
-      "version": "bdde69d011436abdf9e90dff584981e83775d834"
+      "version": "8e027c445f0eb4495e300522843df335c3b54e60"
     },
     {
       "type": "git",
@@ -105,7 +105,7 @@
     {
       "type": "git",
       "path": "github.com/mattn/vim-lsp-settings",
-      "version": "458de9338638417ded27d3e7a8798e122d0abf71"
+      "version": "df1659d5df060e0b88e04891fb2c90515feaeb01"
     },
     {
       "type": "git",
@@ -180,7 +180,7 @@
     {
       "type": "git",
       "path": "github.com/ryanoasis/vim-devicons",
-      "version": "c08e526760c0403d307583afdf7110fbaf98577f"
+      "version": "028673dc93a978225c897b4913dd21b48dc35a7e"
     },
     {
       "type": "git",
@@ -191,6 +191,11 @@
       "type": "git",
       "path": "github.com/thinca/vim-quickrun",
       "version": "3041ad7f0b3f9122d4f00bda2f3bb554bf89105c"
+    },
+    {
+      "type": "git",
+      "path": "github.com/thinca/vim-ref",
+      "version": "161520737e234a20d67f619e772c0aacd5541f01"
     },
     {
       "type": "git",
@@ -215,7 +220,7 @@
     {
       "type": "git",
       "path": "github.com/vim-airline/vim-airline",
-      "version": "ba9b3e183929263bffc44592e5c9a92d2ab8a62d"
+      "version": "b843321428209c892f4a1fab7a5fe473f0b7d386"
     },
     {
       "type": "git",
@@ -263,6 +268,7 @@
         "github.com/rhysd/vim-operator-surround",
         "github.com/ryanoasis/vim-devicons",
         "github.com/thinca/vim-quickrun",
+        "github.com/thinca/vim-ref",
         "github.com/tobyS/pdv",
         "github.com/tobyS/vmustache",
         "github.com/tpope/vim-fugitive",
@@ -278,6 +284,12 @@
         "github.com/lambdalisue/fern-renderer-devicons.vim",
         "github.com/lambdalisue/fern.vim",
         "github.com/lambdalisue/gina.vim"
+      ]
+    },
+    {
+      "name": "nyaa",
+      "repos_path": [
+        "github.com/thinca/vim-ref"
       ]
     }
   ]
