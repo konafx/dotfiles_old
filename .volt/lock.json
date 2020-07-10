@@ -104,6 +104,11 @@
     },
     {
       "type": "git",
+      "path": "github.com/mattn/vim-fz",
+      "version": "9e4f1baa733efbc12f9ac516bba75ab76eb7b9cd"
+    },
+    {
+      "type": "git",
       "path": "github.com/mattn/vim-lsp-settings",
       "version": "df1659d5df060e0b88e04891fb2c90515feaeb01"
     },
@@ -233,7 +238,6 @@
       "name": "default",
       "repos_path": [
         "github.com/TaDaa/vimade",
-        "github.com/Xuyuanp/nerdtree-git-plugin",
         "github.com/alvan/vim-closetag",
         "github.com/ap/vim-css-color",
         "github.com/bkad/CamelCaseMotion",
