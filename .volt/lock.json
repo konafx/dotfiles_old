@@ -40,7 +40,7 @@
     {
       "type": "git",
       "path": "github.com/dense-analysis/ale",
-      "version": "b3c6db173a019c37c83d4600c0c68872e91086dd"
+      "version": "106c27644b4ff7543d600ae54ab9c53bec909828"
     },
     {
       "type": "git",
@@ -76,6 +76,11 @@
       "type": "git",
       "path": "github.com/kana/vim-operator-user",
       "version": "c3dfd41c1ed516b4b901c97562e644de62c367aa"
+    },
+    {
+      "type": "git",
+      "path": "github.com/lambdalisue/fern-comparator-lexical.vim",
+      "version": "cfea6e4a18481435c193944a806d8a4b3187d58f"
     },
     {
       "type": "git",
@@ -190,7 +195,7 @@
     {
       "type": "git",
       "path": "github.com/scrooloose/nerdtree",
-      "version": "e2670f0d190c9c0593ad7ac7b5708a4c198e423d"
+      "version": "6571452857fd1b14f15a3886f9fffc113c36bbac"
     },
     {
       "type": "git",
@@ -225,12 +230,22 @@
     {
       "type": "git",
       "path": "github.com/vim-airline/vim-airline",
-      "version": "b843321428209c892f4a1fab7a5fe473f0b7d386"
+      "version": "768bd0f5c685f728922b98a919cb6fab30c5b4ec"
     },
     {
       "type": "git",
       "path": "github.com/vim-airline/vim-airline-themes",
       "version": "04fa4fc40f21d9490954213c1ee06c7fdea66a6d"
+    },
+    {
+      "type": "git",
+      "path": "github.com/wellle/tmux-complete.vim",
+      "version": "7237d8d8d60af7916e3b546a9f4f396df95a1b21"
+    },
+    {
+      "type": "git",
+      "path": "localhost/local/vim-airline",
+      "version": "17e7c2f8abd4ec96d8d9eb27ecf4a463966c8d20"
     }
   ],
   "profiles": [
@@ -275,10 +290,10 @@
         "github.com/thinca/vim-ref",
         "github.com/tobyS/pdv",
         "github.com/tobyS/vmustache",
-        "github.com/tpope/vim-fugitive",
         "github.com/tpope/vim-surround",
-        "github.com/vim-airline/vim-airline",
-        "github.com/vim-airline/vim-airline-themes"
+        "github.com/vim-airline/vim-airline-themes",
+        "github.com/wellle/tmux-complete.vim",
+        "localhost/local/vim-airline"
       ]
     },
     {
@@ -293,7 +308,10 @@
     {
       "name": "nyaa",
       "repos_path": [
-        "github.com/thinca/vim-ref"
+        "github.com/lambdalisue/fern-comparator-lexical.vim",
+        "github.com/lambdalisue/fern.vim",
+        "github.com/vim-airline/vim-airline-themes",
+        "localhost/local/vim-airline"
       ]
     }
   ]

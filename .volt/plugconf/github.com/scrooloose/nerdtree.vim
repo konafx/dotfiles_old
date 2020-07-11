@@ -7,7 +7,7 @@ endfunction
 
 function! s:on_load_post()
   let g:NERDTreeShowHidden=1
-  "noremap <S-t> :NERDTreeToggle<CR>
+  noremap <S-t> :NERDTreeToggle<CR>
   autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 endfunction
 
