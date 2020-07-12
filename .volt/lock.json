@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "current_profile_name": "default",
+  "current_profile_name": "plug",
   "repos": [
     {
       "type": "git",
@@ -245,7 +245,7 @@
     {
       "type": "git",
       "path": "localhost/local/vim-airline",
-      "version": "17e7c2f8abd4ec96d8d9eb27ecf4a463966c8d20"
+      "version": "9f36cc310c5c232dbfab022fc6039f13bd6d9902"
     }
   ],
   "profiles": [
@@ -313,6 +313,10 @@
         "github.com/vim-airline/vim-airline-themes",
         "localhost/local/vim-airline"
       ]
+    },
+    {
+      "name": "plug",
+      "repos_path": []
     }
   ]
 }
