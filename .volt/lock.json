@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "current_profile_name": "plug",
+  "current_profile_name": "default",
   "repos": [
     {
       "type": "git",
