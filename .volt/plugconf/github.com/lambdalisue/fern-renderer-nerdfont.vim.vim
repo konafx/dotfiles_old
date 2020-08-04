@@ -3,12 +3,12 @@
 " Plugin configuration like the code written in vimrc.
 " This configuration is executed *before* a plugin is loaded.
 function! s:on_load_pre()
-  let g:fern#renderer = "devicons"
 endfunction
 
 " Plugin configuration like the code written in vimrc.
 " This configuration is executed *after* a plugin is loaded.
 function! s:on_load_post()
+  let g:fern#renderer = "nerdfont"
 endfunction
 
 " This function determines when a plugin is loaded.
@@ -33,7 +33,7 @@ endfunction
 " e.g. return ['github.com/tyru/open-browser.vim']
 function! s:depends()
   return [
-    \ 'github.com/lambdalisue/fern.vim',
-    \ 'github.com/ryanoasis/vim-devicons',
-    \ ]
+  \ 'github.com/lambdalisue/fern.vim',
+  \ 'github.com/lambdalisue/nerdfont.vim',
+  ]
 endfunction

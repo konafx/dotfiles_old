@@ -3,12 +3,14 @@
 " Plugin configuration like the code written in vimrc.
 " This configuration is executed *before* a plugin is loaded.
 function! s:on_load_pre()
-  let g:fern#renderer = "devicons"
 endfunction
 
 " Plugin configuration like the code written in vimrc.
 " This configuration is executed *after* a plugin is loaded.
 function! s:on_load_post()
+  let g:bracey_auto_start_browser=0
+  let g:bracey_server_allow_remote_connections=1
+  let g:bracey_server_port=8080
 endfunction
 
 " This function determines when a plugin is loaded.
@@ -32,8 +34,5 @@ endfunction
 " (the argument of :return must be list literal, and the elements are string)
 " e.g. return ['github.com/tyru/open-browser.vim']
 function! s:depends()
-  return [
-    \ 'github.com/lambdalisue/fern.vim',
-    \ 'github.com/ryanoasis/vim-devicons',
-    \ ]
+  return []
 endfunction

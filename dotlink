@@ -60,3 +60,4 @@
 .config/procs/config.toml,.config/procs/config.toml
 .config/terminator/config,.config/terminator/config
 .config/fish/conf.d/bat_integration.fish,.config/fish/conf.d/bat_integration.fish
+.vimrc,.vimrc
