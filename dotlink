@@ -61,3 +61,4 @@
 .config/terminator/config,.config/terminator/config
 .config/fish/conf.d/bat_integration.fish,.config/fish/conf.d/bat_integration.fish
 .vimrc,.vimrc
+.config/git/ignore,.config/git/ignore
