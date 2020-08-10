@@ -204,6 +204,10 @@ Plug 'tyru/caw.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+Plug 'lambdalisue/fern.vim', { 'on': 'Fern' }
+Plug 'lambdalisue/nerdfont.vim', { 'on': 'Fern' }
+Plug 'lambdalisue/fern-renderer-nerdfont.vim', { 'on': 'Fern' }
+
 call plug#end()
 " =================================
 " vim-close tab
@@ -333,3 +337,11 @@ vmap <Leader>c <Plug>(caw:hatpos:toggle)
 " " 行頭にコメントをトグル
 nmap <Leader>, <Plug>(caw:zeropos:toggle)
 vmap <Leader>, <Plug>(caw:zeropos:toggle
+
+" fern.vim
+let g:fern#default_hidden=1
+noremap <S-t> :Fern . -drawer -toggle<CR>
+autocmd FileType fern setlocal nonumber
+
+" fern-renderer-nerdfont.vim
+let g:fern#renderer = 'nerdfont'
