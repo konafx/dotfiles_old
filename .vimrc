@@ -172,7 +172,7 @@ Plug 'kana/vim-operator-replace'
 Plug 'rhysd/vim-operator-surround'
 
 " Explorer
-Plug 'preservim/nerdtree'
+Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Git
