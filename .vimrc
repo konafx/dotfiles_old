@@ -199,12 +199,16 @@ Plug 'thinca/vim-ref'
 Plug 'tyru/caw.vim'
 
 " StatusLine
-Plug 'vim-airline/vim-airline'
+Plug 'konafx/vim-airline', { 'branch': 'feature/lazy-load' }
+" Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-Plug 'lambdalisue/fern.vim', { 'on': 'Fern' }
-Plug 'lambdalisue/nerdfont.vim', { 'on': 'Fern' }
-Plug 'lambdalisue/fern-renderer-nerdfont.vim', { 'on': 'Fern' }
+Plug 'lambdalisue/fern.vim', { 'tag': 'v1.3.1', 'on': 'Fern' }
+" Plug 'lambdalisue/nerdfont.vim'
+" Plug 'lambdalisue/fern-renderer-nerdfont.vim'
+" Plug 'lambdalisue/fern.vim', { 'on': 'Fern' }
+" Plug 'lambdalisue/nerdfont.vim', { 'on': 'Fern' }
+" Plug 'lambdalisue/fern-renderer-nerdfont.vim', { 'on': 'Fern' }
 
 call plug#end()
 " =================================
@@ -342,4 +346,4 @@ noremap <S-t> :Fern . -drawer -toggle<CR>
 autocmd FileType fern setlocal nonumber
 
 " fern-renderer-nerdfont.vim
-let g:fern#renderer = 'nerdfont'
+" let g:fern#renderer = 'nerdfont'
