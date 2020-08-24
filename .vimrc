@@ -334,12 +334,13 @@ nmap <Leader>c <Plug>(caw:hatpos:toggle)
 vmap <Leader>c <Plug>(caw:hatpos:toggle)
 " " 行頭にコメントをトグル
 nmap <Leader>, <Plug>(caw:zeropos:toggle)
-vmap <Leader>, <Plug>(caw:zeropos:toggle
+vmap <Leader>, <Plug>(caw:zeropos:toggle)
 
 " fern.vim
 let g:fern#default_hidden=1
+" S-t: un*t*il cursor move (like *f*)
 noremap <S-t> :Fern . -drawer -toggle<CR>
 autocmd FileType fern setlocal nonumber
 
 " fern-renderer-nerdfont.vim
-" let g:fern#renderer = 'nerdfont'
+let g:fern#renderer = 'nerdfont'
