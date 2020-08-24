@@ -63,15 +63,6 @@ set showmatch
 " ステータスラインを常に表示
 set laststatus=2
 
-" ステータスラインの表示
-" air-lineで上書きされるけど
-"set statusline=%<                           " shorted-position
-"set statusline+=%f\                         " file [space]
-"set statusline+=%m%r%h                      " flag(mod, readonly, help)
-"set statusline+=%{exists('g:loaded_fugitive')?fugitive#statusline():''}%=  " Git-branch-name stop
-"set statusline+=%-14.(%l,%c,%v%)            " LEFT: #(line, col-b, col-vir)
-"set statusline+=\ \[ENC=%{&fileencoding}]%P " fileenc current-position
-
 " 複数一致時、全一致を羅列し、共通最長文字列を補完
 set wildmode=list:longest
 
@@ -89,6 +80,13 @@ set wrapscan
 set hlsearch
 " clear hylight
 nmap <Esc><Esc> :nohlsearch<CR><Esc>
+
+" 永続アンドゥ
+set undofile
+if !isdirectory(expand("~/.vim/undodir"))
+  call mkdir(expand("~/.vim/undodir"), "p")
+endif
+set undodir=$HOME/vim/undodir
 
 " python_venv_path
 if isdirectory(expand($PYENV_ROOT))
