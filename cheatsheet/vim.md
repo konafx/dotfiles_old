@@ -13,6 +13,23 @@
 - 'F{char}` : left {char}
     - `;/,`: repeat `f/F/t/T` forward/opposite
 - `}/{`: paragraph（段落）
+- `\_`: 先頭 ($の逆)
+
+```
+               gg
+               ?
+              C-b
+               H
+               {
+               k
+^ F T ( b ge h   l w e ) t f $
+               j
+               }
+               L
+              C-f
+               /
+               G
+```
 
 ## Edit
 - `c{object}`: `d`の`s`版
