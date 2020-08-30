@@ -54,11 +54,11 @@ set noswapfile
 " 行番号表示
 set number
 
-" 視覚的アラート
-set visualbell
-
 " 一致文字列のアピール
 set showmatch
+
+" 警告OFF
+set belloff=all
 
 " ステータスラインを常に表示
 set laststatus=2
@@ -175,6 +175,9 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Git
 Plug 'tpope/vim-fugitive'
+
+" Tmux
+Plug 'christoomey/vim-tmux-navigator'
 
 " Templater
 Plug 'mattn/vim-sonictemplate'
