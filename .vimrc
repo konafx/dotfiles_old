@@ -32,7 +32,11 @@ hi NonText    ctermfg=59
 hi SpecialKey ctermfg=59
 
 " leaderkey
+nnoremap , <Nop>
 let mapleader = ","
+
+" close window
+nnoremap <silent> <Leader>q :quit<CR>
 
 " indent 2にするマン……
 if has("autocmd")
@@ -216,7 +220,7 @@ let g:closetag_filetypes = 'html,xhtml,phtml,vue'
 let g:closetag_shortcut = '>'
 
 " CamelCaseMotion
-let g:camelcasemotion_key = '<leader>'
+let g:camelcasemotion_key = '<Leader>'
 " map <silent> w <Plug>CamelCaseMotion_w
 " map <silent> b <Plug>CamelCaseMotion_b
 " map <silent> e <Plug>CamelCaseMotion_e
@@ -250,12 +254,7 @@ let g:ale_python_isort_options = '-m isort'
 let g:ale_python_black_executable = g:python3_host_prog
 let g:ale_python_black_options = '-m black'
 
-noremap <Subleader> <Nop>
-map <Space> <Subleader>
-nnoremap <Subleader>, ,
-xnoremap <Subleader>, ,
-
-let g:ale_sign_error = '!!'
+" let g:ale_sign_error = '!!'
 let g:ale_sign_warning = '=='
 let g:ale_sign_info = '--'
 
@@ -328,7 +327,7 @@ map <silent>sr <Plug>(operator-surround-replace)
 
 " NERDTree
 let g:NERDTreeShowHidden=1
-noremap <S-n> :NERDTreeToggle<CR>
+noremap <Leader><S-n> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " caw.vim

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "current_profile_name": "nyaa",
+  "current_profile_name": "default",
   "repos": [
     {
       "type": "git",
@@ -20,7 +20,7 @@
     {
       "type": "git",
       "path": "github.com/ap/vim-css-color",
-      "version": "741dd18a35e251ededc0687eea9b8d100d3b83b8"
+      "version": "4694c6ea03a065a3f6ddbebce56797a21e8241ef"
     },
     {
       "type": "git",
@@ -40,7 +40,7 @@
     {
       "type": "git",
       "path": "github.com/dense-analysis/ale",
-      "version": "316c7c7372ad6f34e439944713655ccff2123f40"
+      "version": "0989da4a38c80983548db623d407d7178f2452d5"
     },
     {
       "type": "git",
@@ -60,17 +60,17 @@
     {
       "type": "git",
       "path": "github.com/iamcco/markdown-preview.nvim",
-      "version": "457ddc4a7c2b0114c03f92d57c17c3b929f93883"
+      "version": "54616cfbc94dc9e334efcb75558e97219b4edcf9"
     },
     {
       "type": "git",
       "path": "github.com/junegunn/fzf",
-      "version": "e2ae1b249cf2d5258b552cfd682c7c0911981e9b"
+      "version": "f2d44ab5a793906457f3d3384f09af085096138d"
     },
     {
       "type": "git",
       "path": "github.com/junegunn/fzf.vim",
-      "version": "2115caeba1b55040bfdb1b8c38a836ad4e0b7669"
+      "version": "4145f53f3d343c389ff974b1f1a68eeb39fba18b"
     },
     {
       "type": "git",
@@ -105,7 +105,7 @@
     {
       "type": "git",
       "path": "github.com/lambdalisue/fern.vim",
-      "version": "c36464efe0faf506cd6ae34f729bf80c748ea3db"
+      "version": "9e5aab086abb2675e86d1b0572692751e1363ef6"
     },
     {
       "type": "git",
@@ -115,7 +115,7 @@
     {
       "type": "git",
       "path": "github.com/lambdalisue/nerdfont.vim",
-      "version": "42b07f6aebf19f9c2301e4423bb1d0331781bc44"
+      "version": "ebc32d87a086b66d86e7cc52b73c1de8f413678a"
     },
     {
       "type": "git",
@@ -130,12 +130,12 @@
     {
       "type": "git",
       "path": "github.com/mattn/vim-lsp-settings",
-      "version": "6f808235c6c9118f1f66e99a1da88832509207a8"
+      "version": "a4723882b1edde89c00289fd7bb05f64843851eb"
     },
     {
       "type": "git",
       "path": "github.com/mattn/vim-sonictemplate",
-      "version": "ccba4d71ed2d7603542ff94643b31e1781503cba"
+      "version": "163c50c8e1d7a9625f6a33e7e107bdafc92d4299"
     },
     {
       "type": "git",
@@ -185,12 +185,12 @@
     {
       "type": "git",
       "path": "github.com/prabirshrestha/asyncomplete.vim",
-      "version": "bb8a9924b703b3663d3be07d326055e44d22179a"
+      "version": "0d4ec1805d50fd39b8b41626e0761736feb307d0"
     },
     {
       "type": "git",
       "path": "github.com/prabirshrestha/vim-lsp",
-      "version": "04cef02eed7fe861f5fdbf066da1b8b7e270b8a2"
+      "version": "eb0e5fb885e8ac04bf6e5af2a3859d105f14bcd1"
     },
     {
       "type": "git",
@@ -210,7 +210,7 @@
     {
       "type": "git",
       "path": "github.com/ryanoasis/vim-devicons",
-      "version": "6bd3ae1dbab89b24bab160d52f90b3c8b0d005bb"
+      "version": "308526367703698554d19f15f692ee3c45a598cb"
     },
     {
       "type": "git",
@@ -220,7 +220,7 @@
     {
       "type": "git",
       "path": "github.com/thinca/vim-quickrun",
-      "version": "3f49e05fb6072d6b7bc7fe20d0356cf15ef3b9de"
+      "version": "c688f336a4aeb002319994f4fb4a8873f204f0ab"
     },
     {
       "type": "git",
@@ -255,17 +255,17 @@
     {
       "type": "git",
       "path": "github.com/vim-airline/vim-airline",
-      "version": "ffa44b832767674ab536a737668f3358fab4d5ea"
+      "version": "c77d89046e5dc66438190e2261fb2197df2a8932"
     },
     {
       "type": "git",
       "path": "github.com/vim-airline/vim-airline-themes",
-      "version": "04fa4fc40f21d9490954213c1ee06c7fdea66a6d"
+      "version": "155bce6665ab8c83447102e8402cc9d3b7c3b3f3"
     },
     {
       "type": "git",
       "path": "localhost/local/vim-airline",
-      "version": "768bd0f5c685f728922b98a919cb6fab30c5b4ec"
+      "version": "8a6060b2ee02fadf7860e0030819bdbccb9e3a80"
     }
   ],
   "profiles": [
@@ -313,8 +313,7 @@
         "github.com/tpope/vim-surround",
         "github.com/turbio/bracey.vim",
         "github.com/vim-airline/vim-airline",
-        "github.com/vim-airline/vim-airline-themes",
-        "github.com/wellle/tmux-complete.vim"
+        "github.com/vim-airline/vim-airline-themes"
       ]
     },
     {
@@ -333,8 +332,7 @@
         "github.com/junegunn/fzf",
         "github.com/junegunn/fzf.vim",
         "github.com/lambdalisue/fern.vim",
-        "github.com/lambdalisue/gina.vim",
-        "localhost/local/vim-airline"
+        "github.com/lambdalisue/gina.vim"
       ]
     },
     {
