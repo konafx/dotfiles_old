@@ -3,45 +3,11 @@
 " Plugin configuration like the code written in vimrc.
 " This configuration is executed *before* a plugin is loaded.
 function! s:on_load_pre()
-    "let g:ale_lint_on_enter=0
 endfunction
 
 " Plugin configuration like the code written in vimrc.
 " This configuration is executed *after* a plugin is loaded.
 function! s:on_load_post()
-    " Python
-    " flake8をLinterとして登録
-    let g:ale_linters = {
-      \ 'html': [],
-      \ 'css': ['stylelint'],
-      \ 'javascript': ['eslint'],
-      \ 'python': ['flake8'],
-      \ 'java': ['javac', 'sbtserver'],
-      \ 'php': ['phpcs', 'php'],
-      \ }
-    " Fixerを登録
-    let g:ale_fixers = {
-      \ 'python': ['autopep8', 'black', 'isort'],
-      \ }
-    " Pythonパスをvenv上に固定
-    let g:ale_python_flake8_executable = g:python3_host_prog
-    let g:ale_python_flake8_options = '-m flake8'
-    let g:ale_python_autopep8_executable = g:python3_host_prog
-    let g:ale_python_autopep8_options = '-m autopep8'
-    let g:ale_python_isort_executable = g:python3_host_prog
-    let g:ale_python_isort_options = '-m isort'
-    let g:ale_python_black_executable = g:python3_host_prog
-    let g:ale_python_black_options = '-m black'
-
-    let g:mapleader = ','
-    noremap <Subleader> <Nop>
-    map <Space> <Subleader>
-    nnoremap <Subleader>, ,
-    xnoremap <Subleader>, ,
-
-    let g:ale_sign_error = '!!'
-    let g:ale_sign_warning = '=='
-    let g:ale_sign_info = '--'
 endfunction
 
 " This function determines when a plugin is loaded.

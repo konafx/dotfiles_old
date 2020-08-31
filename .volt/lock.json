@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "current_profile_name": "plug",
+  "current_profile_name": "nyaa",
   "repos": [
     {
       "type": "git",
@@ -41,6 +41,11 @@
       "type": "git",
       "path": "github.com/dense-analysis/ale",
       "version": "316c7c7372ad6f34e439944713655ccff2123f40"
+    },
+    {
+      "type": "git",
+      "path": "github.com/gko/vim-coloresque",
+      "version": "e12a5007068e74c8ffe5b1da91c25989de9c2081"
     },
     {
       "type": "git",
@@ -119,8 +124,8 @@
     },
     {
       "type": "git",
-      "path": "github.com/mattn/vim-fz",
-      "version": "9e4f1baa733efbc12f9ac516bba75ab76eb7b9cd"
+      "path": "github.com/lilydjwg/colorizer",
+      "version": "bafd4e98462a4ddeb275d02fa1448b4349e2e50f"
     },
     {
       "type": "git",
@@ -259,18 +264,8 @@
     },
     {
       "type": "git",
-      "path": "github.com/wellle/tmux-complete.vim",
-      "version": "7237d8d8d60af7916e3b546a9f4f396df95a1b21"
-    },
-    {
-      "type": "git",
-      "path": "github.com/yuki-ycino/fzf-preview.vim",
-      "version": "354b773d7ffec8e574b709487358a4c30a54e124"
-    },
-    {
-      "type": "git",
       "path": "localhost/local/vim-airline",
-      "version": "9f36cc310c5c232dbfab022fc6039f13bd6d9902"
+      "version": "768bd0f5c685f728922b98a919cb6fab30c5b4ec"
     }
   ],
   "profiles": [
@@ -334,9 +329,12 @@
     {
       "name": "nyaa",
       "repos_path": [
-        "github.com/lambdalisue/fern-comparator-lexical.vim",
+        "github.com/ap/vim-css-color",
+        "github.com/junegunn/fzf",
+        "github.com/junegunn/fzf.vim",
         "github.com/lambdalisue/fern.vim",
-        "github.com/vim-airline/vim-airline-themes"
+        "github.com/lambdalisue/gina.vim",
+        "localhost/local/vim-airline"
       ]
     },
     {
