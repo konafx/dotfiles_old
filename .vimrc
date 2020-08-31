@@ -140,12 +140,15 @@ Plug 'TaDaa/vimade'
 
 Plug 'tobyS/vmustache'
 
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'mattn/vim-lsp-settings'
 
+" schema
+Plug 'cocopon/iceberg.vim'
+
+" Langs
 Plug 'ap/vim-css-color'
 Plug 'dag/vim-fish', { 'for': 'fish' }
 Plug 'heavenshell/vim-jsdoc', { 'for': ['javascript', 'typescript'] }
@@ -239,11 +242,15 @@ let g:ale_linters = {
   \ 'javascript': ['eslint'],
   \ 'python': ['flake8'],
   \ 'java': ['javac', 'sbtserver'],
+  \ 'php': ['phpcs', 'php'],
   \ }
 " Fixerを登録
 let g:ale_fixers = {
   \ 'python': ['autopep8', 'black', 'isort'],
+  \ 'php': ['phpcbf'],
   \ }
+" 保存時の自動整形
+let g:ale_fix_on_save = 1
 " Pythonパスをvenv上に固定
 let g:ale_python_flake8_executable = g:python3_host_prog
 let g:ale_python_flake8_options = '-m flake8'
@@ -253,6 +260,9 @@ let g:ale_python_isort_executable = g:python3_host_prog
 let g:ale_python_isort_options = '-m isort'
 let g:ale_python_black_executable = g:python3_host_prog
 let g:ale_python_black_options = '-m black'
+" PHP
+let g:ale_php_phpcbf_standard = 'PSR2'
+let g:ale_php_phpcs_standard = 'PSR2'
 
 " let g:ale_sign_error = '!!'
 let g:ale_sign_warning = '=='
@@ -346,3 +356,7 @@ autocmd FileType fern setlocal nonumber
 
 " fern-renderer-nerdfont.vim
 let g:fern#renderer = 'nerdfont'
+
+" colorscheme
+set background=dark
+colorscheme iceberg
