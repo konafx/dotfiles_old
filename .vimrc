@@ -73,6 +73,16 @@ set wildmode=list:longest
 " ハイライト
 syntax on
 
+" 背景透過
+augroup TransparentBG
+  autocmd!
+  autocmd Colorscheme * highlight Normal ctermbg=none
+  autocmd Colorscheme * highlight NonText ctermbg=none
+  autocmd Colorscheme * highlight LineNr ctermbg=none
+  autocmd Colorscheme * highlight Folded ctermbg=none
+  autocmd Colorscheme * highlight EndOfBuffer ctermbg=none 
+augroup END
+
 " ## search
 " 大文字小文字の区別をしない
 set ignorecase
@@ -182,6 +192,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Git
 Plug 'tpope/vim-fugitive'
+Plug 'lambdalisue/gina.vim'
 
 " Tmux
 Plug 'christoomey/vim-tmux-navigator'
