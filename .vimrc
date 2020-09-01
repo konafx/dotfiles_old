@@ -43,6 +43,7 @@ if has("autocmd")
   filetype plugin on
   filetype indent on
   autocmd FileType html,xhtml         setlocal ts=2 sts=2 sw=0
+  autocmd FileType markdown           setlocal ts=2 sts=2 sw=0
   autocmd FileType javascript         setlocal ts=2 sts=2 sw=0
   autocmd FileType vue                setlocal ts=2 sts=2 sw=0
   autocmd FileType vim                setlocal ts=2 sts=2 sw=0
@@ -173,7 +174,7 @@ Plug 'nvie/vim-flake8', { 'for': 'python' }
 Plug 'pixelneo/vim-python-docstring', { 'for': 'python' }
 Plug 'tobyS/pdv', { 'for': 'php' }
 Plug 'wellle/tmux-complete.vim', { 'for': 'tmux' }
-Plug 'jwalton512/vim-blade', { 'for': 'php' }
+Plug 'jwalton512/vim-blade', { 'for': ['php', 'blade'] }
 
 Plug 'bkad/CamelCaseMotion'
 Plug 'alvan/vim-closetag'
@@ -216,7 +217,11 @@ Plug 'lambdalisue/reword.vim'
 
 Plug 'tpope/vim-surround'
 
+" チートシート
 Plug 'reireias/vim-cheatsheet'
+" 翻訳
+Plug 'skanehira/translate.vim'
+
 Plug 'ryanoasis/vim-devicons'
 Plug 'thinca/vim-quickrun'
 Plug 'thinca/vim-ref'
