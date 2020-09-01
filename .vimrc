@@ -162,6 +162,7 @@ Plug 'mattn/vim-lsp-settings'
 Plug 'cocopon/iceberg.vim'
 
 " Langs
+Plug 'editorconfig/editorconfig-vim'
 Plug 'ap/vim-css-color'
 Plug 'dag/vim-fish', { 'for': 'fish' }
 Plug 'heavenshell/vim-jsdoc', { 'for': ['javascript', 'typescript'] }
@@ -172,6 +173,7 @@ Plug 'nvie/vim-flake8', { 'for': 'python' }
 Plug 'pixelneo/vim-python-docstring', { 'for': 'python' }
 Plug 'tobyS/pdv', { 'for': 'php' }
 Plug 'wellle/tmux-complete.vim', { 'for': 'tmux' }
+Plug 'jwalton512/vim-blade', { 'for': 'php' }
 
 Plug 'bkad/CamelCaseMotion'
 Plug 'alvan/vim-closetag'
