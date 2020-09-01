@@ -74,14 +74,17 @@ set wildmode=list:longest
 syntax on
 
 " 背景透過
-augroup TransparentBG
-  autocmd!
-  autocmd Colorscheme * highlight Normal ctermbg=none
-  autocmd Colorscheme * highlight NonText ctermbg=none
-  autocmd Colorscheme * highlight LineNr ctermbg=none
-  autocmd Colorscheme * highlight Folded ctermbg=none
-  autocmd Colorscheme * highlight EndOfBuffer ctermbg=none 
-augroup END
+let t:is_transparent = $TRANSPARENT_TERM
+if t:is_transparent
+  augroup TransparentBG
+    autocmd!
+    autocmd Colorscheme * highlight Normal ctermbg=none
+    autocmd Colorscheme * highlight NonText ctermbg=none
+    autocmd Colorscheme * highlight LineNr ctermbg=none
+    autocmd Colorscheme * highlight Folded ctermbg=none
+    autocmd Colorscheme * highlight EndOfBuffer ctermbg=none 
+  augroup END
+endif
 
 " ## search
 " 大文字小文字の区別をしない
