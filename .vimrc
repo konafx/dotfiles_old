@@ -1,3 +1,10 @@
+" set script encoding
+scriptencoding utf-8
+" tiny と small では これ以上 vimrc を読み込まない
+if !1 | finish | endif
+" This is vim, not vi.
+set nocompatible
+
 " langcode
 set encoding=utf-8
 set fileencodings=utf-8,iso-2022-jp,euc-jp,sjis
@@ -147,6 +154,7 @@ endif
 " =================================
 " vim-plug
 call plug#begin()
+Plug 'tyru/restart.vim'
 Plug 'tpope/vim-sensible'
 
 " Fades inactive buffers
@@ -172,9 +180,12 @@ Plug 'moll/vim-node', { 'for': 'javascript' }
 Plug 'posva/vim-vue', { 'for' : 'vue' }
 Plug 'nvie/vim-flake8', { 'for': 'python' }
 Plug 'pixelneo/vim-python-docstring', { 'for': 'python' }
-Plug 'tobyS/pdv', { 'for': 'php' }
 Plug 'wellle/tmux-complete.vim', { 'for': 'tmux' }
+
+Plug 'tobyS/pdv', { 'for': 'php' }
 Plug 'jwalton512/vim-blade', { 'for': ['php', 'blade'] }
+Plug 'phpactor/phpactor', {'for': 'php', 'branch': 'master', 'do': 'composer install --no-dev -o'}
+Plug 'elythyr/phpactor-mappings'
 
 Plug 'bkad/CamelCaseMotion'
 Plug 'alvan/vim-closetag'
@@ -372,11 +383,14 @@ vmap <Leader>, <Plug>(caw:zeropos:toggle)
 " fern.vim
 let g:fern#default_hidden=1
 " S-t: un*t*il cursor move (like *f*)
-noremap <S-t> :Fern . -drawer -toggle<CR>
+noremap <S-t> :Fern . -drawer -reveal=% -toggle<CR>
 autocmd FileType fern setlocal nonumber
 
 " fern-renderer-nerdfont.vim
 let g:fern#renderer = 'nerdfont'
+
+" phpactor
+autocmd FileType php setlocal omnifunc=phpactor#Complete
 
 " colorscheme
 set background=dark
