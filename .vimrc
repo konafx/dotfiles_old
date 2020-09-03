@@ -356,7 +356,7 @@ xmap F <Plug>(clever-f-F)
 omap F <Plug>(clever-f-F)
 
 " pdv
-let g:pdv_template_dir = $HOME ."/.vim/pack/volt/opt/github.com_tobyS_pdv/templates"
+let g:pdv_template_dir = $HOME ."/.vim/plugged/pdv/templates"
 nnoremap <buffer> <C-p> :call pdv#DocumentCurrentLine()<CR>
 
 " vim-operator-replace
