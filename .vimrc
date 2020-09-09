@@ -1,15 +1,17 @@
-" set script encoding
+set encoding=utf-8
 scriptencoding utf-8
-" tiny と small では これ以上 vimrc を読み込まない
+set fileencoding=utf-8
+
 if !1 | finish | endif
 " This is vim, not vi.
 set nocompatible
 
-" langcode
-set encoding=utf-8
 set fileencodings=utf-8,iso-2022-jp,euc-jp,sjis
 set fileformats=unix,dos,mac
 filetype on
+
+" 全角幅文字の表示
+set ambiwidth=double
 
 " ## tab
 " tabToSpace
@@ -32,7 +34,8 @@ set smartindent
 set autoindent
 
 " 色々わかりやすくするやつ
-set list listchars=tab:\▸\-,trail:-,extends:»,precedes:«
+set list
+set listchars=tab:\▸\-,trail:-,extends:»,precedes:«
 
 " ↑の付随: Grey rbg(95, 95, 135)にする
 hi NonText    ctermfg=59
@@ -116,6 +119,8 @@ set undodir=$HOME/vim/undodir
 " python_venv_path
 if isdirectory(expand($PYENV_ROOT))
   let g:python3_host_prog = expand("$PYENV_ROOT/versions/vim/bin/python")
+else
+  let g:python3_host_prog = expand("$MINGW64/python")
 endif
 
 " json processer
