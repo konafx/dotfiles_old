@@ -175,6 +175,10 @@ Plug 'mattn/vim-lsp-settings'
 " schema
 Plug 'cocopon/iceberg.vim'
 
+" Snippets
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+
 " Langs
 Plug 'editorconfig/editorconfig-vim'
 Plug 'ap/vim-css-color'
@@ -194,6 +198,7 @@ Plug 'elythyr/phpactor-mappings'
 
 Plug 'bkad/CamelCaseMotion'
 Plug 'alvan/vim-closetag'
+
 
 " Fixer
 Plug 'dense-analysis/ale'
@@ -361,8 +366,12 @@ xmap F <Plug>(clever-f-F)
 omap F <Plug>(clever-f-F)
 
 " pdv
-let g:pdv_template_dir = $HOME ."/.vim/plugged/pdv/templates"
-nnoremap <buffer> <C-p> :call pdv#DocumentCurrentLine()<CR>
+if has("win64")
+  let g:pdv_template_dir = $HOME . "/vimfiles/plugged/pdv/templates"
+elseif has("unix")
+  let g:pdv_template_dir = $HOME ."/.vim/plugged/pdv/templates"
+endif
+nnoremap <buffer><C-p> :call pdv#DocumentWithSnip()<CR>
 
 " vim-operator-replace
 nmap R <Plug>(operator-replace)
@@ -396,6 +405,13 @@ let g:fern#renderer = 'nerdfont'
 
 " phpactor
 autocmd FileType php setlocal omnifunc=phpactor#Complete
+
+" ultisnips
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+let g:UltiSnipsEditSplit="vertical"
 
 " colorscheme
 set background=dark
