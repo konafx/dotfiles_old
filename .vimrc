@@ -3,6 +3,7 @@ scriptencoding utf-8
 set fileencoding=utf-8
 
 if !1 | finish | endif
+
 " This is vim, not vi.
 set nocompatible
 
@@ -48,6 +49,9 @@ let mapleader = ","
 " close window
 nnoremap <silent> <Leader>q :quit<CR>
 
+" ## window & tab
+nnoremap <silent> gr :tabprevious<CR>
+
 " indent 2にするマン……
 if has("autocmd")
   filetype plugin on
@@ -66,6 +70,8 @@ set nobackup
 set noswapfile
 
 " ## view
+syntax on
+
 " 行番号表示
 set number
 
@@ -80,9 +86,6 @@ set laststatus=2
 
 " 複数一致時、全一致を羅列し、共通最長文字列を補完
 set wildmode=list:longest
-
-" ハイライト
-syntax on
 
 " 背景透過
 let t:is_transparent = $TRANSPARENT_TERM
@@ -116,12 +119,22 @@ if !isdirectory(expand("~/.vim/undodir"))
 endif
 set undodir=$HOME/vim/undodir
 
+" <C-w> on terminal is word erase command
+set termwinkey=<C-g>
+
 " python_venv_path
 if isdirectory(expand($PYENV_ROOT))
   let g:python3_host_prog = expand("$PYENV_ROOT/versions/vim/bin/python")
 else
   let g:python3_host_prog = expand("$MINGW64/python")
 endif
+
+" auto reload vimrc
+augroup source-vimrc
+  autocmd!
+  autocmd BufWritePost *vimrc source %:p | set foldmethod=marker
+  autocmd BufWritePost *gvimrc if has('gui') source %:p
+augroup END
 
 " json processer
 command! -nargs=? Jq call s:Jq(<f-args>)
@@ -162,8 +175,10 @@ call plug#begin()
 Plug 'tyru/restart.vim'
 Plug 'tpope/vim-sensible'
 
-" Fades inactive buffers
-Plug 'TaDaa/vimade'
+if has('python')
+  " Fades inactive buffers
+  Plug 'TaDaa/vimade'
+endif
 
 Plug 'tobyS/vmustache'
 
@@ -199,12 +214,20 @@ Plug 'elythyr/phpactor-mappings'
 Plug 'bkad/CamelCaseMotion'
 Plug 'alvan/vim-closetag'
 
+Plug 'dhruvasagar/vim-table-mode'
 
 " Fixer
 Plug 'dense-analysis/ale'
 
+" Fuzzy Finder
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+if has('unix')
+  Plug 'Yggdroot/LeaderF', { 'do' : './install.sh' }
+elseif has('win32')
+  Plug 'Yggdroot/LeaderF', { 'do' : './install.bat' }
+endif
+
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
@@ -258,8 +281,12 @@ Plug 'lambdalisue/fern.vim'
 Plug 'lambdalisue/nerdfont.vim'
 Plug 'lambdalisue/fern-renderer-nerdfont.vim'
 
+" startup
+Plug 'mhinz/vim-startify'
+
 call plug#end()
 " =================================
+
 " vim-close tab
 let g:closetag_filetypes = 'html,xhtml,phtml,vue'
 let g:closetag_shortcut = '>'
@@ -371,7 +398,7 @@ if has("win64")
 elseif has("unix")
   let g:pdv_template_dir = $HOME ."/.vim/plugged/pdv/templates"
 endif
-nnoremap <buffer><C-p> :call pdv#DocumentWithSnip()<CR>
+nnoremap <Leader><C-p> :call pdv#DocumentWithSnip()<CR>
 
 " vim-operator-replace
 nmap R <Plug>(operator-replace)
@@ -394,6 +421,9 @@ vmap <Leader>c <Plug>(caw:hatpos:toggle)
 nmap <Leader>, <Plug>(caw:zeropos:toggle)
 vmap <Leader>, <Plug>(caw:zeropos:toggle)
 
+" gina.vim
+set diffopt+=vertical
+
 " fern.vim
 let g:fern#default_hidden=1
 " S-t: un*t*il cursor move (like *f*)
@@ -413,6 +443,29 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 let g:UltiSnipsEditSplit="vertical"
 
+" vim-lsp
+nnoremap <expr> <silent> <C-]> execute(':LspDefinition') =~ "not supported" ? "\<C-]>" : ":echo<cr>"
+
+" fzf.vim
+nnoremap <silent> <Leader>F :Files<CR>
+"nnoremap <silent> <Leader>g :GFiles<CR>
+"nnoremap <silent> <Leader>f :Buffers<CR>
+nmap <leader><tab> <plug>(fzf-maps-n)
+xmap <leader><tab> <plug>(fzf-maps-x)
+omap <leader><tab> <plug>(fzf-maps-o)
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, {'options': ['--layout=reverse', '--info=inline', '--preview', 'bat {}']}, <bang>0)
+
+" LeaderF
+let g:Lf_WindowPosition = 'popup'
+let g:Lf_PreviewInPopup = 1
+nnoremap <silent> <Leader>g :LeaderfFile<CR>
+nnoremap <silent> <Leader>f :LeaderfBuffer<CR>
+
 " colorscheme
 set background=dark
 colorscheme iceberg
+
+" LOCAL VIMRC
+source $HOME/vimfiles/.vimrc.local
+

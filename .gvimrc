@@ -11,3 +11,10 @@ set guioptions -=b
 
 "font
 set guifont=Cica:h12
+
+" window size
+set lines=40
+set columns=120
+
+" maximized
+autocmd GUIEnter * simalt ~x
