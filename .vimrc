@@ -452,7 +452,7 @@ set background=dark
 colorscheme iceberg
 
 " LOCAL VIMRC
-if exists("$HOME/vimfiles/.vimrc.local")
+if filereadable("$HOME/vimfiles/.vimrc.local")
   source $HOME/vimfiles/.vimrc.local
 endif
 
