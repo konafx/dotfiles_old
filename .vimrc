@@ -129,13 +129,6 @@ else
   let g:python3_host_prog = expand("$MINGW64/python")
 endif
 
-" auto reload vimrc
-augroup source-vimrc
-  autocmd!
-  autocmd BufWritePost *vimrc source %:p | set foldmethod=marker
-  autocmd BufWritePost *gvimrc if has('gui') source %:p
-augroup END
-
 " json processer
 command! -nargs=? Jq call s:Jq(<f-args>)
 function! s:Jq(...)
@@ -145,20 +138,6 @@ function! s:Jq(...)
       let l:arg = a:1
   endif
   execute "%! jq \"" . l:arg . "\""
-endfunction
-
-" project vimrc
-augroup vimrc-local
-  autocmd!
-  autocmd BufNewFile,BufReadPost * call s:vimrc_local(expand('<aflie>:p:h'))
-  autocmd BufReadPre .vimrc.local setfiletype=vim
-augroup END
-
-function! s:vimrc_local(loc)
-  let files = findfile('.vimrc.local', escape(a:loc, ' ') . ';', -1)
-  for i in reverse(filter(files, 'filereadable(v:val)'))
-    source `=i`
-  endfor
 endfunction
 
 " WSLでyank-to-clipboard
@@ -227,7 +206,8 @@ if has('unix')
 elseif has('win32')
   Plug 'Yggdroot/LeaderF', { 'do' : './install.bat' }
 endif
-
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'mattn/ctrlp-matchfuzzy'
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
@@ -265,6 +245,8 @@ Plug 'tpope/vim-surround'
 Plug 'reireias/vim-cheatsheet'
 " 翻訳
 Plug 'skanehira/translate.vim'
+
+Plug 'skanehira/code2img.vim'
 
 Plug 'ryanoasis/vim-devicons'
 Plug 'thinca/vim-quickrun'
@@ -461,6 +443,9 @@ let g:Lf_WindowPosition = 'popup'
 let g:Lf_PreviewInPopup = 1
 nnoremap <silent> <Leader>g :LeaderfFile<CR>
 nnoremap <silent> <Leader>f :LeaderfBuffer<CR>
+
+" CtrlP
+let g:ctrlp_match_func = {'match': 'ctrlp_matchfuzzy#matcher'}
 
 " colorscheme
 set background=dark
