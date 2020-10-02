@@ -4,6 +4,13 @@
 - `r{char}`: Replace cursol to {char}
 - In INSERT mode
     - `Ctrl-W`: delete word (back cursor)
+- In CommandLine mode
+    - `Ctrl-R` + `register`: paster resigter
+
+## LeaderF
+- `<C-X>`: open in horizontal split window.
+- `<C-]>`: open in vertical split window.
+- `<C-T>`: open in new tabpage.
 
 ## Move
 - `w` : word next

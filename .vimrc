@@ -51,6 +51,7 @@ nnoremap <silent> <Leader>q :quit<CR>
 
 " ## window & tab
 nnoremap <silent> gr :tabprevious<CR>
+" tnoremap <C-g>gr <C-g>gT
 
 " indent 2にするマン……
 if has("autocmd")
@@ -347,7 +348,8 @@ let g:NERDTreeExtensionHighlightColor['vue'] = '42B983'
 syntax sync fromstart "syntax
 
 " cheatsheet
-let g:cheatsheet#cheat_file = expand('~/.dotfiles/cheatsheet/vim.md')
+" g:cheatsheet#cheat_file は .vimrc.local に書くべき
+" let g:cheatsheet#cheat_file = expand('~/.dotfiles/cheatsheet/vim.md')
 let g:cheatsheet#float_window = 0
 
 " vim-ref
