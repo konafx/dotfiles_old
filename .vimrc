@@ -4,9 +4,6 @@ set fileencoding=utf-8
 
 if !1 | finish | endif
 
-" This is vim, not vi.
-set nocompatible
-
 set fileencodings=utf-8,iso-2022-jp,euc-jp,sjis
 set fileformats=unix,dos,mac
 filetype on
@@ -49,9 +46,16 @@ let mapleader = ","
 " close window
 nnoremap <silent> <Leader>q :quit<CR>
 
-" ## window & tab
+" <C-w> on terminal is word erase command
+set termwinkey=<C-g>
+
+" window & tab
 nnoremap <silent> gr :tabprevious<CR>
-" tnoremap <C-g>gr <C-g>gT
+tnoremap <C-g>gr <C-g>gT
+
+" 水平移動
+noremap H ^
+noremap L g_
 
 " indent 2にするマン……
 if has("autocmd")
@@ -69,9 +73,6 @@ endif
 " 恐れるな
 set nobackup
 set noswapfile
-
-" ## view
-syntax on
 
 " 行番号表示
 set number
@@ -118,10 +119,7 @@ set undofile
 if !isdirectory(expand("~/.vim/undodir"))
   call mkdir(expand("~/.vim/undodir"), "p")
 endif
-set undodir=$HOME/vim/undodir
-
-" <C-w> on terminal is word erase command
-set termwinkey=<C-g>
+set undodir=$HOME/.vim/undodir
 
 " python_venv_path
 if isdirectory(expand($PYENV_ROOT))
@@ -154,6 +152,8 @@ endif
 call plug#begin()
 Plug 'tyru/restart.vim'
 Plug 'tpope/vim-sensible'
+
+Plug 'vim-jp/vimdoc-ja'
 
 if has('python')
   " Fades inactive buffers
@@ -207,8 +207,6 @@ if has('unix')
 elseif has('win32')
   Plug 'Yggdroot/LeaderF', { 'do' : './install.bat' }
 endif
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'mattn/ctrlp-matchfuzzy'
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
@@ -269,6 +267,9 @@ Plug 'mhinz/vim-startify'
 
 call plug#end()
 " =================================
+
+" ## view
+syntax on
 
 " vim-close tab
 let g:closetag_filetypes = 'html,xhtml,phtml,vue'
@@ -446,15 +447,12 @@ let g:Lf_PreviewInPopup = 1
 nnoremap <silent> <Leader>g :LeaderfFile<CR>
 nnoremap <silent> <Leader>f :LeaderfBuffer<CR>
 
-" CtrlP
-let g:ctrlp_match_func = {'match': 'ctrlp_matchfuzzy#matcher'}
-
 " colorscheme
 set background=dark
 colorscheme iceberg
 
 " LOCAL VIMRC
-if filereadable("$HOME/vimfiles/.vimrc.local")
+if filereadable(expand("~/vimfiles/.vimrc.local"))
   source $HOME/vimfiles/.vimrc.local
 endif
 
