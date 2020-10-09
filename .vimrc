@@ -147,6 +147,33 @@ if system('uname -a | grep microsoft') != ''
   augroup END
 endif
 
+" git grep
+function! s:gitgrep(query)
+  let l:current_grep = &grepprg " 前回の設定値の保存
+  setlocal grepprg=git\ grep\ -I\ --line-number
+  execute 'silent grep! ' . a:query
+  let &grepprg = l:current_grep
+  redraw!
+endfunction
+
+command! -nargs=? Ggrep call s:gitgrep(<f-args>)
+
+" jvgrep
+function! s:jvgrep(query)
+  let l:current_grep = &grepprg
+  setlocal grepprg=jvgrep
+  execute 'silent grep! ' . a:query ' ./*'
+  let &grepprg = l:current_grep
+  redraw!
+endfunction
+
+command! -nargs=? Jvgrep call s:jvgrep(<f-args>)
+
+augroup quickfixgrep
+  autocmd!
+  autocmd QuickFixCmdPost make,*grep* cwindow
+augroup END
+
 " =================================
 " vim-plug
 call plug#begin()
@@ -162,6 +189,8 @@ endif
 
 Plug 'tobyS/vmustache'
 
+" Plug 'lighttiger2505/sqls.vim'
+" Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
@@ -185,6 +214,7 @@ Plug 'posva/vim-vue', { 'for' : 'vue' }
 Plug 'nvie/vim-flake8', { 'for': 'python' }
 Plug 'pixelneo/vim-python-docstring', { 'for': 'python' }
 Plug 'wellle/tmux-complete.vim', { 'for': 'tmux' }
+Plug 'chrisbra/csv.vim'
 
 Plug 'tobyS/pdv', { 'for': 'php' }
 Plug 'jwalton512/vim-blade', { 'for': ['php', 'blade'] }
@@ -220,7 +250,6 @@ Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Git
-Plug 'tpope/vim-fugitive'
 Plug 'lambdalisue/gina.vim'
 
 " Tmux
