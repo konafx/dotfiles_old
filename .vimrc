@@ -188,6 +188,7 @@ if has('python')
 endif
 
 Plug 'tobyS/vmustache'
+Plug 'mattn/vimtweak'
 
 " Plug 'lighttiger2505/sqls.vim'
 " Plug 'prabirshrestha/async.vim'
@@ -277,9 +278,8 @@ Plug 'reireias/vim-cheatsheet'
 " 翻訳
 Plug 'skanehira/translate.vim'
 
-" skk
-Plug 'tyru/skkdict.vim'
-Plug 'tyru/eskk.vim'
+Plug 'mattn/webapi-vim'
+Plug 'mattn/vim-gist'
 
 Plug 'skanehira/code2img.vim'
 
