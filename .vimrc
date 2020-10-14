@@ -239,6 +239,7 @@ if has('unix')
 elseif has('win32')
   Plug 'Yggdroot/LeaderF', { 'do' : './install.bat' }
 endif
+Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
@@ -467,24 +468,12 @@ let g:UltiSnipsEditSplit="vertical"
 " vim-lsp
 nnoremap <expr> <silent> <C-]> execute(':LspDefinition') =~ "not supported" ? "\<C-]>" : ":echo<cr>"
 
-" fzf.vim
-nnoremap <silent> <Leader>F :Files<CR>
-"nnoremap <silent> <Leader>g :GFiles<CR>
-"nnoremap <silent> <Leader>f :Buffers<CR>
-nmap <leader><tab> <plug>(fzf-maps-n)
-xmap <leader><tab> <plug>(fzf-maps-x)
-omap <leader><tab> <plug>(fzf-maps-o)
-command! -bang -nargs=? -complete=dir Files
-  \ call fzf#vim#files(<q-args>, {'options': ['--layout=reverse', '--info=inline', '--preview', 'bat {}']}, <bang>0)
-
-" LeaderF
-let g:Lf_WindowPosition = 'popup'
-let g:Lf_PreviewInPopup = 1
-let g:Lf_DefaultMode = 'Fuzzy'
-nnoremap <silent> <Leader>g :LeaderfFile<CR>
-nnoremap <silent> <Leader>f :LeaderfBuffer<CR>
+" vim-clap
+nnoremap <silent> <Leader>g :Clap gfiles<CR>
+nnoremap <silent> <Leader>f :Clap buffers<CR>
 
 " eskk
+" 以下は.vimrc.localに記載
 " let g:eskk#directory = "~/.eskk"
 " let g:eskk#dictionary = { 'path': "~/.skk-jisyo", 'sorted': 0, 'encoding': 'utf-8', }
 " let g:eskk#large_dictionary = { 'path': "~/.eskk/SKK-JISYO.L", 'sorted': 1, 'encoding': 'euc-jp', }
