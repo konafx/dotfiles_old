@@ -198,6 +198,8 @@ Plug 'mattn/vim-lsp-settings'
 
 " schema
 Plug 'cocopon/iceberg.vim'
+Plug 'koirand/tokyo-metro.vim'
+Plug 'arcticicestudio/nord-vim'
 
 " Snippets
 Plug 'SirVer/ultisnips'
@@ -273,6 +275,10 @@ Plug 'tpope/vim-surround'
 Plug 'reireias/vim-cheatsheet'
 " 翻訳
 Plug 'skanehira/translate.vim'
+
+" skk
+Plug 'tyru/skkdict.vim'
+Plug 'tyru/eskk.vim'
 
 Plug 'skanehira/code2img.vim'
 
@@ -437,6 +443,7 @@ vmap <Leader>, <Plug>(caw:zeropos:toggle)
 
 " gina.vim
 set diffopt+=vertical
+noremap <silent> <C-s> :Gina status -s<CR>
 
 " fern.vim
 let g:fern#default_hidden=1
@@ -473,8 +480,14 @@ command! -bang -nargs=? -complete=dir Files
 " LeaderF
 let g:Lf_WindowPosition = 'popup'
 let g:Lf_PreviewInPopup = 1
+let g:Lf_DefaultMode = 'Fuzzy'
 nnoremap <silent> <Leader>g :LeaderfFile<CR>
 nnoremap <silent> <Leader>f :LeaderfBuffer<CR>
+
+" eskk
+" let g:eskk#directory = "~/.eskk"
+" let g:eskk#dictionary = { 'path': "~/.skk-jisyo", 'sorted': 0, 'encoding': 'utf-8', }
+" let g:eskk#large_dictionary = { 'path': "~/.eskk/SKK-JISYO.L", 'sorted': 1, 'encoding': 'euc-jp', }
 
 " colorscheme
 set background=dark
