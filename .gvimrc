@@ -10,7 +10,12 @@ set guioptions -=L
 set guioptions -=b
 
 "font
-set guifont=Cica:h12
+set guifont=Cica:h12:cSHIFTJIS
+
+" font changer
+command FontSmall :set guifont=Cica:h8:cSHIFTJIS guifontwide=Cica:h8
+command FontMid :set guifont=Cica:h12:cSHIFTJIS guifontwide=Cica:h12
+command FontBig :set guifont=Cica:h20:cSHIFTJIS guifontwide=Cica:h20
 
 " window size
 set lines=40

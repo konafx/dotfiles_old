@@ -197,10 +197,11 @@ Plug 'prabirshrestha/vim-lsp'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'mattn/vim-lsp-settings'
 
-" schema
+" colorschema
 Plug 'cocopon/iceberg.vim'
 Plug 'koirand/tokyo-metro.vim'
 Plug 'arcticicestudio/nord-vim'
+Plug 'cideM/yui'
 
 " Snippets
 Plug 'SirVer/ultisnips'
@@ -469,6 +470,7 @@ let g:UltiSnipsEditSplit="vertical"
 nnoremap <expr> <silent> <C-]> execute(':LspDefinition') =~ "not supported" ? "\<C-]>" : ":echo<cr>"
 
 " vim-clap
+let g:clap_layout = { 'relative': 'editor' }
 nnoremap <silent> <Leader>g :Clap gfiles<CR>
 nnoremap <silent> <Leader>f :Clap buffers<CR>
 
