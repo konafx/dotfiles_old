@@ -156,6 +156,12 @@ function! s:gitgrep(query)
   redraw!
 endfunction
 
+" use rg
+if executable('rg')
+    let &grepprg = 'rg --vimgrep --hidden'
+    set grepformat=%f:%l:%c:%m
+endif
+
 command! -nargs=? Ggrep call s:gitgrep(<f-args>)
 
 " jvgrep
@@ -202,6 +208,8 @@ Plug 'cocopon/iceberg.vim'
 Plug 'koirand/tokyo-metro.vim'
 Plug 'arcticicestudio/nord-vim'
 Plug 'cideM/yui'
+Plug 'jaredgorski/spacecamp'
+Plug 'franbach/miramare'
 
 " Snippets
 Plug 'SirVer/ultisnips'
@@ -273,6 +281,8 @@ Plug 'brooth/far.vim'
 Plug 'lambdalisue/reword.vim'
 
 Plug 'tpope/vim-surround'
+
+Plug 'mattn/vim-lexiv'
 
 " チートシート
 Plug 'reireias/vim-cheatsheet'
@@ -467,10 +477,12 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsEditSplit="vertical"
 
 " vim-lsp
+let g:lsp_diagnostics_enabled = 1
 nnoremap <expr> <silent> <C-]> execute(':LspDefinition') =~ "not supported" ? "\<C-]>" : ":echo<cr>"
 
 " vim-clap
 let g:clap_layout = { 'relative': 'editor' }
+nnoremap <silent> <Leader>C :Clap<CR>
 nnoremap <silent> <Leader>g :Clap gfiles<CR>
 nnoremap <silent> <Leader>f :Clap buffers<CR>
 
