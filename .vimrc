@@ -193,7 +193,6 @@ if has('python')
   Plug 'TaDaa/vimade'
 endif
 
-Plug 'tobyS/vmustache'
 Plug 'mattn/vimtweak'
 
 " Plug 'lighttiger2505/sqls.vim'
@@ -212,8 +211,8 @@ Plug 'jaredgorski/spacecamp'
 Plug 'franbach/miramare'
 
 " Snippets
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
+Plug 'henricattoire/aergia'
+Plug 'mattn/vim-sonictemplate'
 
 " Langs
 Plug 'editorconfig/editorconfig-vim'
@@ -228,27 +227,19 @@ Plug 'pixelneo/vim-python-docstring', { 'for': 'python' }
 Plug 'wellle/tmux-complete.vim', { 'for': 'tmux' }
 Plug 'chrisbra/csv.vim'
 
+" pdv requirements
+Plug 'tobyS/vmustache'
 Plug 'tobyS/pdv', { 'for': 'php' }
 Plug 'jwalton512/vim-blade', { 'for': ['php', 'blade'] }
-Plug 'phpactor/phpactor', {'for': 'php', 'branch': 'master', 'do': 'composer install --no-dev -o'}
-Plug 'elythyr/phpactor-mappings'
+" Plug 'phpactor/phpactor', {'for': 'php', 'branch': 'master', 'do': 'composer install --no-dev -o'}
+" Plug 'elythyr/phpactor-mappings'
 
 Plug 'bkad/CamelCaseMotion'
 Plug 'alvan/vim-closetag'
 
 Plug 'dhruvasagar/vim-table-mode'
 
-" Fixer
-Plug 'dense-analysis/ale'
-
 " Fuzzy Finder
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-if has('unix')
-  Plug 'Yggdroot/LeaderF', { 'do' : './install.sh' }
-elseif has('win32')
-  Plug 'Yggdroot/LeaderF', { 'do' : './install.bat' }
-endif
 Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
@@ -258,18 +249,11 @@ Plug 'kana/vim-operator-user'
 Plug 'kana/vim-operator-replace'
 Plug 'rhysd/vim-operator-surround'
 
-" Explorer
-Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'Xuyuanp/nerdtree-git-plugin'
-
 " Git
 Plug 'lambdalisue/gina.vim'
 
 " Tmux
 Plug 'christoomey/vim-tmux-navigator'
-
-" Templater
-Plug 'mattn/vim-sonictemplate'
 
 " Search
 " e.g.) maekawa -> 前川
@@ -289,6 +273,7 @@ Plug 'reireias/vim-cheatsheet'
 " 翻訳
 Plug 'skanehira/translate.vim'
 
+" vim-gist requirements
 Plug 'mattn/webapi-vim'
 Plug 'mattn/vim-gist'
 
@@ -305,6 +290,7 @@ Plug 'tyru/caw.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+" Explorer
 Plug 'lambdalisue/fern.vim'
 Plug 'lambdalisue/nerdfont.vim'
 Plug 'lambdalisue/fern-renderer-nerdfont.vim'
@@ -324,49 +310,6 @@ let g:closetag_shortcut = '>'
 
 " CamelCaseMotion
 let g:camelcasemotion_key = '<Leader>'
-" map <silent> w <Plug>CamelCaseMotion_w
-" map <silent> b <Plug>CamelCaseMotion_b
-" map <silent> e <Plug>CamelCaseMotion_e
-" map <silent> ge <Plug>CamelCaseMotion_ge
-" sunmap w
-" sunmap b
-" sunmap e
-" sunmap ge
-
-" ale
-" Python
-" flake8をLinterとして登録
-let g:ale_linters = {
-  \ 'html': [],
-  \ 'css': ['stylelint'],
-  \ 'javascript': ['eslint'],
-  \ 'python': ['flake8'],
-  \ 'java': ['javac', 'sbtserver'],
-  \ 'php': ['phpcs', 'php'],
-  \ }
-" Fixerを登録
-let g:ale_fixers = {
-  \ 'python': ['autopep8', 'black', 'isort'],
-  \ 'php': ['phpcbf'],
-  \ }
-" 保存時の自動整形
-let g:ale_fix_on_save = 1
-" Pythonパスをvenv上に固定
-let g:ale_python_flake8_executable = g:python3_host_prog
-let g:ale_python_flake8_options = '-m flake8'
-let g:ale_python_autopep8_executable = g:python3_host_prog
-let g:ale_python_autopep8_options = '-m autopep8'
-let g:ale_python_isort_executable = g:python3_host_prog
-let g:ale_python_isort_options = '-m isort'
-let g:ale_python_black_executable = g:python3_host_prog
-let g:ale_python_black_options = '-m black'
-" PHP
-let g:ale_php_phpcbf_standard = 'PSR2'
-let g:ale_php_phpcs_standard = 'PSR2'
-
-" let g:ale_sign_error = '!!'
-let g:ale_sign_warning = '=='
-let g:ale_sign_info = '--'
 
 " airline
 let g:airline_statusline_ontop = 0
@@ -383,14 +326,12 @@ let g:airline_right_alt_sep = ''
 let g:airline_theme='papercolor'
 
 " vim-sonictemplate
-let g:sonictemplate_vim_template_dir = expand('~/.vim/sonictemplate')
+" local.vim
+" let g:sonictemplate_vim_template_dir = expand('~/.vim/sonictemplate')
 
 " vim-devicon
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {}
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['vue'] = ''
-" アイコン入力方法 : `[Ctrl+V]` > `[u]` > `e905`
-let g:NERDTreeExtensionHighlightColor = {}
-let g:NERDTreeExtensionHighlightColor['vue'] = '42B983'
 
 " vim-vue
 syntax sync fromstart "syntax
@@ -440,11 +381,6 @@ map <silent>sa <Plug>(operator-surround-append)
 map <silent>sd <Plug>(operator-surround-delete)
 map <silent>sr <Plug>(operator-surround-replace)
 
-" NERDTree
-let g:NERDTreeShowHidden=1
-noremap <Leader><S-n> :NERDTreeToggle<CR>
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
 " caw.vim
 " 行の最初の文字の前にコメント文字をトグル
 nmap <Leader>c <Plug>(caw:hatpos:toggle)
@@ -460,6 +396,7 @@ noremap <silent> <C-s> :Gina status -s<CR>
 " fern.vim
 let g:fern#default_hidden=1
 " S-t: un*t*il cursor move (like *f*)
+noremap sf :Fern %:h<CR>
 noremap <S-t> :Fern . -drawer -reveal=% -toggle<CR>
 autocmd FileType fern setlocal nonumber
 
@@ -467,14 +404,7 @@ autocmd FileType fern setlocal nonumber
 let g:fern#renderer = 'nerdfont'
 
 " phpactor
-autocmd FileType php setlocal omnifunc=phpactor#Complete
-
-" ultisnips
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
-let g:UltiSnipsEditSplit="vertical"
+" autocmd FileType php setlocal omnifunc=phpactor#Complete
 
 " vim-lsp
 let g:lsp_diagnostics_enabled = 1
