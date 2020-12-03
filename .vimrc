@@ -210,6 +210,8 @@ Plug 'arcticicestudio/nord-vim'
 Plug 'cideM/yui'
 Plug 'jaredgorski/spacecamp'
 Plug 'franbach/miramare'
+Plug 'bignimbus/pop-punk.vim'
+Plug 'kato-k/vim-colorscheme-settings'
 
 " Snippets
 Plug 'henricattoire/aergia'
@@ -243,6 +245,7 @@ Plug 'dhruvasagar/vim-table-mode'
 " Fuzzy Finder
 Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'mattn/ctrlp-ghq'
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
@@ -253,6 +256,9 @@ Plug 'rhysd/vim-operator-surround'
 
 " Git
 Plug 'lambdalisue/gina.vim'
+
+" GitHub
+Plug 'skanehira/gh.vim'
 
 " Tmux
 Plug 'christoomey/vim-tmux-navigator'
@@ -343,8 +349,7 @@ let g:nerdfont#path#extension#customs['vue'] = ''
 syntax sync fromstart "syntax
 
 " cheatsheet
-" g:cheatsheet#cheat_file は .vimrc.local に書くべき
-" let g:cheatsheet#cheat_file = expand('~/.dotfiles/cheatsheet/vim.md')
+" g:cheatsheet#cheat_file
 let g:cheatsheet#float_window = 0
 
 " vim-ref
@@ -422,8 +427,17 @@ nnoremap <silent> <Leader>C :Clap<CR>
 nnoremap <silent> <Leader>g :Clap gfiles<CR>
 nnoremap <silent> <Leader>f :Clap buffers<CR>
 
+" ctrlp
+" ctrlp-ghq
+let g:ctrlp_ghq_actions = [
+  \ {"label": "Fern", "action": "Fern", "path": 1},
+  \ {"label": "Open", "action": "e", "path": 1},
+  \ {"label": "Look", "action": "!ghq look", "path": 0},
+  \]
+let ctrlp_ghq_default_action = 'lcd'
+let g:ctrlp_ghq_cache_enabled = 1
+
 " eskk
-" 以下は.vimrc.localに記載
 " let g:eskk#directory = "~/.eskk"
 " let g:eskk#dictionary = { 'path': "~/.skk-jisyo", 'sorted': 0, 'encoding': 'utf-8', }
 " let g:eskk#large_dictionary = { 'path': "~/.eskk/SKK-JISYO.L", 'sorted': 1, 'encoding': 'euc-jp', }
@@ -433,12 +447,34 @@ let g:gist_extmap = {
   \ ".md": "markdown"
   \ }
 
-" colorscheme
+" let g:colorschemes_settings#rc_file_path = expand("~/vimfiles/colorrc.vim")
+let g:colorschemes_settings#use_default_colorschemes = v:false
 set background=dark
 colorscheme iceberg
 
 " LOCAL VIMRC
-if filereadable(expand("~/vimfiles/.vimrc.local"))
-  source $HOME/vimfiles/.vimrc.local
+" 環境依存になりがちな設定
+if has('win32') || has('win64')
+  let s:vimhome = expand("$HOME/vimfiles")
+elseif has('unix')
+  let s:vimhome = expand("$HOME/.vim")
+endif
+
+let g:cheatsheet#cheat_file = s:vimhome . "/cheatsheet"
+
+let g:startify_bookmarks = [
+  \ {'c': s:vimhome . "/vimrc"},
+  \ {'v': s:vimhome . "/gvimrc"},
+  \ s:vimhome,
+  \ ]
+
+let g:colorschemes_settings#rc_file_path = s:vimhome . "/colorrc.vim"
+if filereadable(g:colorschemes_settings#rc_file_path)
+  execute "source" g:colorschemes_settings#rc_file_path
+endif
+
+" CREDENTIALS
+if filereadable(s:vimhome . "/credentials.vim")
+  exec "source" s:vimhome . "/credentials.vim"
 endif
 
