@@ -63,6 +63,7 @@ if has("autocmd")
   filetype indent on
   autocmd FileType html,xhtml         setlocal ts=2 sts=2 sw=0
   autocmd FileType markdown           setlocal ts=2 sts=2 sw=0
+  autocmd FileType css,sass,scss      setlocal ts=2 sts=2 sw=0
   autocmd FileType javascript         setlocal ts=2 sts=2 sw=0
   autocmd FileType vue                setlocal ts=2 sts=2 sw=0
   autocmd FileType vim                setlocal ts=2 sts=2 sw=0
@@ -241,6 +242,7 @@ Plug 'dhruvasagar/vim-table-mode'
 
 " Fuzzy Finder
 Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
+Plug 'ctrlpvim/ctrlp.vim'
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
@@ -333,6 +335,10 @@ let g:airline_theme='papercolor'
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {}
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['vue'] = ''
 
+" nerdfont.vim
+let g:nerdfont#path#extension#customs = {}
+let g:nerdfont#path#extension#customs['vue'] = ''
+
 " vim-vue
 syntax sync fromstart "syntax
 
@@ -421,6 +427,11 @@ nnoremap <silent> <Leader>f :Clap buffers<CR>
 " let g:eskk#directory = "~/.eskk"
 " let g:eskk#dictionary = { 'path': "~/.skk-jisyo", 'sorted': 0, 'encoding': 'utf-8', }
 " let g:eskk#large_dictionary = { 'path': "~/.eskk/SKK-JISYO.L", 'sorted': 1, 'encoding': 'euc-jp', }
+
+" vim-gist
+let g:gist_extmap = {
+  \ ".md": "markdown"
+  \ }
 
 " colorscheme
 set background=dark
