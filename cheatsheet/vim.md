@@ -7,10 +7,9 @@
 - In CommandLine mode
     - `Ctrl-R` + `register`: paster resigter
 
-## LeaderF
-- `<C-X>`: open in horizontal split window.
-- `<C-]>`: open in vertical split window.
-- `<C-T>`: open in new tabpage.
+## Plugin
+- `:SwitchColorScheme`: 色変更プラグイン
+- `:CtrlPGhq`: GHQ起動
 
 ## Move
 - `w` : word next

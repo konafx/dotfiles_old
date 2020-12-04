@@ -44,13 +44,13 @@ nnoremap , <Nop>
 let mapleader = ","
 
 " close window
-nnoremap <silent> <Leader>q :quit<CR>
+nnoremap <silent> <Leader>q <Cmd>quit
 
 " <C-w> on terminal is word erase command
 set termwinkey=<C-g>
 
 " window & tab
-nnoremap <silent> gr :tabprevious<CR>
+nnoremap <silent> gr <Cmd>tabprevious<CR>
 tnoremap <C-g>gr <C-g>gT
 
 " 水平移動
@@ -113,7 +113,7 @@ set wrapscan
 " hylight
 set hlsearch
 " clear hylight
-nmap <Esc><Esc> :nohlsearch<CR><Esc>
+nmap <Esc><Esc> <Cmd>nohlsearch<CR>
 
 " 永続アンドゥ
 set undofile
@@ -126,7 +126,7 @@ set undodir=$HOME/.vim/undodir
 if isdirectory(expand($PYENV_ROOT))
   let g:python3_host_prog = expand("$PYENV_ROOT/versions/vim/bin/python")
 else
-  let g:python3_host_prog = expand("$MINGW64/python")
+  let g:python3_host_prog = expand("$MINGW64/bin/python")
 endif
 
 " json processer
@@ -144,7 +144,7 @@ endfunction
 if system('uname -a | grep microsoft') != ''
   augroup myYank
     autocmd!
-    autocmd TextYankPost * :call system('clip.exe', @")
+    autocmd TextYankPost * <Cmd>call system('clip.exe', @")
   augroup END
 endif
 
@@ -402,13 +402,13 @@ vmap <Leader>, <Plug>(caw:zeropos:toggle)
 
 " gina.vim
 set diffopt+=vertical
-noremap <silent> <C-s> :Gina status -s<CR>
+noremap <silent> <C-s> <Cmd>Gina status -s<CR>
 
 " fern.vim
 let g:fern#default_hidden=1
 " S-t: un*t*il cursor move (like *f*)
-noremap sf :Fern %:h<CR>
-noremap <S-t> :Fern . -drawer -reveal=% -toggle<CR>
+noremap sf <Cmd>Fern %:h<CR>
+noremap <S-t> <Cmd>Fern . -drawer -reveal=% -toggle<CR>
 autocmd FileType fern setlocal nonumber
 
 " fern-renderer-nerdfont.vim
@@ -423,9 +423,9 @@ nnoremap <expr> <silent> <C-]> execute(':LspDefinition') =~ "not supported" ? "\
 
 " vim-clap
 let g:clap_layout = { 'relative': 'editor' }
-nnoremap <silent> <Leader>C :Clap<CR>
-nnoremap <silent> <Leader>g :Clap gfiles<CR>
-nnoremap <silent> <Leader>f :Clap buffers<CR>
+nnoremap <silent> <Leader>C <Cmd>Clap<CR>
+nnoremap <silent> <Leader>g <Cmd>Clap gfiles<CR>
+nnoremap <silent> <Leader>f <Cmd>Clap buffers<CR>
 
 " ctrlp
 " ctrlp-ghq
@@ -435,7 +435,7 @@ let g:ctrlp_ghq_actions = [
   \ {"label": "Look", "action": "!ghq look", "path": 0},
   \]
 let ctrlp_ghq_default_action = 'lcd'
-let g:ctrlp_ghq_cache_enabled = 1
+let g:ctrlp_ghq_cache_enabled = 0
 
 " eskk
 " let g:eskk#directory = "~/.eskk"
@@ -460,14 +460,22 @@ elseif has('unix')
   let s:vimhome = expand("$HOME/.vim")
 endif
 
-let g:cheatsheet#cheat_file = s:vimhome . "/cheatsheet"
+" cheatsheet
+let g:cheatsheet#cheat_file = s:vimhome . "/cheatsheet/vim.md"
+" augroup cheat_filetype
+"   autocmd!
+"   let cheatsheet#cheat_dir = s:vimhome . "/cheatsheet"
+"   autocmd FileType * let g:cheatsheet#cheat_file = cheatsheet#cheat_dir .. "/vim.md"
+" augroup END
 
+" Statify
 let g:startify_bookmarks = [
   \ {'c': s:vimhome . "/vimrc"},
   \ {'v': s:vimhome . "/gvimrc"},
   \ s:vimhome,
   \ ]
 
+" colorscheme-settings
 let g:colorschemes_settings#rc_file_path = s:vimhome . "/colorrc.vim"
 if filereadable(g:colorschemes_settings#rc_file_path)
   execute "source" g:colorschemes_settings#rc_file_path
