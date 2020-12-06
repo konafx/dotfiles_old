@@ -205,7 +205,9 @@ Plug 'mattn/vim-lsp-settings'
 
 " colorschema
 Plug 'cocopon/iceberg.vim'
+Plug 'machakann/vim-colorscheme-snowtrek'
 Plug 'koirand/tokyo-metro.vim'
+Plug 'ghifarit53/tokyonight-vim'
 Plug 'arcticicestudio/nord-vim'
 Plug 'cideM/yui'
 Plug 'jaredgorski/spacecamp'
@@ -246,6 +248,7 @@ Plug 'dhruvasagar/vim-table-mode'
 Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'mattn/ctrlp-ghq'
+Plug 'hara/ctrlp-colorscheme'
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
