@@ -57,6 +57,9 @@ tnoremap <C-g>gr <C-g>gT
 noremap H ^
 noremap L g_
 
+" 1文字貼り付け防止
+noremap x "_x
+
 " indent 2にするマン……
 if has("autocmd")
   filetype plugin on
@@ -114,20 +117,6 @@ set wrapscan
 set hlsearch
 " clear hylight
 nmap <Esc><Esc> <Cmd>nohlsearch<CR>
-
-" 永続アンドゥ
-set undofile
-if !isdirectory(expand("~/.vim/undodir"))
-  call mkdir(expand("~/.vim/undodir"), "p")
-endif
-set undodir=$HOME/.vim/undodir
-
-" python_venv_path
-if isdirectory(expand($PYENV_ROOT))
-  let g:python3_host_prog = expand("$PYENV_ROOT/versions/vim/bin/python")
-else
-  let g:python3_host_prog = expand("$MINGW64/bin/python")
-endif
 
 " json processer
 command! -nargs=? Jq call s:Jq(<f-args>)
@@ -213,6 +202,8 @@ Plug 'cideM/yui'
 Plug 'jaredgorski/spacecamp'
 Plug 'franbach/miramare'
 Plug 'bignimbus/pop-punk.vim'
+Plug 'atelierbram/Base2Tone-vim'
+Plug 'reedes/vim-colors-pencil'
 Plug 'kato-k/vim-colorscheme-settings'
 
 " Snippets
@@ -240,7 +231,6 @@ Plug 'jwalton512/vim-blade', { 'for': ['php', 'blade'] }
 " Plug 'elythyr/phpactor-mappings'
 
 Plug 'bkad/CamelCaseMotion'
-Plug 'alvan/vim-closetag'
 
 Plug 'dhruvasagar/vim-table-mode'
 
@@ -318,6 +308,15 @@ syntax on
 " vim-close tab
 let g:closetag_filetypes = 'html,xhtml,phtml,vue'
 let g:closetag_shortcut = '>'
+
+" quickrun
+let g:quickrun_config = {}
+let g:quickrun_config['typescript'] = { 'type' : 'typescript/tsc' }
+let g:quickrun_config['typescript/tsc'] = {
+\   'exec': ['%c --target esnext --module commonjs %o %s', 'node %s:r.js'],
+\   'tempfile': '%{tempname()}.ts',
+\   'hook/sweep/files': ['%S:p:r.js'],
+\ }
 
 " CamelCaseMotion
 let g:camelcasemotion_key = '<Leader>'
@@ -463,29 +462,43 @@ elseif has('unix')
   let s:vimhome = expand("$HOME/.vim")
 endif
 
+" 永続アンドゥ
+set undofile
+if !isdirectory(s:vimhome .. "/undodir")
+  call mkdir(s:vimhome .. "/undodir", "p")
+endif
+execute "set undodir=" .. s:vimhome .. "/undodir"
+
 " cheatsheet
-let g:cheatsheet#cheat_file = s:vimhome . "/cheatsheet/vim.md"
+let g:cheatsheet#cheat_file = s:vimhome .. "/cheatsheet/vim.md"
 " augroup cheat_filetype
 "   autocmd!
-"   let cheatsheet#cheat_dir = s:vimhome . "/cheatsheet"
+"   let cheatsheet#cheat_dir = s:vimhome .. "/cheatsheet"
 "   autocmd FileType * let g:cheatsheet#cheat_file = cheatsheet#cheat_dir .. "/vim.md"
 " augroup END
 
 " Statify
 let g:startify_bookmarks = [
-  \ {'c': s:vimhome . "/vimrc"},
-  \ {'v': s:vimhome . "/gvimrc"},
+  \ {'c': s:vimhome .. "/vimrc"},
+  \ {'v': s:vimhome .. "/gvimrc"},
   \ s:vimhome,
+  \ ]
+let g:startify_commands = [
+  \ ':help reference',
+  \ {'n': ['Notes', 'Fern $HOME/Workspace/0_notes']},
+  \ {'g': ['Ghq', 'CtrlPGhq']},
+  \ {'sc': ['ColorScheme', 'CtrlPColorscheme']},
+  \ {'sl': ['Sessions', 'SLoad']},
   \ ]
 
 " colorscheme-settings
-let g:colorschemes_settings#rc_file_path = s:vimhome . "/colorrc.vim"
+let g:colorschemes_settings#rc_file_path = s:vimhome .. "/colorrc.vim"
 if filereadable(g:colorschemes_settings#rc_file_path)
   execute "source" g:colorschemes_settings#rc_file_path
 endif
 
 " CREDENTIALS
-if filereadable(s:vimhome . "/credentials.vim")
-  exec "source" s:vimhome . "/credentials.vim"
+if filereadable(s:vimhome .. "/credentials.vim")
+  exec "source" s:vimhome .. "/credentials.vim"
 endif
 
