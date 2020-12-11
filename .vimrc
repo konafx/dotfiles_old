@@ -61,9 +61,10 @@ noremap L g_
 noremap x "_x
 
 " indent 2にするマン……
-if has("autocmd")
-  filetype plugin on
-  filetype indent on
+filetype plugin on
+filetype indent on
+augroup FileTyper
+  autocmd!
   autocmd FileType html,xhtml         setlocal ts=2 sts=2 sw=0
   autocmd FileType markdown           setlocal ts=2 sts=2 sw=0
   autocmd FileType css,sass,scss      setlocal ts=2 sts=2 sw=0
@@ -71,7 +72,7 @@ if has("autocmd")
   autocmd FileType vue                setlocal ts=2 sts=2 sw=0
   autocmd FileType vim                setlocal ts=2 sts=2 sw=0
   autocmd FileType python             setlocal cinwords=if,elif,else,for,while,try,except,finally,def,class
-endif
+augroup END
 
 " ## cache
 " 恐れるな
@@ -146,13 +147,13 @@ function! s:gitgrep(query)
   redraw!
 endfunction
 
+command! -nargs=? Ggrep call s:gitgrep(<f-args>)
+
 " use rg
 if executable('rg')
     let &grepprg = 'rg --vimgrep --hidden'
     set grepformat=%f:%l:%c:%m
 endif
-
-command! -nargs=? Ggrep call s:gitgrep(<f-args>)
 
 " jvgrep
 function! s:jvgrep(query)
@@ -378,14 +379,6 @@ nmap F <Plug>(clever-f-F)
 xmap F <Plug>(clever-f-F)
 omap F <Plug>(clever-f-F)
 
-" pdv
-if has("win64")
-  let g:pdv_template_dir = $HOME . "/vimfiles/plugged/pdv/templates"
-elseif has("unix")
-  let g:pdv_template_dir = $HOME ."/.vim/plugged/pdv/templates"
-endif
-nnoremap <Leader><C-p> :call pdv#DocumentWithSnip()<CR>
-
 " vim-operator-replace
 nmap R <Plug>(operator-replace)
 
@@ -477,7 +470,14 @@ let g:cheatsheet#cheat_file = s:vimhome .. "/cheatsheet/vim.md"
 "   autocmd FileType * let g:cheatsheet#cheat_file = cheatsheet#cheat_dir .. "/vim.md"
 " augroup END
 
-" Statify
+" Restart.vim
+command!
+  \ -bar
+  \ RestartWithSession
+  \ let g:restart_sessionoptions = 'blank,curdir,folds,help,localoptions,tabpages'
+  \ | Restart
+
+" Startify
 let g:startify_bookmarks = [
   \ {'c': s:vimhome .. "/vimrc"},
   \ {'v': s:vimhome .. "/gvimrc"},
@@ -490,6 +490,10 @@ let g:startify_commands = [
   \ {'sc': ['ColorScheme', 'CtrlPColorscheme']},
   \ {'sl': ['Sessions', 'SLoad']},
   \ ]
+
+" pdv
+let g:pdv_template_dir = s:vimhome .. "plugged/pdv/templates"
+nnoremap <Leader><C-p> :call pdv#DocumentWithSnip()<CR>
 
 " colorscheme-settings
 let g:colorschemes_settings#rc_file_path = s:vimhome .. "/colorrc.vim"
