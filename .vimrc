@@ -60,11 +60,20 @@ noremap L g_
 " 1文字貼り付け防止
 noremap x "_x
 
-" indent 2にするマン……
+" インデントしても選択領域を保持
+vnoremap < <gv
+vnoremap > >gv
+
+" * 検索の移動無効
+nnoremap <silent><expr> * v:count ? '*'
+\ : ':sil exe "keepj norm! *" <Bar> call winrestview(' . string(winsaveview()) . ')<CR>'
+
 filetype plugin on
 filetype indent on
 augroup FileTyper
   autocmd!
+  " コメントアウト行後の改行時にコメントアウトを入れない
+  autocmd FileType *                  setlocal formatoptions-=ro
   autocmd FileType html,xhtml         setlocal ts=2 sts=2 sw=0
   autocmd FileType markdown           setlocal ts=2 sts=2 sw=0
   autocmd FileType css,sass,scss      setlocal ts=2 sts=2 sw=0
@@ -205,6 +214,7 @@ Plug 'franbach/miramare'
 Plug 'bignimbus/pop-punk.vim'
 Plug 'atelierbram/Base2Tone-vim'
 Plug 'reedes/vim-colors-pencil'
+Plug 'ulwlu/elly.vim'
 Plug 'kato-k/vim-colorscheme-settings'
 
 " Snippets
@@ -238,8 +248,10 @@ Plug 'dhruvasagar/vim-table-mode'
 " Fuzzy Finder
 Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
 Plug 'ctrlpvim/ctrlp.vim'
+" ctrlp extensions
 Plug 'mattn/ctrlp-ghq'
 Plug 'hara/ctrlp-colorscheme'
+Plug 'kshenoy/vim-ctrlp-args'
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
@@ -413,7 +425,7 @@ let g:fern#renderer = 'nerdfont'
 " autocmd FileType php setlocal omnifunc=phpactor#Complete
 
 " vim-lsp
-let g:lsp_diagnostics_enabled = 1
+let g:lsp_diagnostics_echo_cursor = 1
 nnoremap <expr> <silent> <C-]> execute(':LspDefinition') =~ "not supported" ? "\<C-]>" : ":echo<cr>"
 
 " vim-clap

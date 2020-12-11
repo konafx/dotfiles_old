@@ -1,7 +1,8 @@
 # Vim Cheat Sheet
 ## NOW
+- `*` : search word on cursor
 - `.` : repeat cmd
-- `r{char}`: Replace cursol to {char}
+- `r{char}`: Replace cursor to {char}
 - In INSERT mode
     - `Ctrl-W`: delete word (back cursor)
 - In CommandLine mode
@@ -37,6 +38,9 @@
                G
 ```
 
+## Search
+- `*`: search current word
+- `/<C-r><C-w>`: current word to commandline
 ## Edit
 - `c{object}`: `d`の`s`版
 - `gU{object}`: Upper
@@ -68,6 +72,9 @@
 - `gT`: go to preview tab
 
 ## Etc...
+### Tips
+- `d])`：カーソル右の関数引数削除
+
 ### コマンドラインのCtrl-R
 yankしたものをコマンドラインに貼り付けられる
 
