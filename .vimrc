@@ -97,6 +97,9 @@ set showmatch
 " 警告OFF
 set belloff=all
 
+" marker folding
+set foldmethod=marker
+
 " ステータスラインを常に表示
 set laststatus=2
 
