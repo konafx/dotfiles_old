@@ -8,10 +8,11 @@ set fileencodings=utf-8,iso-2022-jp,euc-jp,sjis
 set fileformats=unix,dos,mac
 filetype on
 
-" 全角幅文字の表示
+" 全角幅文字の表示 {{{
 set ambiwidth=double
+" }}}
 
-" ## tab
+" indent {{{
 " tabToSpace
 set expandtab
 
@@ -38,11 +39,14 @@ set listchars=tab:\▸\-,trail:-,extends:»,precedes:«
 " ↑の付随: Grey rbg(95, 95, 135)にする
 hi NonText    ctermfg=59
 hi SpecialKey ctermfg=59
+" }}}
 
-" leaderkey
+" leaderkey {{{
 nnoremap , <Nop>
 let mapleader = ","
+" }}}
 
+" map alias {{{
 " close window
 nnoremap <silent> <Leader>q <Cmd>quit
 
@@ -67,13 +71,13 @@ vnoremap > >gv
 " * 検索の移動無効
 nnoremap <silent><expr> * v:count ? '*'
 \ : ':sil exe "keepj norm! *" <Bar> call winrestview(' . string(winsaveview()) . ')<CR>'
+" }}}
 
+" filetype {{{
 filetype plugin on
 filetype indent on
 augroup FileTyper
   autocmd!
-  " コメントアウト行後の改行時にコメントアウトを入れない
-  autocmd FileType *                  setlocal formatoptions-=ro
   autocmd FileType html,xhtml         setlocal ts=2 sts=2 sw=0
   autocmd FileType markdown           setlocal ts=2 sts=2 sw=0
   autocmd FileType css,sass,scss      setlocal ts=2 sts=2 sw=0
@@ -82,12 +86,22 @@ augroup FileTyper
   autocmd FileType vim                setlocal ts=2 sts=2 sw=0
   autocmd FileType python             setlocal cinwords=if,elif,else,for,while,try,except,finally,def,class
 augroup END
+" }}}
 
-" ## cache
+" コメントアウト行後の改行時にコメントアウトを入れない {{{
+augroup DisableInsertNextlineComment
+  autocmd!
+  autocmd FileType *                  setlocal formatoptions-=ro
+augroup END
+" }}}
+
+" cache {{{
 " 恐れるな
 set nobackup
 set noswapfile
+" }}}
 
+" visual {{{
 " 行番号表示
 set number
 
@@ -103,9 +117,6 @@ set foldmethod=marker
 " ステータスラインを常に表示
 set laststatus=2
 
-" 複数一致時、全一致を羅列し、共通最長文字列を補完
-set wildmode=list:longest
-
 " 背景透過
 let t:is_transparent = $TRANSPARENT_TERM
 if t:is_transparent
@@ -118,8 +129,9 @@ if t:is_transparent
     autocmd Colorscheme * highlight EndOfBuffer ctermbg=none 
   augroup END
 endif
+" }}}
 
-" ## search
+" search {{{
 " 大文字小文字の区別をしない
 set ignorecase
 " 大文字で検索したときは大文字のみ検索
@@ -130,8 +142,11 @@ set wrapscan
 set hlsearch
 " clear hylight
 nmap <Esc><Esc> <Cmd>nohlsearch<CR>
+" 複数一致時、全一致を羅列し、共通最長文字列を補完
+set wildmode=list:longest
+" }}}
 
-" json processer
+" json processer {{{
 command! -nargs=? Jq call s:Jq(<f-args>)
 function! s:Jq(...)
   if 0 == a:0
@@ -141,16 +156,18 @@ function! s:Jq(...)
   endif
   execute "%! jq \"" . l:arg . "\""
 endfunction
+" }}}
 
-" WSLでyank-to-clipboard
+" WSLでyank-to-clipboard {{{
 if system('uname -a | grep microsoft') != ''
   augroup myYank
     autocmd!
     autocmd TextYankPost * <Cmd>call system('clip.exe', @")
   augroup END
 endif
+" }}}
 
-" git grep
+" git grep {{{
 function! s:gitgrep(query)
   let l:current_grep = &grepprg " 前回の設定値の保存
   setlocal grepprg=git\ grep\ -I\ --line-number
@@ -160,14 +177,16 @@ function! s:gitgrep(query)
 endfunction
 
 command! -nargs=? Ggrep call s:gitgrep(<f-args>)
+" }}}
 
-" use rg
+" use rg {{{
 if executable('rg')
     let &grepprg = 'rg --vimgrep --hidden'
     set grepformat=%f:%l:%c:%m
 endif
+" }}}
 
-" jvgrep
+" jvgrep {{{
 function! s:jvgrep(query)
   let l:current_grep = &grepprg
   setlocal grepprg=jvgrep
@@ -177,14 +196,16 @@ function! s:jvgrep(query)
 endfunction
 
 command! -nargs=? Jvgrep call s:jvgrep(<f-args>)
+" }}}
 
+" quickfixgrep {{{
 augroup quickfixgrep
   autocmd!
   autocmd QuickFixCmdPost make,*grep* cwindow
 augroup END
+" }}}
 
-" =================================
-" vim-plug
+" vim-plug {{{1
 call plug#begin()
 Plug 'tyru/restart.vim'
 Plug 'tpope/vim-sensible'
@@ -318,16 +339,18 @@ Plug 'lambdalisue/fern-renderer-nerdfont.vim'
 Plug 'mhinz/vim-startify'
 
 call plug#end()
-" =================================
+" 1}}}
 
-" ## view
+" view {{{
 syntax on
+" }}}
 
-" vim-close tab
+" vim-close tab {{{
 let g:closetag_filetypes = 'html,xhtml,phtml,vue'
 let g:closetag_shortcut = '>'
+" }}}
 
-" quickrun
+" quickrun {{{
 let g:quickrun_config = {}
 let g:quickrun_config['typescript'] = { 'type' : 'typescript/tsc' }
 let g:quickrun_config['typescript/tsc'] = {
@@ -335,11 +358,13 @@ let g:quickrun_config['typescript/tsc'] = {
 \   'tempfile': '%{tempname()}.ts',
 \   'hook/sweep/files': ['%S:p:r.js'],
 \ }
+" }}}
 
-" CamelCaseMotion
+" CamelCaseMotion {{{
 let g:camelcasemotion_key = '<Leader>'
+" }}}
 
-" airline
+" airline {{{
 let g:airline_statusline_ontop = 0
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -352,27 +377,28 @@ let g:airline_right_alt_sep = ''
 
 " airline-themes
 let g:airline_theme='papercolor'
+" }}}
 
-" vim-sonictemplate
-" local.vim
-" let g:sonictemplate_vim_template_dir = expand('~/.vim/sonictemplate')
-
-" vim-devicon
+" vim-devicon {{{
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {}
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['vue'] = ''
+" }}}
 
-" nerdfont.vim
+" nerdfont.vim {{{
 let g:nerdfont#path#extension#customs = {}
 let g:nerdfont#path#extension#customs['vue'] = ''
+" }}}
 
-" vim-vue
+" vim-vue {{{
 syntax sync fromstart "syntax
+" }}}
 
-" cheatsheet
+" cheatsheet {{{
 " g:cheatsheet#cheat_file
 let g:cheatsheet#float_window = 0
+" }}}
 
-" vim-ref
+" vim-ref {{{
 let g:ref_source_webdict_sites = {
 \   'wikipedia': {
 \     'url': 'http://ja.wikipedia.org/wiki/%s'
@@ -384,9 +410,9 @@ let g:ref_source_webdict_sites = {
 function! g:ref_source_webdict_sites.weblio.filter(output)
   return join(split(a:output, "\n")[18 :], "\n")
 endfunction
+" }}}
 
-
-" clever-f
+" clever-f {{{
 " dont allow overwrite |t|, |T|
 let g:clever_f_not_overwrites_standard_mappings=1
 nmap f <Plug>(clever-f-f)
@@ -395,51 +421,65 @@ omap f <Plug>(clever-f-f)
 nmap F <Plug>(clever-f-F)
 xmap F <Plug>(clever-f-F)
 omap F <Plug>(clever-f-F)
+" }}}
 
-" vim-operator-replace
+" vim-operator-replace {{{
 nmap R <Plug>(operator-replace)
+" }}}
 
-" vim-operator-surround
+" vim-operator-surround {{{
 map <silent>sa <Plug>(operator-surround-append)
 map <silent>sd <Plug>(operator-surround-delete)
 map <silent>sr <Plug>(operator-surround-replace)
+" }}}
 
-" caw.vim
+" caw.vim {{{
 " 行の最初の文字の前にコメント文字をトグル
 nmap <Leader>c <Plug>(caw:hatpos:toggle)
 vmap <Leader>c <Plug>(caw:hatpos:toggle)
 " " 行頭にコメントをトグル
 nmap <Leader>, <Plug>(caw:zeropos:toggle)
 vmap <Leader>, <Plug>(caw:zeropos:toggle)
+" }}}
 
-" gina.vim
+" gina.vim {{{
 set diffopt+=vertical
 noremap <silent> <C-s> <Cmd>Gina status -s<CR>
+" }}}
 
-" fern.vim
+" fern.vim {{{
 let g:fern#default_hidden=1
 " S-t: un*t*il cursor move (like *f*)
 noremap sf <Cmd>Fern %:h<CR>
 noremap <S-t> <Cmd>Fern . -drawer -reveal=% -toggle<CR>
 autocmd FileType fern setlocal nonumber
+" }}}
 
-" fern-renderer-nerdfont.vim
+" fern-renderer-nerdfont.vim {{{
 let g:fern#renderer = 'nerdfont'
+" }}}
 
-" phpactor
+
+" phpactor {{{
 " autocmd FileType php setlocal omnifunc=phpactor#Complete
+" }}}
 
-" vim-lsp
+
+" vim-lsp {{{
 let g:lsp_diagnostics_echo_cursor = 1
 nnoremap <expr> <silent> <C-]> execute(':LspDefinition') =~ "not supported" ? "\<C-]>" : ":echo<cr>"
+" }}}
 
-" vim-clap
+
+" vim-clap {{{
 let g:clap_layout = { 'relative': 'editor' }
 nnoremap <silent> <Leader>C <Cmd>Clap<CR>
 nnoremap <silent> <Leader>g <Cmd>Clap gfiles<CR>
 nnoremap <silent> <Leader>f <Cmd>Clap buffers<CR>
+" }}}
 
-" ctrlp
+
+" ctrlp {{{
 " ctrlp-ghq
 let g:ctrlp_ghq_actions = [
   \ {"label": "Fern", "action": "Fern", "path": 1},
@@ -448,10 +488,10 @@ let g:ctrlp_ghq_actions = [
   \]
 let ctrlp_ghq_default_action = 'lcd'
 let g:ctrlp_ghq_cache_enabled = 0
+" }}}
 
-" buffergator
+" buffergator {{{
 let g:buffergator_viewport_split_policy="N"
-" {{{
 " Original code was posted to vim-jp.slack.com
 " author: https://github.com/kuuote
 function! s:buffergator_filter() abort
@@ -496,47 +536,54 @@ autocmd FileType buffergator noremap <silent> <buffer> <Leader>/ :<C-u>call <SID
 autocmd FileType buffergator noremap <silent> <buffer> m :<C-u>call <SID>buffergator_enter()<CR>
 " }}}
 
-" vim-gist
+" vim-gist {{{
 let g:gist_extmap = {
   \ ".md": "markdown"
   \ }
+" }}}
 
+" colorscheme {{{
 " let g:colorschemes_settings#rc_file_path = expand("~/vimfiles/colorrc.vim")
 let g:colorschemes_settings#use_default_colorschemes = v:false
 set background=dark
 colorscheme iceberg
+" }}}
 
-" LOCAL VIMRC
+" LOCAL VIMRC {{{
 " 環境依存になりがちな設定
 if has('win32') || has('win64')
   let s:vimhome = expand("$HOME/vimfiles")
 elseif has('unix')
   let s:vimhome = expand("$HOME/.vim")
 endif
+" }}}
 
-" 永続アンドゥ
+" 永続アンドゥ {{{
 set undofile
 if !isdirectory(s:vimhome .. "/undodir")
   call mkdir(s:vimhome .. "/undodir", "p")
 endif
 execute "set undodir=" .. s:vimhome .. "/undodir"
+" }}}
 
-" cheatsheet
+" cheatsheet {{{
 let g:cheatsheet#cheat_file = s:vimhome .. "/cheatsheet/vim.md"
 " augroup cheat_filetype
 "   autocmd!
 "   let cheatsheet#cheat_dir = s:vimhome .. "/cheatsheet"
 "   autocmd FileType * let g:cheatsheet#cheat_file = cheatsheet#cheat_dir .. "/vim.md"
 " augroup END
+" }}}
 
-" Restart.vim
+" Restart.vim {{{
 command!
   \ -bar
   \ RestartWithSession
   \ let g:restart_sessionoptions = 'blank,curdir,folds,help,localoptions,tabpages'
   \ | Restart
+" }}}
 
-" Startify
+" Startify {{{
 let g:startify_bookmarks = [
   \ {'c': s:vimhome .. "/vimrc"},
   \ {'v': s:vimhome .. "/gvimrc"},
@@ -549,19 +596,23 @@ let g:startify_commands = [
   \ {'sc': ['ColorScheme', 'CtrlPColorscheme']},
   \ {'sl': ['Sessions', 'SLoad']},
   \ ]
+" }}}
 
-" pdv
+" pdv {{{
 let g:pdv_template_dir = s:vimhome .. "plugged/pdv/templates"
 nnoremap <Leader><C-p> :call pdv#DocumentWithSnip()<CR>
+" }}}
 
-" colorscheme-settings
+" colorscheme-settings {{{
 let g:colorschemes_settings#rc_file_path = s:vimhome .. "/colorrc.vim"
 if filereadable(g:colorschemes_settings#rc_file_path)
   execute "source" g:colorschemes_settings#rc_file_path
 endif
+" }}}
 
-" CREDENTIALS
+" CREDENTIALS {{{
 if filereadable(s:vimhome .. "/credentials.vim")
   exec "source" s:vimhome .. "/credentials.vim"
 endif
+" }}}
 
