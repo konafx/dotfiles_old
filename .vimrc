@@ -255,6 +255,8 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'mattn/ctrlp-ghq'
 Plug 'hara/ctrlp-colorscheme'
 Plug 'kshenoy/vim-ctrlp-args'
+Plug 'jeetsukumaran/vim-buffergator'
+
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
@@ -447,10 +449,52 @@ let g:ctrlp_ghq_actions = [
 let ctrlp_ghq_default_action = 'lcd'
 let g:ctrlp_ghq_cache_enabled = 0
 
-" eskk
-" let g:eskk#directory = "~/.eskk"
-" let g:eskk#dictionary = { 'path': "~/.skk-jisyo", 'sorted': 0, 'encoding': 'utf-8', }
-" let g:eskk#large_dictionary = { 'path': "~/.eskk/SKK-JISYO.L", 'sorted': 1, 'encoding': 'euc-jp', }
+" buffergator
+let g:buffergator_viewport_split_policy="N"
+" {{{
+" Original code was posted to vim-jp.slack.com
+" author: https://github.com/kuuote
+function! s:buffergator_filter() abort
+  let lines = copy(s:lines)
+  let text = getcmdline()
+  call filter(lines, {_, val -> val =~? text})
+  setlocal modifiable
+  silent 1,$delete _
+  silent 0put=lines
+  $d
+  setlocal nomodifiable
+  call cursor('$', 1)
+  redraw
+endfunction
+
+function! s:buffergator_cmd() abort
+  autocmd FuzzyBuffgator CmdlineChanged * call s:buffergator_filter()
+  call input('buffergator: ')
+endfunction
+
+augroup FuzzyBuffgator
+  autocmd!
+  autocmd CmdlineLeave * autocmd! FuzzyBuffgator CmdlineChanged
+augroup END
+
+function! s:read_buffergator_buffer(timer) abort
+  let s:lines = getline(1, '$')
+endfunction
+
+function! s:buffergator_init() abort
+  call timer_start(0, function('s:read_buffergator_buffer'))
+endfunction
+
+function! s:buffergator_enter() abort
+  let line = getline('.')
+  let bufnum = matchstr(getline('.'), '^.*\[\zs.*\ze\]')
+  execute 'bdelete | wincmd w | '. 'buffer ' . trim(bufnum)
+endfunction
+
+autocmd FileType buffergator call s:buffergator_init()
+autocmd FileType buffergator noremap <silent> <buffer> <Leader>/ :<C-u>call <SID>buffergator_cmd()<CR>
+autocmd FileType buffergator noremap <silent> <buffer> m :<C-u>call <SID>buffergator_enter()<CR>
+" }}}
 
 " vim-gist
 let g:gist_extmap = {

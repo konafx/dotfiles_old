@@ -41,6 +41,8 @@
 ## Search
 - `*`: search current word
 - `/<C-r><C-w>`: current word to commandline
+- `[I` -> `:[0-9]\+`: search word and go linenumber on current buffer
+
 ## Edit
 - `c{object}`: `d`の`s`版
 - `gU{object}`: Upper
