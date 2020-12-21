@@ -12,7 +12,7 @@ filetype on
 set ambiwidth=double
 " }}}
 
-" indent {{{
+" インデント関係 {{{
 " tabToSpace
 set expandtab
 
@@ -31,14 +31,6 @@ set smartindent
 
 " インデント大切に守るマン！！！
 set autoindent
-
-" 色々わかりやすくするやつ
-set list
-set listchars=tab:\▸\-,trail:-,extends:»,precedes:«
-
-" ↑の付随: Grey rbg(95, 95, 135)にする
-hi NonText    ctermfg=59
-hi SpecialKey ctermfg=59
 " }}}
 
 " leaderkey {{{
@@ -47,13 +39,8 @@ let mapleader = ","
 " }}}
 
 " map alias {{{
-" close window
-nnoremap <silent> <Leader>q <Cmd>quit
-
-" <C-w> on terminal is word erase command
-set termwinkey=<C-g>
-
 " window & tab
+set termwinkey=<C-g>
 nnoremap <silent> gr <Cmd>tabprevious<CR>
 tnoremap <C-g>gr <C-g>gT
 
@@ -67,13 +54,14 @@ noremap x "_x
 " インデントしても選択領域を保持
 vnoremap < <gv
 vnoremap > >gv
+vnoremap = =gv
 
-" * 検索の移動無効
+" `*`検索の初回移動無効
 nnoremap <silent><expr> * v:count ? '*'
 \ : ':sil exe "keepj norm! *" <Bar> call winrestview(' . string(winsaveview()) . ')<CR>'
 " }}}
 
-" filetype {{{
+" ファイルタイプごとの設定 {{{
 filetype plugin on
 filetype indent on
 augroup FileTyper
@@ -116,6 +104,15 @@ set foldmethod=marker
 
 " ステータスラインを常に表示
 set laststatus=2
+
+" 特殊表示 {{{
+" 色々わかりやすくするやつ
+set list
+set listchars=tab:\▸\-,trail:-,extends:»,precedes:«
+" ↑の付随: Grey rbg(95, 95, 135)にする
+hi NonText    ctermfg=59
+hi SpecialKey ctermfg=59
+" }}}
 
 " 背景透過
 let t:is_transparent = $TRANSPARENT_TERM
@@ -361,7 +358,7 @@ let g:quickrun_config['typescript/tsc'] = {
 " }}}
 
 " CamelCaseMotion {{{
-let g:camelcasemotion_key = '<Leader>'
+let g:camelcasemotion_key = '<Space>'
 " }}}
 
 " airline {{{
@@ -428,9 +425,9 @@ nmap R <Plug>(operator-replace)
 " }}}
 
 " vim-operator-surround {{{
-map <silent>sa <Plug>(operator-surround-append)
-map <silent>sd <Plug>(operator-surround-delete)
-map <silent>sr <Plug>(operator-surround-replace)
+map <silent> sa <Plug>(operator-surround-append)
+map <silent> sd <Plug>(operator-surround-delete)
+map <silent> sr <Plug>(operator-surround-replace)
 " }}}
 
 " caw.vim {{{
@@ -450,7 +447,7 @@ noremap <silent> <C-s> <Cmd>Gina status -s<CR>
 " fern.vim {{{
 let g:fern#default_hidden=1
 " S-t: un*t*il cursor move (like *f*)
-noremap sf <Cmd>Fern %:h<CR>
+" noremap sf <Cmd>Fern %:h<CR>
 noremap <S-t> <Cmd>Fern . -drawer -reveal=% -toggle<CR>
 autocmd FileType fern setlocal nonumber
 " }}}
@@ -459,25 +456,18 @@ autocmd FileType fern setlocal nonumber
 let g:fern#renderer = 'nerdfont'
 " }}}
 
-
 " phpactor {{{
 " autocmd FileType php setlocal omnifunc=phpactor#Complete
 " }}}
-
 
 " vim-lsp {{{
 let g:lsp_diagnostics_echo_cursor = 1
 nnoremap <expr> <silent> <C-]> execute(':LspDefinition') =~ "not supported" ? "\<C-]>" : ":echo<cr>"
 " }}}
 
-
 " vim-clap {{{
 let g:clap_layout = { 'relative': 'editor' }
-nnoremap <silent> <Leader>C <Cmd>Clap<CR>
-nnoremap <silent> <Leader>g <Cmd>Clap gfiles<CR>
-nnoremap <silent> <Leader>f <Cmd>Clap buffers<CR>
 " }}}
-
 
 " ctrlp {{{
 " ctrlp-ghq
@@ -491,49 +481,52 @@ let g:ctrlp_ghq_cache_enabled = 0
 " }}}
 
 " buffergator {{{
+let g:buffergator_suppress_keymaps=1
 let g:buffergator_viewport_split_policy="N"
+" {{{
 " Original code was posted to vim-jp.slack.com
 " author: https://github.com/kuuote
-function! s:buffergator_filter() abort
-  let lines = copy(s:lines)
-  let text = getcmdline()
-  call filter(lines, {_, val -> val =~? text})
-  setlocal modifiable
-  silent 1,$delete _
-  silent 0put=lines
-  $d
-  setlocal nomodifiable
-  call cursor('$', 1)
-  redraw
-endfunction
-
-function! s:buffergator_cmd() abort
-  autocmd FuzzyBuffgator CmdlineChanged * call s:buffergator_filter()
-  call input('buffergator: ')
-endfunction
-
-augroup FuzzyBuffgator
-  autocmd!
-  autocmd CmdlineLeave * autocmd! FuzzyBuffgator CmdlineChanged
-augroup END
-
-function! s:read_buffergator_buffer(timer) abort
-  let s:lines = getline(1, '$')
-endfunction
-
-function! s:buffergator_init() abort
-  call timer_start(0, function('s:read_buffergator_buffer'))
-endfunction
-
-function! s:buffergator_enter() abort
-  let line = getline('.')
-  let bufnum = matchstr(getline('.'), '^.*\[\zs.*\ze\]')
-  execute 'bdelete | wincmd w | '. 'buffer ' . trim(bufnum)
-endfunction
-
-autocmd FileType buffergator call s:buffergator_init()
-autocmd FileType buffergator noremap <silent> <buffer> <Leader>/ :<C-u>call <SID>buffergator_cmd()<CR>
-autocmd FileType buffergator noremap <silent> <buffer> m :<C-u>call <SID>buffergator_enter()<CR>
+" function! s:buffergator_filter() abort
+"   let lines = copy(s:lines)
+"   let text = getcmdline()
+"   call filter(lines, {_, val -> val =~? text})
+"   setlocal modifiable
+"   silent 1,$delete _
+"   silent 0put=lines
+"   $d
+"   setlocal nomodifiable
+"   call cursor('$', 1)
+"   redraw
+" endfunction
+" 
+" function! s:buffergator_cmd() abort
+"   autocmd FuzzyBuffgator CmdlineChanged * call s:buffergator_filter()
+"   call input('buffergator: ')
+" endfunction
+" 
+" augroup FuzzyBuffgator
+"   autocmd!
+"   autocmd CmdlineLeave * autocmd! FuzzyBuffgator CmdlineChanged
+" augroup END
+" 
+" function! s:read_buffergator_buffer(timer) abort
+"   let s:lines = getline(1, '$')
+" endfunction
+" 
+" function! s:buffergator_init() abort
+"   call timer_start(0, function('s:read_buffergator_buffer'))
+" endfunction
+" 
+" function! s:buffergator_enter() abort
+"   let line = getline('.')
+"   let bufnum = matchstr(getline('.'), '^.*\[\zs.*\ze\]')
+"   execute 'bdelete | wincmd w | '. 'buffer ' . trim(bufnum)
+" endfunction
+" 
+" autocmd FileType buffergator call s:buffergator_init()
+" autocmd FileType buffergator noremap <silent> <buffer> <Leader>/ :<C-u>call <SID>buffergator_cmd()<CR>
+" autocmd FileType buffergator noremap <silent> <buffer> m :<C-u>call <SID>buffergator_enter()<CR>
+" }}}
 " }}}
 
 " vim-gist {{{
@@ -602,6 +595,52 @@ let g:startify_commands = [
 let g:pdv_template_dir = s:vimhome .. "plugged/pdv/templates"
 nnoremap <Leader><C-p> :call pdv#DocumentWithSnip()<CR>
 " }}}
+
+" MAPPING {{{1
+" find file
+nnoremap <silent> <Leader>f <Cmd>CtrlP<CR>
+" open filer
+nnoremap <silent> <Leader>d <Cmd>Fern %:h<CR>
+" open filer (project)
+nnoremap <silent> <Leader>D <Cmd>Fern . -reveal=%<CR>
+" find buffer
+nnoremap <silent> <Leader>b <Cmd>BuffergatorOpen<CR>
+" quickfix
+" quickfix toggler function {{{3
+function! ToggleQuickfix()
+  let l:nr = winnr('$')
+  cwindow
+  let l:nr2 = winnr('$')
+  if l:nr == l:nr2
+    cclose
+  endif
+endfunction
+" 3}}}
+nnoremap <silent> <Leader>q <Cmd>call ToggleQuickfix()<CR>
+" save
+nnoremap <silent> <Leader>w <Cmd>w<CR>
+
+" [git] {{{2
+nnoremap [git] <Nop>
+nmap <Leader>g [git]
+
+nnoremap <silent> [git]f <Cmd>Clap git_files<CR>
+nnoremap <silent> [git]s <Cmd>Gina status -s<CR>
+nnoremap <silent> [git]b <Cmd>Gina branch<CR>
+nnoremap <silent> [git]l <Cmd>Gina log<CR>
+" 2}}}
+
+" [tab] {{{2
+nnoremap [tab] <Nop>
+nmap t [tab]
+
+nnoremap <silent> [tab]n <Cmd>tabnext<CR>
+nnoremap <silent> [tab]p <Cmd>tabprevious<CR>
+nnoremap <silent> [tab]e <Cmd>tabedit<CR>
+nnoremap <silent> [tab]c <Cmd>tabclose<CR>
+nnoremap <silent> [tab]o <Cmd>tabonly<CR>
+" 2}}}
+" 1}}}
 
 " colorscheme-settings {{{
 let g:colorschemes_settings#rc_file_path = s:vimhome .. "/colorrc.vim"
