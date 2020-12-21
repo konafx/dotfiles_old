@@ -236,6 +236,8 @@ Plug 'bignimbus/pop-punk.vim'
 Plug 'atelierbram/Base2Tone-vim'
 Plug 'reedes/vim-colors-pencil'
 Plug 'ulwlu/elly.vim'
+Plug 'Rigellute/rigel'
+Plug 'axvr/photon.vim'
 Plug 'kato-k/vim-colorscheme-settings'
 
 " Snippets
@@ -324,8 +326,9 @@ Plug 'thinca/vim-ref'
 Plug 'tyru/caw.vim'
 
 " StatusLine
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'
 
 " Explorer
 Plug 'lambdalisue/fern.vim'
@@ -374,6 +377,12 @@ let g:airline_right_alt_sep = ''
 
 " airline-themes
 let g:airline_theme='papercolor'
+" }}}
+
+" lightline.vim {{{
+let g:lightline = {
+  \ 'colorscheme': 'nord',
+  \ }
 " }}}
 
 " vim-devicon {{{
