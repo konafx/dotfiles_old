@@ -161,7 +161,7 @@ endfunction
 if has('unix') && system('uname -a | grep microsoft') != ''
   augroup myYank
     autocmd!
-    autocmd TextYankPost * <Cmd>call system('clip.exe', @")
+    autocmd TextYankPost * call system('clip.exe', @")
   augroup END
 endif
 " }}}
