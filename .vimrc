@@ -31,6 +31,8 @@ set smartindent
 
 " インデント大切に守るマン！！！
 set autoindent
+
+let g:vim_indent_cont = 2
 " }}}
 
 " leaderkey {{{
@@ -379,12 +381,6 @@ let g:airline_right_alt_sep = ''
 let g:airline_theme='papercolor'
 " }}}
 
-" lightline.vim {{{
-let g:lightline = {
-  \ 'colorscheme': 'nord',
-  \ }
-" }}}
-
 " vim-devicon {{{
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {}
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['vue'] = ''
@@ -566,6 +562,12 @@ if !isdirectory(s:vimhome .. "/undodir")
   call mkdir(s:vimhome .. "/undodir", "p")
 endif
 execute "set undodir=" .. s:vimhome .. "/undodir"
+" }}}
+
+" lightlinerc.vim {{{
+if filereadable(s:vimhome .. "/lightlinerc.vim")
+  exec "source" s:vimhome .. "/lightlinerc.vim"
+endif
 " }}}
 
 " cheatsheet {{{
