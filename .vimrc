@@ -158,7 +158,7 @@ endfunction
 " }}}
 
 " WSLでyank-to-clipboard {{{
-if system('uname -a | grep microsoft') != ''
+if has('unix') && system('uname -a | grep microsoft') != ''
   augroup myYank
     autocmd!
     autocmd TextYankPost * <Cmd>call system('clip.exe', @")
@@ -211,10 +211,8 @@ Plug 'tpope/vim-sensible'
 
 Plug 'vim-jp/vimdoc-ja'
 
-if has('python')
-  " Fades inactive buffers
-  Plug 'TaDaa/vimade'
-endif
+" Fades inactive buffers
+Plug 'TaDaa/vimade'
 
 Plug 'mattn/vimtweak'
 
