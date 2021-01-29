@@ -238,6 +238,7 @@ Plug 'reedes/vim-colors-pencil'
 Plug 'ulwlu/elly.vim'
 Plug 'Rigellute/rigel'
 Plug 'axvr/photon.vim'
+Plug 'co1ncidence/mountaineer.vim'
 Plug 'kato-k/vim-colorscheme-settings'
 
 " Snippets
@@ -473,6 +474,8 @@ let g:clap_layout = { 'relative': 'editor' }
 " }}}
 
 " ctrlp {{{
+let g:ctrlp_show_hidden = 1
+
 " ctrlp-ghq
 let g:ctrlp_ghq_actions = [
   \ {"label": "Fern", "action": "Fern", "path": 1},
