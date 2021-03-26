@@ -1,0 +1,14 @@
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+
+# set PATH so it inclueds user's private GOPATH/bin if it exists
+if [ -d "$HOME/go/bin" ] ; then
+    GOPATH="$HOME/go"
+    PATH="$GOPATH/bin:$PATH"
+fi
+

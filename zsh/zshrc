@@ -1,17 +1,12 @@
 setopt IGNOREEOF
 
 # 環境変数 {{{
-export GOPATH=$HOME/.go
-export PATH="$PATH:$GOPATH/bin"
-
-export PATH="$PATH:$HOME/.cargo/bin"
-
-export TRANSPARENT_TERM=1
+# export TRANSPARENT_TERM=1
 # }}}
 
 # LOCALE {{{
-export LC_TIME=en_US.utf-8
-export LANG=ja_JP.utf-8
+# export LC_TIME=en_US.utf-8
+# export LANG=ja_JP.utf-8
 # }}}
 
 # Colored
@@ -60,6 +55,7 @@ alias lst='ls -ltr'
 alias l='ls'
 alias la='ls -a'
 alias ll='ls -l'
+alias lla='ls -la'
 # }}}
 
 alias so='source'
@@ -75,6 +71,8 @@ alias mkdir='mkdir -p'
 alias ..='c ../'
 alias back='pushd'
 alias diff='diff -U1'
+
+alias gst='git status'
 # }}}
 
 # cdの後にlsを実行
@@ -111,3 +109,24 @@ zinit light sindresorhus/pure
 
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zaw
+
+# fzf
+export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
+# awscli
+autoload bashcompinit && bashcompinit
+complete -C '/usr/local/bin/aws_completer' aws
+
+# ghq fzf
+function ghq-fzf() {
+    local src=$(ghq list | fzf --preview "batcat --color=always --style=header,grid --line-range :80 $(ghq root)/{}/README.*")
+    if [ -n "$src" ]; then
+        BUFFER="cd $(ghq root)/$src"
+        zle accept-line
+    fi
+    zle -R -c
+}
+zle -N ghq-fzf
+bindkey '^g' ghq-fzf
+
+# tty
+export GPG_TTY=$(tty)

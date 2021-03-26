@@ -116,7 +116,7 @@ hi NonText    ctermfg=59
 hi SpecialKey ctermfg=59
 " }}}
 
-" 背景透過
+" 背景透過 {{{
 let t:is_transparent = $TRANSPARENT_TERM
 if t:is_transparent
   augroup TransparentBG
@@ -225,7 +225,7 @@ Plug 'mattn/vim-lsp-settings'
 
 " colorschema
 Plug 'cocopon/iceberg.vim'
-Plug 'machakann/vim-colorscheme-snowtrek'
+" Plug 'machakann/vim-colorscheme-snowtrek'
 Plug 'koirand/tokyo-metro.vim'
 Plug 'ghifarit53/tokyonight-vim'
 Plug 'arcticicestudio/nord-vim'
@@ -541,13 +541,6 @@ let g:gist_extmap = {
   \ }
 " }}}
 
-" colorscheme {{{
-" let g:colorschemes_settings#rc_file_path = expand("~/vimfiles/colorrc.vim")
-let g:colorschemes_settings#use_default_colorschemes = v:false
-set background=dark
-colorscheme iceberg
-" }}}
-
 " LOCAL VIMRC {{{
 " 環境依存になりがちな設定
 if has('win32') || has('win64')
@@ -655,9 +648,13 @@ nnoremap <silent> [tab]o <Cmd>tabonly<CR>
 " 1}}}
 
 " colorscheme-settings {{{
+let g:colorschemes_settings#use_default_colorschemes = v:false
 let g:colorschemes_settings#rc_file_path = s:vimhome .. "/colorrc.vim"
 if filereadable(g:colorschemes_settings#rc_file_path)
   execute "source" g:colorschemes_settings#rc_file_path
+else
+  set background=dark
+  colorscheme iceberg
 endif
 " }}}
 
@@ -666,4 +663,3 @@ if filereadable(s:vimhome .. "/credentials.vim")
   exec "source" s:vimhome .. "/credentials.vim"
 endif
 " }}}
-
