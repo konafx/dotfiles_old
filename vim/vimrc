@@ -295,6 +295,9 @@ Plug 'skanehira/gh.vim'
 " Tmux
 Plug 'christoomey/vim-tmux-navigator'
 
+" ssh yank
+Plug 'greymd/oscyank.vim'
+
 " Search
 " e.g.) maekawa -> 前川
 Plug 'osyo-manga/vim-vigemo'
