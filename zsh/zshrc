@@ -44,35 +44,12 @@ setopt pushd_ignore_dups
 setopt correct
 
 # alias {{{
-alias -g L='| less'
-alias -g H='| head'
-alias -g G='| grep'
-alias -g GI='| grep -ri'
+alias -g @l='| less'
+alias -g @h='| head'
+alias -g @g='| grep'
+alias -g @gi='| grep -ri'
 
-# ls {{{
-alias ls='ls --color=auto'
-alias lst='ls -ltr'
-alias l='ls'
-alias la='ls -a'
-alias ll='ls -l'
-alias lla='ls -la'
-# }}}
-
-alias so='source'
-alias v='vim'
-alias vi='vim'
-alias vz='vim ~/.zshrc'
-alias c='cdr'
-# historyに日付を表示
-alias h='fc -lt '%F %T' 1'
-alias cp='cp -i'
-alias rm='rm -i'
-alias mkdir='mkdir -p'
-alias ..='c ../'
-alias back='pushd'
-alias diff='diff -U1'
-
-alias gst='git status'
+source $HOME/.aliases
 # }}}
 
 # cdの後にlsを実行
@@ -110,6 +87,8 @@ zinit light sindresorhus/pure
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zaw
 
+zinit ice as"completion" id-as"dc-complete"
+
 # fzf
 export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
 # awscli
@@ -128,5 +107,45 @@ function ghq-fzf() {
 zle -N ghq-fzf
 bindkey '^g' ghq-fzf
 
+# function tmux-tree() {
+#     tmux ls -F'#{session_id}:#{session_name}: #{T:tree_mode_format}' | while read -r s; do
+#         session_info=$(echo "$s" | cut -d ':' -f 1)
+#         session_name=$(echo "$s" | cut -d ':' -f 2)
+#         if [[ -n "$1" ]] && [[ "$1" == "$session_name" ]]; then
+#             echo -e "${ESC}[1;34m$session_info${ESC}[0m"
+#         else
+#             echo -e "${ESC}[1m$session_info${ESC}[0m"
+#         fi
+#         tmux lsw -t"$session_info" -F'[#{window_id}]#{T:tree_mode_format}' | while read -r w; do
+#             echo "  ﬌ $w"
+#         done
+#     done
+# }
+# 
+# zle -N tmux-tree
+# function tmux-fzf() {
+#     ESC='\033'
+#     tree = "${functions[tmux-tree]}"
+#     bat=${commands[bat]:-"batcat"}
+#     session=$(tmux list-sessions -F "#{session_name}" 2>/dev/null |
+#         fzf --exit-0 --preview="${tree} {} | ${bat} --theme TwoDark --style plain")
+#     echo "$session"
+# }
+# zle -N tmux-fzf
+# bindkey '^t' tmux-fzf
+
+# yq
+yq() {
+    docker run --rm -i -v "${PWD}":/workdir mikefarah/yq "$@"
+}
+
 # tty
 export GPG_TTY=$(tty)
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/local/bin/bit bit
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/konafx/google-cloud-sdk/path.zsh.inc' ]; then . '/home/konafx/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/konafx/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/konafx/google-cloud-sdk/completion.zsh.inc'; fi
