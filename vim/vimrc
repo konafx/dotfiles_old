@@ -249,7 +249,7 @@ Plug 'mattn/vim-sonictemplate'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'ap/vim-css-color'
 Plug 'dag/vim-fish', { 'for': 'fish' }
-Plug 'heavenshell/vim-jsdoc', { 'for': ['javascript', 'typescript'] }
+Plug 'heavenshell/vim-jsdoc', { 'for': ['javascript', 'typescript'], 'do': 'make install' }
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'moll/vim-node', { 'for': 'javascript' }
 Plug 'posva/vim-vue', { 'for' : 'vue' }
