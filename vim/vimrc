@@ -223,7 +223,9 @@ Plug 'prabirshrestha/vim-lsp'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'mattn/vim-lsp-settings'
 
-Plug 'Quramy/tsuquyomi'
+" Plug 'Quramy/tsuquyomi'
+
+Plug 'dense-analysis/ale'
 
 " colorschema
 Plug 'cocopon/iceberg.vim'
@@ -244,8 +246,9 @@ Plug 'co1ncidence/mountaineer.vim'
 Plug 'kato-k/vim-colorscheme-settings'
 
 " Snippets
-Plug 'henricattoire/aergia'
-Plug 'mattn/vim-sonictemplate'
+Plug 'rafamadriz/friendly-snippets'
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
 
 " Langs
 Plug 'editorconfig/editorconfig-vim'
@@ -439,6 +442,36 @@ map <silent> sd <Plug>(operator-surround-delete)
 map <silent> sr <Plug>(operator-surround-replace)
 " }}}
 
+" vim-vpnip {{{
+" Expand
+imap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
+smap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
+
+" Expand or jump
+imap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+smap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+
+" Jump forward or backward
+imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+
+" Select or cut text to use as $TM_SELECTED_TEXT in the next snippet.
+" See https://github.com/hrsh7th/vim-vsnip/pull/50
+nmap        s   <Plug>(vsnip-select-text)
+xmap        s   <Plug>(vsnip-select-text)
+nmap        S   <Plug>(vsnip-cut-text)
+xmap        S   <Plug>(vsnip-cut-text)
+
+" If you want to use snippet for multiple filetypes, you can
+" `g:vsnip_filetypes` for it.
+let g:vsnip_filetypes = {}
+let g:vsnip_filetypes.javascript = ['javascriptreact']
+let g:vsnip_filetypes.javascriptreact = ['javascript']
+let g:vsnip_filetypes.typescriptreact = ['typescript']
+" }}}
+
 " caw.vim {{{
 " 行の最初の文字の前にコメント文字をトグル
 nmap <Leader>c <Plug>(caw:hatpos:toggle)
@@ -470,6 +503,7 @@ let g:fern#renderer = 'nerdfont'
 " }}}
 
 " vim-lsp {{{
+let g:lsp_diagnostics_enabled = 0
 let g:lsp_diagnostics_echo_cursor = 1
 nnoremap <expr> <silent> <C-]> execute(':LspDefinition') =~ "not supported" ? "\<C-]>" : ":echo<cr>"
 
@@ -480,9 +514,9 @@ function! s:on_lsp_buffer_enabled() abort
   nmap <buffer> gd <plug>(lsp-definition)
   nmap <buffer> <C-]> <plug>(lsp-definition)
   nmap <buffer> <f2> <plug>(lsp-rename)
-  nmap <buffer> <Leader>d <plug>(lsp-type-definition)
-  nmap <buffer> <Leader>r <plug>(lsp-references)
-  nmap <buffer> <Leader>i <plug>(lsp-implementation)
+  nmap <buffer> <Leader>ld <plug>(lsp-type-definition)
+  nmap <buffer> <Leader>lr <plug>(lsp-references)
+  nmap <buffer> <Leader>li <plug>(lsp-implementation)
   inoremap <expr> <cr> pumvisible() ? "\<c-y>\<cr>" : "\<cr>"
 endfunction
 
@@ -525,6 +559,29 @@ let g:lsp_settings['gopls'] = {
 
 set completeopt+=menuone
 " }}}
+" }}}
+
+" ale {{{
+let g:ale_linters = {
+  \ 'javascriptreact': ['eslint'],
+  \ 'javascript': ['eslint'],
+  \ }
+
+let g:ale_fixers = {
+  \ 'javascriptreact': ['prettier'],
+  \ 'javascript': ['prettier'],
+  \ }
+
+let g:ale_sign_error = '!!'
+let g:ale_sign_warning = '=='
+let g:ale_sign_info = '--'
+
+let g:ale_fix_on_save = 1
+let g:ale_lint_on_text_changed = 0
+let g:ale_lint_on_insert_leave = 0
+let g:ale_lint_on_enter = 0
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_filetype_changed = 0
 " }}}
 
 " vim-clap {{{
@@ -620,6 +677,10 @@ execute "set undodir=" .. s:vimhome .. "/undodir"
 if filereadable(s:vimhome .. "/lightlinerc.vim")
   exec "source" s:vimhome .. "/lightlinerc.vim"
 endif
+" }}}
+
+" vsnip dir {{{
+let g:vsnip_snippet_dir = s:vimhome .. "/vsnip_snippets"
 " }}}
 
 " cheatsheet {{{
