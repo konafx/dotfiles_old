@@ -251,6 +251,7 @@ Plug 'nvie/vim-flake8', { 'for': 'python' }
 Plug 'pixelneo/vim-python-docstring', { 'for': 'python' }
 Plug 'wellle/tmux-complete.vim', { 'for': 'tmux' }
 Plug 'chrisbra/csv.vim'
+Plug 'zinit-zsh/zinit-vim-syntax', { 'for': 'zsh' }
 
 " pdv requirements
 Plug 'tobyS/vmustache'

@@ -84,15 +84,24 @@ zinit light-mode for \
 zinit ice pick"async.zsh" src"pure.zsh"
 zinit light sindresorhus/pure
 
+zinit ice blockf
 zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zaw
+zinit light zdharma/history-search-multi-word
 
-zinit ice as"completion" id-as"dc-complete"
+zinit ice as"completion"
+zinit snippet 'https://raw.githubusercontent.com/docker/compose/master/contrib/completion/zsh/_docker-compose'
+
+zinit ice as"completion"
+zinit snippet 'https://raw.githubusercontent.com/x-motemen/ghq/master/misc/zsh/_ghq'
+
+# for bash_completion
+autoload -U +X bashcompinit && bashcompinit
 
 # fzf
 export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
 # awscli
-autoload bashcompinit && bashcompinit
 complete -C '/usr/local/bin/aws_completer' aws
 
 # ghq fzf
@@ -141,7 +150,6 @@ yq() {
 
 # tty
 export GPG_TTY=$(tty)
-autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/bit bit
 
 # The next line updates PATH for the Google Cloud SDK.
