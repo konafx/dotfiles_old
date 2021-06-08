@@ -8,11 +8,10 @@ set fileencodings=utf-8,iso-2022-jp,euc-jp,sjis
 set fileformats=unix,dos,mac
 filetype on
 
-" 全角幅文字の表示 {{{
+" 全角幅文字の表示
 set ambiwidth=double
-" }}}
 
-" インデント関係 {{{
+" インデント関係
 " tabToSpace
 set expandtab
 
@@ -33,14 +32,12 @@ set smartindent
 set autoindent
 
 let g:vim_indent_cont = 2
-" }}}
 
-" leaderkey {{{
+" leaderkey
 nnoremap , <Nop>
 let mapleader = ","
-" }}}
 
-" map alias {{{
+" map alias
 " window & tab
 set termwinkey=<C-g>
 nnoremap <silent> gr <Cmd>tabprevious<CR>
@@ -61,9 +58,8 @@ vnoremap = =gv
 " `*`検索の初回移動無効
 nnoremap <silent><expr> * v:count ? '*'
 \ : ':sil exe "keepj norm! *" <Bar> call winrestview(' . string(winsaveview()) . ')<CR>'
-" }}}
 
-" ファイルタイプごとの設定 {{{
+" ファイルタイプごとの設定
 filetype plugin on
 filetype indent on
 augroup FileTyper
@@ -76,22 +72,18 @@ augroup FileTyper
   autocmd FileType vim                setlocal ts=2 sts=2 sw=0
   autocmd FileType python             setlocal cinwords=if,elif,else,for,while,try,except,finally,def,class
 augroup END
-" }}}
+"
 
-" コメントアウト行後の改行時にコメントアウトを入れない {{{
+" コメントアウト行後の改行時にコメントアウトを入れない
 augroup DisableInsertNextlineComment
   autocmd!
   autocmd FileType *                  setlocal formatoptions-=ro
 augroup END
-" }}}
 
-" cache {{{
 " 恐れるな
 set nobackup
 set noswapfile
-" }}}
 
-" visual {{{
 " 行番号表示
 set number
 
@@ -107,16 +99,14 @@ set foldmethod=marker
 " ステータスラインを常に表示
 set laststatus=2
 
-" 特殊表示 {{{
 " 色々わかりやすくするやつ
 set list
 set listchars=tab:\▸\-,trail:-,extends:»,precedes:«
 " ↑の付随: Grey rbg(95, 95, 135)にする
 hi NonText    ctermfg=59
 hi SpecialKey ctermfg=59
-" }}}
 
-" 背景透過 {{{
+" 背景透過
 let t:is_transparent = $TRANSPARENT_TERM
 if t:is_transparent
   augroup TransparentBG
@@ -128,9 +118,8 @@ if t:is_transparent
     autocmd Colorscheme * highlight EndOfBuffer ctermbg=none 
   augroup END
 endif
-" }}}
 
-" search {{{
+" search
 " 大文字小文字の区別をしない
 set ignorecase
 " 大文字で検索したときは大文字のみ検索
@@ -143,9 +132,8 @@ set hlsearch
 nmap <Esc><Esc> <Cmd>nohlsearch<CR>
 " 複数一致時、全一致を羅列し、共通最長文字列を補完
 set wildmode=list:longest
-" }}}
 
-" json processer {{{
+" json processer
 command! -nargs=? Jq call s:Jq(<f-args>)
 function! s:Jq(...)
   if 0 == a:0
@@ -155,18 +143,16 @@ function! s:Jq(...)
   endif
   execute "%! jq \"" . l:arg . "\""
 endfunction
-" }}}
 
-" WSLでyank-to-clipboard {{{
+" WSLでyank-to-clipboard
 if has('unix') && system('uname -a | grep microsoft') != ''
   augroup myYank
     autocmd!
     autocmd TextYankPost * call system('clip.exe', @")
   augroup END
 endif
-" }}}
 
-" git grep {{{
+" git grep
 function! s:gitgrep(query)
   let l:current_grep = &grepprg " 前回の設定値の保存
   setlocal grepprg=git\ grep\ -I\ --line-number
@@ -176,16 +162,14 @@ function! s:gitgrep(query)
 endfunction
 
 command! -nargs=? Ggrep call s:gitgrep(<f-args>)
-" }}}
 
-" use rg {{{
+" use rg
 if executable('rg')
     let &grepprg = 'rg --vimgrep --hidden'
     set grepformat=%f:%l:%c:%m
 endif
-" }}}
 
-" jvgrep {{{
+" jvgrep
 function! s:jvgrep(query)
   let l:current_grep = &grepprg
   setlocal grepprg=jvgrep
@@ -195,14 +179,12 @@ function! s:jvgrep(query)
 endfunction
 
 command! -nargs=? Jvgrep call s:jvgrep(<f-args>)
-" }}}
 
-" quickfixgrep {{{
+" quickfixgrep 
 augroup quickfixgrep
   autocmd!
   autocmd QuickFixCmdPost make,*grep* cwindow
 augroup END
-" }}}
 
 " vim-plug {{{1
 call plug#begin()
