@@ -263,6 +263,7 @@ Plug 'pixelneo/vim-python-docstring', { 'for': 'python' }
 Plug 'wellle/tmux-complete.vim', { 'for': 'tmux' }
 Plug 'chrisbra/csv.vim'
 Plug 'zinit-zsh/zinit-vim-syntax', { 'for': 'zsh' }
+Plug 'pantharshit00/vim-prisma'
 
 " pdv requirements
 Plug 'tobyS/vmustache'
