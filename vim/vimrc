@@ -172,9 +172,19 @@ endfunction
 command! -nargs=? Ggrep call s:gitgrep(<f-args>)
 
 " use rg
+function! s:ripgrep(query)
+  let l:current_grep = &grepprg " 前回の設定値の保存
+  let l:current_grepformat = &grepformat
+  setlocal grepprg=rg\ --vimgrep\ --hidden
+  setlocal grepformat=%f:%l:%c:%m
+  execute 'silent grep! ' . a:query
+  let &grepprg = l:current_grep
+  let &grepformat = l:current_grepformat
+  redraw!
+endfunction
+
 if executable('rg')
-    let &grepprg = 'rg --vimgrep --hidden'
-    set grepformat=%f:%l:%c:%m
+  command! -nargs=? Rgrep call s:ripgrep(<f-args>)
 endif
 
 " jvgrep
