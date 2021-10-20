@@ -71,6 +71,7 @@ augroup FileTyper
   autocmd FileType vue                setlocal ts=2 sts=2 sw=0
   autocmd FileType vim                setlocal ts=2 sts=2 sw=0
   autocmd FileType python             setlocal cinwords=if,elif,else,for,while,try,except,finally,def,class
+  autocmd FileType go                 setlocal sw=4 ts=4 sts=4 noet
 augroup END
 "
 
