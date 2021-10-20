@@ -39,3 +39,5 @@ if command -v bat &> /dev/null
 then
     export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 fi
+
+export PATH="$HOME/.poetry/bin:$PATH"
