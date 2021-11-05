@@ -617,6 +617,10 @@ let g:clap_layout = { 'relative': 'editor' }
 
 " ctrlp {{{
 let g:ctrlp_show_hidden = 1
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  'node_modules\|vendor\|\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ }
 
 " ctrlp-ghq
 let g:ctrlp_ghq_actions = [
@@ -687,8 +691,10 @@ let g:gist_extmap = {
 " 環境依存になりがちな設定
 if has('win32') || has('win64')
   let s:vimhome = expand("$HOME/vimfiles")
+  set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
 elseif has('unix')
   let s:vimhome = expand("$HOME/.vim")
+  set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 endif
 " }}}
 
