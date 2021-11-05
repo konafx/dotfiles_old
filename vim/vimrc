@@ -486,6 +486,17 @@ vmap <Leader>c <Plug>(caw:hatpos:toggle)
 " 行頭にコメントをトグル
 nmap <Leader>, <Plug>(caw:zeropos:toggle)
 vmap <Leader>, <Plug>(caw:zeropos:toggle)
+" Fix tsx, jsx commentout
+augroup SetJsxComment
+  autocmd!
+  autocmd FileType javascriptreact,typescriptreact call s:set_jsx_comment()
+augroup END
+
+function! s:set_jsx_comment() abort
+  let &l:commentstring = ''
+  unlet! b:caw_oneline_comment
+  let b:caw_wrap_oneline_comment = ['{/*', '*/}']
+endfunction
 " }}}
 
 " gina.vim {{{
@@ -574,13 +585,18 @@ set completeopt+=menuone
 " ale {{{
 let g:ale_linters = {
   \ 'javascriptreact': ['eslint'],
+  \ 'typescriptreact': ['eslint'],
   \ 'javascript': ['eslint'],
+  \ 'typescript': ['eslint'],
   \ 'cloudformation.yaml': ['cfn-lint'],
   \ }
 
 let g:ale_fixers = {
   \ 'javascriptreact': ['prettier'],
+  \ 'typescriptreact': ['prettier'],
   \ 'javascript': ['prettier'],
+  \ 'typescript': ['prettier'],
+  \ 'php': ['php_cs_fixer'],
   \ }
 
 let g:ale_sign_error = '!!'
