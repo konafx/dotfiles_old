@@ -498,7 +498,10 @@ let g:fern#default_hidden=1
 " S-t: un*t*il cursor move (like *f*)
 " noremap sf <Cmd>Fern %:h<CR>
 noremap <S-t> <Cmd>Fern . -drawer -reveal=% -toggle<CR>
-autocmd FileType fern setlocal nonumber
+augroup FernNoNumber
+  autocmd!
+  autocmd FileType fern setlocal nonumber
+augroup END
 " }}}
 
 " fern-renderer-nerdfont.vim {{{
