@@ -73,6 +73,11 @@ augroup FileTyper
   autocmd FileType python             setlocal cinwords=if,elif,else,for,while,try,except,finally,def,class
   autocmd FileType go                 setlocal sw=4 ts=4 sts=4 noet
 augroup END
+
+augroup CfnTemplate
+  autocmd!
+  autocmd BufRead,BufNewFile *.template.yml,*.template.yaml set ft=cloudformation.yaml
+augroup END
 "
 
 " コメントアウト行後の改行時にコメントアウトを入れない
@@ -478,7 +483,7 @@ let g:vsnip_filetypes.typescriptreact = ['typescript']
 " 行の最初の文字の前にコメント文字をトグル
 nmap <Leader>c <Plug>(caw:hatpos:toggle)
 vmap <Leader>c <Plug>(caw:hatpos:toggle)
-" " 行頭にコメントをトグル
+" 行頭にコメントをトグル
 nmap <Leader>, <Plug>(caw:zeropos:toggle)
 vmap <Leader>, <Plug>(caw:zeropos:toggle)
 " }}}
@@ -567,6 +572,7 @@ set completeopt+=menuone
 let g:ale_linters = {
   \ 'javascriptreact': ['eslint'],
   \ 'javascript': ['eslint'],
+  \ 'cloudformation.yaml': ['cfn-lint'],
   \ }
 
 let g:ale_fixers = {
