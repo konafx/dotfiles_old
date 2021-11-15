@@ -114,7 +114,6 @@ function ghq-fzf() {
     zle -R -c
 }
 zle -N ghq-fzf
-bindkey '^g' ghq-fzf
 
 # function tmux-tree() {
 #     tmux ls -F'#{session_id}:#{session_name}: #{T:tree_mode_format}' | while read -r s; do
@@ -158,6 +157,15 @@ if [ -f '/home/konafx/google-cloud-sdk/path.zsh.inc' ]; then . '/home/konafx/goo
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/konafx/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/konafx/google-cloud-sdk/completion.zsh.inc'; fi
 
-export PATH="$HOME/.poetry/bin:$PATH"
+# export PATH="$HOME/.poetry/bin:$PATH"
 
 complete -o nospace -C /usr/bin/terraform terraform
+
+# bindkeys {{{
+# reset
+bindkey -d
+# emacs
+bindkey -e
+# ghq
+bindkey '^g' ghq-fzf
+# }}}
