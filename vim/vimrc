@@ -166,6 +166,19 @@ if has('unix') && system('uname -a | grep microsoft') != ''
   augroup END
 endif
 
+" ssh yank xclip
+" let t:ssh_connection = $SSH_CONNECTION
+" if t:ssh_connection
+"   augroup XSshYank
+"     autocmd!
+"     autocmd TextYankPost * call system('xclip', @")
+"   augroup END
+" endif
+
+" Suppress autoindent pasting clipboard
+nnoremap <F10> :<C-u>exe "normal" (getline(".")==""?"I":"o")<CR>i<C-o>:set paste<CR>
+au InsertLeave * set nopaste
+
 " git grep
 function! s:gitgrep(query)
   let l:current_grep = &grepprg " 前回の設定値の保存

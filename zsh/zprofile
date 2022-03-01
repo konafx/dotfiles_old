@@ -1,1 +1,7 @@
 source "$HOME/.profile"
+
+# xclipを使いたかった名残
+# 結局うまくいかなかった
+#IFS=' '
+#set -- $(echo $SSH_CONNECTION)
+#export DISPLAY=$1:0.0
