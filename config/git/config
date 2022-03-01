@@ -20,6 +20,7 @@
     sp = stash pop
     ss = stash save
     sl = stash list
+    ft = fetch
 
 [ghq]
     root = ~/.ghq

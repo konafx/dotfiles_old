@@ -26,14 +26,12 @@ alias back='pushd'
 alias diff='diff -U1'
 
 alias g='git'
-alias gst='git status'
+alias gst='git status -sb'
 
 alias t='tmux'
 
 alias d='docker'
 alias dc='docker-compose'
-
-alias fd='fdfind'
 
 DISTRO=$(awk -F= '/^ID/{print $2}' /etc/os-release)
 if [ "$DISTRO" = "arch" ]; then
@@ -42,4 +40,7 @@ fi
 
 if [ "$DISTRO" = "ubuntu" ]; then
     alias bat='batcat'
+    alias fd='fdfind'
 fi
+
+alias tf='terraform'
