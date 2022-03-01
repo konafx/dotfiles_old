@@ -323,7 +323,7 @@ Plug 'skanehira/gh.vim'
 Plug 'christoomey/vim-tmux-navigator'
 
 " ssh yank
-Plug 'greymd/oscyank.vim'
+Plug 'ojroques/vim-oscyank'
 
 " Search
 " e.g.) maekawa -> 前川
@@ -700,6 +700,18 @@ let g:buffergator_viewport_split_policy="N"
 let g:gist_extmap = {
   \ ".md": "markdown"
   \ }
+" }}}
+
+
+" vim-oscyank {{{
+let t:ssh_connection = $SSH_CONNECTION
+if t:ssh_connection
+  augroup RegisterOscYank
+    autocmd!
+    " regname is '+'になることがない（getreg('+')は動作する）ので、"yy で簡単にoscyankできるようにする
+    autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is 'y' | execute 'OSCYankReg y' | endif
+  augroup END
+endif
 " }}}
 
 " LOCAL VIMRC {{{
