@@ -41,3 +41,5 @@ then
 fi
 
 export PATH="$HOME/.poetry/bin:$PATH"
+
+export EDITOR=/usr/bin/vim
