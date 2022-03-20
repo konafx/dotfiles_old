@@ -68,6 +68,7 @@ augroup FileTyper
   autocmd FileType markdown           setlocal ts=2 sts=2 sw=0
   autocmd FileType css,sass,scss      setlocal ts=2 sts=2 sw=0
   autocmd FileType javascript         setlocal ts=2 sts=2 sw=0
+  autocmd FileType typescript,typescriptreact setlocal ts=2 sts=2 sw=0
   autocmd FileType vue                setlocal ts=2 sts=2 sw=0
   autocmd FileType vim                setlocal ts=2 sts=2 sw=0
   autocmd FileType terraform,tf       setlocal ts=2 sts=2 sw=0

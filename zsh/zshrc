@@ -166,8 +166,6 @@ if [ -f '/home/konafx/google-cloud-sdk/path.zsh.inc' ]; then . '/home/konafx/goo
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/konafx/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/konafx/google-cloud-sdk/completion.zsh.inc'; fi
 
-# export PATH="$HOME/.poetry/bin:$PATH"
-
 complete -o nospace -C /usr/bin/terraform terraform
 
 # bindkeys {{{
@@ -188,3 +186,5 @@ bindkey '^[[3~' delete-char
 # tabtab source for packages
 # uninstall by removing these lines
 [[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
+
+export PATH="$HOME/.poetry/bin:$PATH"
