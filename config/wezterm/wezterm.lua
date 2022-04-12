@@ -32,7 +32,7 @@ local tmux_keybinds = {
 	{ key = "l", mods = "ALT|SHIFT|CTRL", action = wezterm.action({ AdjustPaneSize = { "Right", 1 } }) },
 	{ key = "k", mods = "ALT|SHIFT|CTRL", action = wezterm.action({ AdjustPaneSize = { "Up", 1 } }) },
 	{ key = "j", mods = "ALT|SHIFT|CTRL", action = wezterm.action({ AdjustPaneSize = { "Down", 1 } }) },
-	{ key = " ", mods = "ALT", action = "QuickSelect" },
+	{ key = "c", mods = "ALT", action = "QuickSelect" },
 }
 
 local default_keybinds = {
