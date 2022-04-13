@@ -115,6 +115,17 @@ function ghq-fzf() {
 }
 zle -N ghq-fzf
 
+function ghq-updated-fzf() {
+    local sorted=$(ghq list | python -c "import os; import sys; print(''.join(sorted(sys.stdin.readlines(), key=lambda path: os.stat(f'$(ghq root)/{path.strip()}').st_mtime, reverse=True)))")
+    local src=$(echo $sorted | fzf --preview "bat --color=always --style=header,grid --line-range :80 $(ghq root)/{}/README.*")
+    if [ -n "$src" ]; then
+        BUFFER="cd $(ghq root)/$src"
+        zle accept-line
+    fi
+    zle -R -c
+}
+zle -N ghq-updated-fzf
+
 function git-status() {
     if [ "$(git rev-parse --is-inside-work-tree 2> /dev/null)" = 'true' ]; then
         echo git status -sb
@@ -160,11 +171,11 @@ yq() {
 export GPG_TTY=$(tty)
 complete -o nospace -C /usr/local/bin/bit bit
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/konafx/google-cloud-sdk/path.zsh.inc' ]; then . '/home/konafx/google-cloud-sdk/path.zsh.inc'; fi
-
 # The next line enables shell command completion for gcloud.
-if [ -f '/home/konafx/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/konafx/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '$HOME/google-cloud-sdk/path.zsh.inc' ]; then . '$HOME/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '$HOME/google-cloud-sdk/completion.zsh.inc' ]; then . '$HOME/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '$HOME/.cache/paru/clone/google-cloud-sdk/pkg/google-cloud-sdk/opt/google-cloud-sdk/path.zsh.inc' ]; then . '$HOME/.cache/paru/clone/google-cloud-sdk/pkg/google-cloud-sdk/opt/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '$HOME/.cache/paru/clone/google-cloud-sdk/pkg/google-cloud-sdk/opt/google-cloud-sdk/completion.zsh.inc' ]; then . '$HOME/.cache/paru/clone/google-cloud-sdk/pkg/google-cloud-sdk/opt/google-cloud-sdk/completion.zsh.inc'; fi
 
 complete -o nospace -C /usr/bin/terraform terraform
 
@@ -175,6 +186,8 @@ bindkey -d
 bindkey -e
 # ghq
 bindkey '^g' ghq-fzf
+# ghq sorted
+bindkey '^h' ghq-updated-fzf
 # git staths
 bindkey '^z' git-status
 # util keys
