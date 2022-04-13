@@ -110,6 +110,16 @@ local config = {
 	},
 	tab_bar_at_bottom = true,
 	disable_default_key_bindings = true,
+    visual_bell = {
+        fade_in_function = "EaseIn",
+        fade_in_duration_ms = 120,
+        fade_out_function = "EaseOut",
+        fade_out_duration_ms = 120,
+    },
+    colors = {
+        visual_bell = "#202020",
+    },
+    audible_bell = "Disabled",
     keys = create_keybinds(),
 }
 
