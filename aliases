@@ -27,6 +27,7 @@ alias diff='diff -U1'
 
 alias g='git'
 alias gst='git status -sb'
+alias gbr='git branch -vva'
 
 alias t='tmux'
 
