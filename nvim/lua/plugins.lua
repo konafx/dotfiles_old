@@ -66,6 +66,13 @@ packer.startup(function(use)
     requires = { 'kyazdani42/nvim-web-devicons', opt = true }
   }
 
+  -- git plugins
+  use {
+    'lambdalisue/gina.vim',
+    opt = true,
+    cmd = { 'Gina' },
+  }
+
   -- colorscheme
   use 'EdenEast/nightfox.nvim'
 end)

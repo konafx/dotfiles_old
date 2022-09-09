@@ -1,7 +1,7 @@
-local ok, mason = pcall(require, "mason")
+local ok, _ = pcall(require, "mason")
 if not ok then print('mason is not installed') return end
 
--- Mappings.
+-- Mappings. {{{
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap = true, silent = true }
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
@@ -9,13 +9,15 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
+--- }}}
+
 local ok, mason_lspconfig = pcall(require, "mason-lspconfig")
 if not ok then print('mson-lspconfig is not installed') return end
 
 local ok, lspconfig = pcall(require, 'lspconfig')
 if not ok then print('nvim-lspconfig is not installed') return end
 
--- Use an on_attach function to only map the following keys
+-- Use an on_attach function to only map the following keys {{{
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
   -- format on save
@@ -49,14 +51,17 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
   -- vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
 end
+--- }}}
 
--- The nvim-cmp almost supports LSP's capabilities so You should advertise it to LSP servers..
+-- The nvim-cmp almost supports LSP's capabilities so You should advertise it to LSP servers.. {{{
 local ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 if not ok then print('cmp-nvim-lsp is not installed') return end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
+--- }}}
 
+--- mason lspconfig {{{
 mason_lspconfig.setup_handlers {
   function(server_name)
     lspconfig[server_name].setup {
@@ -92,3 +97,4 @@ mason_lspconfig.setup_handlers {
     }
   end
 }
+--- }}}
