@@ -13,10 +13,9 @@ keymap.set('v', '>', '>gv')
 keymap.set('v', '=', '=gv')
 
 -- `*`検索の初回移動無効
--- not workr?
 keymap.set('n', '*', function()
-  return vim.v.count and '*' or
-      [[<Cmd>sil exe "keepj norm! *" <Bar> call winrestview(]] .. string(vim.fn.winsaveview()) .. [[)]]
+  return vim.v.count >= 1 and '*'
+      or [[<Cmd>sil exe "keepj norm! *" <Bar> call winrestview(]] .. vim.fn.string(vim.fn.winsaveview()) .. ')<CR>'
 end, { silent = true, expr = true })
 
 -- save
@@ -24,7 +23,7 @@ keymap.set('n', '<Leader>w', '<Cmd>w<CR>', { silent = true })
 
 -- [tab] {{{
 keymap.set('', '[tab]', '<Nop>')
-keymap.set('n', 't', '[tab]', {remap = true})
+keymap.set('n', 't', '[tab]', { remap = true })
 
 keymap.set('n', '[tab]n', '<Cmd>tabnext<CR>', { silent = true })
 keymap.set('n', '[tab]p', '<Cmd>tabprevious<CR>', { silent = true })

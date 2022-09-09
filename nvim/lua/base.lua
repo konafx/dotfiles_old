@@ -30,6 +30,9 @@ opt.wildoptions = 'pum'
 opt.pumblend = 5
 opt.background = 'dark'
 
+opt.foldmethod = 'expr'
+opt.foldexpr = 'nvim_treesitter#foldexpr()'
+
 -- Undercurl
 local cmd = vim.cmd
 cmd [[let &t_Cs = "\e[4:3m"]]

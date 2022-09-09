@@ -17,7 +17,7 @@ if not ok then print('mson-lspconfig is not installed') return end
 local ok, lspconfig = pcall(require, 'lspconfig')
 if not ok then print('nvim-lspconfig is not installed') return end
 
--- Use an on_attach function to only map the following keys {{{
+-- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
   -- format on save

@@ -49,9 +49,19 @@ packer.startup(function(use)
     run = ':TSUpdate'
   }
 
-  -- autoclosetag
-  use 'windwp/nvim-ts-autotag'
-  use 'windwp/nvim-autopairs'
+  -- Autotag
+  use {
+    'windwp/nvim-ts-autotag',
+    config = function () require('nvim-ts-autotag').setup() end
+  }
+  use {
+    'windwp/nvim-autopairs',
+    config = function ()
+      require('nvim-autopairs').setup({
+        disable_filetype = { 'TelescopePrompt', 'vim', 'fern' }
+      })
+    end
+  }
 
   -- fuzzy finder
   use {
