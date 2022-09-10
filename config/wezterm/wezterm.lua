@@ -115,6 +115,7 @@ local config = {
         fade_in_duration_ms = 120,
         fade_out_function = "EaseOut",
         fade_out_duration_ms = 120,
+        target = "CursorColor",
     },
     colors = {
         visual_bell = "#202020",
