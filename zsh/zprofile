@@ -3,6 +3,11 @@ source "$HOME/.profile"
 export DENO_INSTALL="$HOME/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
 
+export DOT_REPO="https://github.com/konafx/dotfiles.git"
+export DOT_DIR="$HOME/.dotfiles"
+fpath=($HOME/.zsh/dot $fpath)
+source $HOME/.zsh/dot/dot.sh
+
 # xclipを使いたかった名残
 # 結局うまくいかなかった
 #IFS=' '
