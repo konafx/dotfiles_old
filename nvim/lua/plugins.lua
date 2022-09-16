@@ -11,6 +11,7 @@ packer.startup(function(use)
 
   -- utility
   use 'nvim-lua/plenary.nvim'
+  use 'vim-denops/denops.vim'
 
   -- Fades inactive buffers
   use 'TaDaa/vimade'
@@ -53,11 +54,11 @@ packer.startup(function(use)
   -- Autotag
   use {
     'windwp/nvim-ts-autotag',
-    config = function () require('nvim-ts-autotag').setup() end
+    config = function() require('nvim-ts-autotag').setup() end
   }
   use {
     'windwp/nvim-autopairs',
-    config = function ()
+    config = function()
       require('nvim-autopairs').setup({
         disable_filetype = { 'TelescopePrompt', 'vim', 'fern' }
       })
@@ -79,9 +80,23 @@ packer.startup(function(use)
 
   -- git plugins
   use {
+    'TimUntersberger/neogit',
+    requires = { 'nvim-lua/plenary.nvim', 'sindrets/diffview.nvim' },
+  }
+  use {
+    'sindrets/diffview.nvim',
+    requires = 'nvim-lua/plenary.nvim'
+  }
+  use {
     'lambdalisue/gina.vim',
     opt = true,
     cmd = { 'Gina' },
+  }
+
+  -- 翻訳
+  use {
+    'skanehira/denops-translate.vim',
+    requires = { 'vim-denops/denops.vim'}
   }
 
   -- colorscheme

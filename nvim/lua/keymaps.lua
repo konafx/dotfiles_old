@@ -21,6 +21,19 @@ end, { silent = true, expr = true })
 -- save
 keymap.set('n', '<Leader>w', '<Cmd>w<CR>', { silent = true })
 
+-- clear hylight
+keymap.set('n', '<Esc><Esc>', '<Cmd>nohlsearch<CR>', { noremap = false })
+
+-- Make inputting a character by code easily.
+keymap.set('i',
+  '<Plug>(vimrc-input-char-by-code)',
+  [[<C-r>=nr2char(eval(input('char? ', '0x')))<CR>]],
+  { noremap = true }
+)
+keymap.set('i', '<C-v>x', '<Plug>(vimrc-input-char-by-code)', { noremap = false })
+keymap.set('i', '<C-v>u', '<Plug>(vimrc-input-char-by-code)', { noremap = false })
+keymap.set('i', '<C-v>U', '<Plug>(vimrc-input-char-by-code)', { noremap = false })
+
 -- [tab] {{{
 keymap.set('', '[tab]', '<Nop>')
 keymap.set('n', 't', '[tab]', { remap = true })

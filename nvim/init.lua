@@ -6,4 +6,5 @@ vim.opt.fileencoding = 'utf-8'
 
 require('plugins')
 require('base')
+require('extensions')
 require('keymaps')
