@@ -1,6 +1,6 @@
 local create_user_command = vim.api.nvim_create_user_command
 
--- jq
+-- json parser
 if vim.fn.executable('jq') then
   create_user_command('Jq',
     function(opts)
@@ -14,6 +14,8 @@ if vim.fn.executable('jq') then
   )
 end
 
+-- QuickFixGrep {{{
+-- require setting [[au QuickFixCmdPost make,*grep* cwindow]]
 if vim.fn.executable('git') then
   create_user_command('Ggrep',
     function(opts)
@@ -55,3 +57,4 @@ if vim.fn.executable('jvgrep') then
     { nargs = 1 }
   )
 end
+-- }}}
