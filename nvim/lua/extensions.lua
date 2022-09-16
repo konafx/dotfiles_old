@@ -48,7 +48,7 @@ if vim.fn.executable('jvgrep') then
     function(opts)
       local current_grepprg = vim.o.grepprg
       vim.opt_local.grepprg = 'jvgrep'
-      vim.cmd('silent grep! ' .. opts.args .. './*')
+      vim.cmd('silent grep! ' .. opts.args .. ' ./*')
       vim.opt_local.grepprg = current_grepprg
       vim.cmd('redraw!')
     end,
