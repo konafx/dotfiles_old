@@ -19,3 +19,11 @@ create_autocmd('QuickFixCmdPost', {
   pattern = {'make', '*grep*'},
   command = 'cwindow',
 })
+
+-- Automaticaly Packer Reload
+-- https://github.com/wbthomason/packer.nvim/blob/6afb67460283f0e990d35d229fd38fdc04063e0a/README.md?plain=1#L202-L222
+create_autocmd('BufWritePost', {
+  group = create_augroup('PackerUserConfig', {}),
+  pattern = 'plugins.lua',
+  command = 'source <afile> | PackerCompile',
+})

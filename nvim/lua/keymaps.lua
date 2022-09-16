@@ -34,6 +34,16 @@ keymap.set('i', '<C-v>x', '<Plug>(vimrc-input-char-by-code)', { noremap = false 
 keymap.set('i', '<C-v>u', '<Plug>(vimrc-input-char-by-code)', { noremap = false })
 keymap.set('i', '<C-v>U', '<Plug>(vimrc-input-char-by-code)', { noremap = false })
 
+-- Toggle quickfix window
+keymap.set('n', '<Leader>q', function()
+  local nr = vim.fn.winnr('$')
+  vim.cmd('cwindow')
+  local nr2 = vim.fn.winnr('$')
+  if nr == nr2 then
+    vim.cmd('cclose')
+  end
+end, { silent = true })
+
 -- [tab] {{{
 keymap.set('', '[tab]', '<Nop>')
 keymap.set('n', 't', '[tab]', { remap = true })

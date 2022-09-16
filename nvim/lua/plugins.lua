@@ -64,6 +64,29 @@ packer.startup(function(use)
       })
     end
   }
+  -- auto close
+  use 'mattn/vim-lexiv'
+
+  -- Operator
+  use 'kana/vim-operator-user'
+  use {
+    'kana/vim-operator-replace',
+    requires = 'kana/vim-operator-user',
+  }
+  use {
+    'rhysd/vim-operator-surround',
+    requires = 'kana/vim-operator-user',
+  }
+
+  -- Search
+  -- " e.g.) maekawa -> 前川
+  use 'osyo-manga/vim-vigemo'
+  use {
+    'rhysd/clever-f.vim',
+    config = function()
+      vim.g.clever_f_not_overwrites_standard_mappings = 1
+    end
+  }
 
   -- fuzzy finder
   use {
@@ -93,10 +116,49 @@ packer.startup(function(use)
     cmd = { 'Gina' },
   }
 
+  -- buffers
+  use {
+    'jeetsukumaran/vim-buffergator',
+    config = function()
+      vim.g.buffergator_suppress_keymaps = 1
+      vim.g.buffergator_viewport_split_policy = "N"
+    end
+  }
+
+  use {
+    'bkad/CamelCaseMotion',
+    config = function()
+      vim.g.camelcasemotion_key = '<Space>'
+    end
+  }
+
+  -- Markdown
+  use {
+    'iamcco/markdown-preview.nvim',
+    run = 'cd app && yarn install'
+    -- { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug'] }
+  }
+
   -- 翻訳
   use {
     'skanehira/denops-translate.vim',
-    requires = { 'vim-denops/denops.vim'}
+    requires = { 'vim-denops/denops.vim' }
+  }
+
+  use 'thinca/vim-quickrun'
+
+  -- 辞書
+  use {
+    'thinca/vim-ref',
+    config = function()
+      require('rc/vim-ref')
+    end
+  }
+
+  -- Gist
+  use {
+    'mattn/vim-gist',
+    requires = 'mattn/webapi-vim'
   }
 
   -- colorscheme
