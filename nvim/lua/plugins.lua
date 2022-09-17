@@ -13,6 +13,9 @@ packer.startup(function(use)
   use 'nvim-lua/plenary.nvim'
   use 'vim-denops/denops.vim'
 
+  -- icon
+  use 'kyazdani42/nvim-web-devicons'
+
   -- Fades inactive buffers
   use 'TaDaa/vimade'
 
@@ -38,8 +41,13 @@ packer.startup(function(use)
   use 'onsails/lspkind.nvim'
   -- snippet engine
   use 'L3MON4D3/LuaSnip'
+  use 'rafamadriz/friendly-snippets'
+  use 'saadparwaiz1/cmp_luasnip'
   -- complete
-  use 'hrsh7th/nvim-cmp'
+  use {
+    'hrsh7th/nvim-cmp',
+    after = 'luasnip',
+  }
   use { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' }
   use { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' }
   use { 'hrsh7th/cmp-path', after = 'nvim-cmp' }
@@ -98,7 +106,7 @@ packer.startup(function(use)
   -- statusline
   use {
     'nvim-lualine/lualine.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+    requires = { 'kyazdani42/nvim-web-devicons' }
   }
 
   -- git plugins
