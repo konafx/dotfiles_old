@@ -34,7 +34,7 @@ alias t='tmux'
 alias d='docker'
 alias dc='docker-compose'
 
-DISTRO=$(awk -F= '/^ID/{print $2}' /etc/os-release)
+DISTRO=$(awk -F= '/^ID=/{print $2}' /etc/os-release)
 if [ "$DISTRO" = "arch" ]; then
     alias pc='pacman'
 fi
@@ -45,3 +45,5 @@ if [ "$DISTRO" = "ubuntu" ]; then
 fi
 
 alias tf='terraform'
+
+alias tmux='tmux -u'
