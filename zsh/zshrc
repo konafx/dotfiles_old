@@ -105,8 +105,16 @@ export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
 complete -C '/usr/local/bin/aws_completer' aws
 
 # ghq fzf
+DISTRO=$(awk -F= '/^ID=/{print $2}' /etc/os-release)
+cmd_bat='bat'
+cmd_fd='fd'
+if [ "$DISTRO" = "ubuntu" ]; then
+    cmd_bat='batcat'
+    cmd_fd='fdfind'
+fi
+
 function ghq-fzf() {
-    local src=$(ghq list | fzf --preview "bat --color=always --style=header,grid --line-range :80 $(ghq root)/{}/README.*")
+    local src=$(ghq list | fzf --preview "${cmd_bat} --color=always --style=header,grid --line-range :80 $(ghq root)/{}/README.*")
     if [ -n "$src" ]; then
         BUFFER="cd $(ghq root)/$src"
         zle accept-line
@@ -117,7 +125,7 @@ zle -N ghq-fzf
 
 function ghq-updated-fzf() {
     local sorted=$(ghq list | python -c "import os; import sys; print(''.join(sorted(sys.stdin.readlines(), key=lambda path: os.stat(f'$(ghq root)/{path.strip()}').st_mtime, reverse=True)))")
-    local src=$(echo $sorted | fzf --preview "bat --color=always --style=header,grid --line-range :80 $(ghq root)/{}/README.*")
+    local src=$(echo $sorted | fzf --preview "${cmd_bat} --color=always --style=header,grid --line-range :80 $(ghq root)/{}/README.*")
     if [ -n "$src" ]; then
         BUFFER="cd $(ghq root)/$src"
         zle accept-line
@@ -185,12 +193,15 @@ bindkey -d
 # emacs
 bindkey -e
 # ghq
-bindkey '^g' ghq-fzf
+bindkey '^g^g' ghq-fzf
+bindkey '^gg' ghq-fzf
 # ghq sorted
-bindkey '^h' ghq-updated-fzf
+bindkey '^g^h' ghq-updated-fzf
+bindkey '^gh' ghq-updated-fzf
 # git staths
-bindkey '^z' git-status
-# util keys
+bindkey '^g^z' git-status
+bindkey '^gz' git-status
+# util key
 bindkey '^[[H' beginning-of-line
 bindkey '^[[F' end-of-line
 bindkey '^[[3~' delete-char
