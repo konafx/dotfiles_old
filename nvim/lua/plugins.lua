@@ -31,8 +31,12 @@ packer.startup(function(use)
   }
   use {
     'williamboman/mason-lspconfig.nvim',
-    requires = { 'williamboman/mason.nvim' },
-    after = { 'mason.nvim', 'nvim-cmp', 'nvim-lspconfig' },
+    requires = { 'williamboman/mason.nvim',
+
+        'hrsh7th/nvim-cmp',
+      'neovim/nvim-lspconfig'
+    },
+    -- after = { 'mason.nvim', 'nvim-cmp', 'nvim-lspconfig' },
     config = function() require('mason-lspconfig').setup() end,
   }
   -- LSP
@@ -85,6 +89,9 @@ packer.startup(function(use)
     'rhysd/vim-operator-surround',
     requires = 'kana/vim-operator-user',
   }
+
+  -- Comment
+  use 'tyru/caw.vim'
 
   -- Search
   -- " e.g.) maekawa -> 前川
