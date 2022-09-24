@@ -5,12 +5,13 @@ local utils = require 'utils';
 --- keybinds
 ---------------------------------------------------------------
 local tmux_keybinds = {
-    { key = "k", mods = "ALT", action = wezterm.action({ SpawnTab = "CurrentPaneDomain" }) },
+    -- { key = "k", mods = "ALT", action = wezterm.action({ SpawnTab = "CurrentPaneDomain" }) },
+    { key = "k", mods = "ALT", action = wezterm.action.ShowLauncher },
 	{ key = "j", mods = "ALT", action = wezterm.action({ CloseCurrentTab = { confirm = false } }) },
 	{ key = "h", mods = "ALT", action = wezterm.action({ ActivateTabRelative = -1 }) },
 	{ key = "l", mods = "ALT", action = wezterm.action({ ActivateTabRelative = 1 }) },
 	{ key = "h", mods = "ALT|CTRL", action = wezterm.action({ MoveTabRelative = -1 }) },
-	{ key = "l", mods = "ALT|CTRL", action = wezterm.action({ ActivateTabRelative = 1 }) },
+	{ key = "l", mods = "ALT|CTRL", action = wezterm.action({ MoveTabRelative = 1 }) },
 	{ key = "k", mods = "ALT|CTRL", action = "ActivateCopyMode" },
 	{ key = "j", mods = "ALT|CTRL", action = wezterm.action({ PasteFrom = "PrimarySelection" }) },
 	{ key = "1", mods = "ALT", action = wezterm.action({ ActivateTab = 0 }) },
