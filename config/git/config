@@ -29,7 +29,7 @@
     user = konafx
 
 [core]
-    editor = vim
+    editor = nvim
     whitespace = cr-at-eol
     autocrlf = input
 [receive]

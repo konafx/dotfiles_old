@@ -17,12 +17,15 @@ telescope.setup {
         ['q'] = actions.close
       },
     },
+    file_ignore_patterns = {
+      '.git/', '.cache', '%.o', '%.a', '%.out', '%.class', '%.pdf', '%.mkv', '%.mp4', '%.zip'
+    }
   },
   extensions = {
     file_browser = {
       theme = "dropdown",
       -- disables netrw and use telescope-file-browser in its place
-      hijack_netrw = false,
+      hijack_netrw = true,
       mappings = {
         -- your custom insert mode mappings
         ["i"] = {

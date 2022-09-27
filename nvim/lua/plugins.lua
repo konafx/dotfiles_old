@@ -33,7 +33,7 @@ packer.startup(function(use)
     'williamboman/mason-lspconfig.nvim',
     requires = { 'williamboman/mason.nvim',
 
-        'hrsh7th/nvim-cmp',
+      'hrsh7th/nvim-cmp',
       'neovim/nvim-lspconfig'
     },
     -- after = { 'mason.nvim', 'nvim-cmp', 'nvim-lspconfig' },
@@ -129,6 +129,12 @@ packer.startup(function(use)
     'lambdalisue/gina.vim',
     opt = true,
     cmd = { 'Gina' },
+  }
+  use {
+    'lewis6991/gitsigns.nvim',
+    config = function()
+      require('rc/gitsigns')
+    end
   }
 
   -- buffers
