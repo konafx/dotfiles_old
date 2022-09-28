@@ -1,0 +1,18 @@
+-- local rules = {
+--   { char = '<C-h>', at = [[(\%#)]], input = '<BS><Del>', },
+--   { char = '<BS>', at = [[(\%#)]], input = '<BS><Del>', },
+--   { char = '<C-h>', at = [[{\%#}]], input = '<BS><Del>', },
+--   { char = '<BS>', at = [[{\%#}]], input = '<BS><Del>', },
+--   { char = '<C-h>', at = '[\\%#]', input = '<BS><Del>', },
+--   { char = '<BS>', at = '[\\%#]', input = '<BS><Del>', },
+--   { char = '<C-h>', at = "'\\%#'", input = '<BS><Del>', },
+--   { char = '<BS>', at = "'\\%#'", input = '<BS><Del>', },
+--   { char = '<C-h>', at = [["\%#"]], input = '<BS><Del>', },
+--   { char = '<BS>', at = [["\%#"]], input = '<BS><Del>', },
+--   { char = '<C-h>', at = [[`\%#`]], input = '<BS><Del>', },
+--   { char = '<BS>', at = [[`\%#`]], input = '<BS><Del>', },
+-- }
+
+-- for _, rule in ipairs(rules) do
+--   vim.fn['lexima#add_rule'](rule)
+-- end
