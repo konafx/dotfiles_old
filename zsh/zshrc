@@ -104,7 +104,6 @@ export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
 # awscli
 complete -C '/usr/local/bin/aws_completer' aws
 
-# ghq fzf
 DISTRO=$(awk -F= '/^ID=/{print $2}' /etc/os-release)
 cmd_bat='bat'
 cmd_fd='fd'
@@ -113,6 +112,13 @@ if [ "$DISTRO" = "ubuntu" ]; then
     cmd_fd='fdfind'
 fi
 
+# cmd_fzf='fzf'
+# if command -v tmux &> /dev/null
+# then
+#   cmd_fzf='fzf-tmux'
+# fi
+
+# ghq fzf
 function ghq-fzf() {
     local src=$(ghq list | fzf --preview "${cmd_bat} --color=always --style=header,grid --line-range :80 $(ghq root)/{}/README.*")
     if [ -n "$src" ]; then
@@ -230,3 +236,5 @@ bindkey '^T' zaw-tmux
 [[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
 
 export PATH="$HOME/.poetry/bin:$PATH"
+
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local

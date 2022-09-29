@@ -8,8 +8,15 @@ export DOT_DIR="$HOME/.dotfiles"
 fpath=($HOME/.zsh/dot $fpath)
 source $HOME/.zsh/dot/dot.sh
 
+# fzf
+export FZF_TMUX=1 # enable
+export FZF_TMUX_OPTS='-p 80%' # popup
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # xclipを使いたかった名残
 # 結局うまくいかなかった
 #IFS=' '
 #set -- $(echo $SSH_CONNECTION)
 #export DISPLAY=$1:0.0
+

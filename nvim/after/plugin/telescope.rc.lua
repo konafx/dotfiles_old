@@ -14,7 +14,11 @@ telescope.setup {
   defaults = {
     mappings = {
       n = {
-        ['q'] = actions.close
+        ['q'] = actions.close,
+        ["<CR>"] = actions.select_default,
+        ["<C-x>"] = actions.select_horizontal,
+        ["<C-v>"] = actions.select_vertical,
+        ["<C-t>"] = actions.select_tab,
       },
     },
     file_ignore_patterns = {
@@ -24,14 +28,14 @@ telescope.setup {
   extensions = {
     file_browser = {
       theme = "dropdown",
-      -- disables netrw and use telescope-file-browser in its place
+      --disables netrw and use telescope-file-browser in its place
       hijack_netrw = true,
       mappings = {
         -- your custom insert mode mappings
-        ["i"] = {
+        i = {
           ["<C-w>"] = function() vim.cmd('normal vbd') end,
         },
-        ["n"] = {
+        n = {
           -- your custom normal mode mappings
           ["N"] = fb_actions.create,
           ["h"] = fb_actions.goto_parent_dir,

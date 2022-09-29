@@ -27,3 +27,18 @@ create_autocmd('BufWritePost', {
   pattern = 'plugins.lua',
   command = 'source <afile> | PackerCompile',
 })
+
+-- 背景透過
+if vim.env.TRANSPARENT_TERM == '1' then
+  create_autocmd('Colorscheme', {
+    group = vim.api.nvim_create_augroup('TransparentBackground', {}),
+    pattern = '*',
+    callback = function ()
+      vim.api.nvim_set_hl(0, 'Normal', { ctermbg = 'NONE' })
+      vim.api.nvim_set_hl(0, 'NonText', { ctermbg = 'NONE' })
+      vim.api.nvim_set_hl(0, 'LineNr', { ctermbg = 'NONE' })
+      vim.api.nvim_set_hl(0, 'Folded', { ctermbg = 'NONE' })
+      vim.api.nvim_set_hl(0, 'EndOfBuffer', { ctermbg = 'NONE' })
+    end,
+  })
+end
