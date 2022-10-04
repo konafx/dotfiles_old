@@ -42,4 +42,4 @@ fi
 
 export PATH="$HOME/.poetry/bin:$PATH"
 
-export EDITOR=/usr/bin/vim
+export EDITOR=/usr/bin/nvim

@@ -149,6 +149,16 @@ function git-status() {
 }
 zle -N git-status
 
+function fzf-open() {
+    local src=$(git ls-files | fzf --query "$LBUFFER" --prompt "edit>")
+    if [ -n "$src" ]; then
+        BUFFER="${EDITOR} $src"
+        zle accept-line
+    fi
+    zle -R -c
+}
+zle -N fzf-open
+
 # function tmux-tree() {
 #     tmux ls -F'#{session_id}:#{session_name}: #{T:tree_mode_format}' | while read -r s; do
 #         session_info=$(echo "$s" | cut -d ':' -f 1)
@@ -218,6 +228,8 @@ bindkey '^gh' ghq-updated-fzf
 # git staths
 bindkey '^g^z' git-status
 bindkey '^gz' git-status
+bindkey '^f^f' fzf-open
+bindkey '^ff' fzf-open
 # util key
 bindkey '^[[H' beginning-of-line
 bindkey '^[[F' end-of-line
