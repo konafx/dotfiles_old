@@ -17,6 +17,40 @@ if not ok then print('mson-lspconfig is not installed') return end
 local ok, lspconfig = pcall(require, 'lspconfig')
 if not ok then print('nvim-lspconfig is not installed') return end
 
+-- https://scrapbox.io/vim-jp/better_K_for_neovim_lua
+local function lua_help()
+  if vim.bo.filetype ~= 'lua' then
+    return false
+  end
+  local current_line = vim.api.nvim_get_current_line()
+  local cursor_col = vim.api.nvim_win_get_cursor(0)[2] + 1
+  -- vim.fn.foo
+  local s, e, m = current_line:find([[fn%.([%w_]+)%(?]])
+  if s and s <= cursor_col and cursor_col <= e then
+    vim.cmd('h ' .. m)
+    return true
+  end
+  -- vim.fn['foo']
+  s, e, m = current_line:find([[fn%[['"]([%w_#]+)['"]%]%(?]])
+  if s and s <= cursor_col and cursor_col <= e then
+    vim.cmd('h ' .. m)
+    return true
+  end
+  -- vim.api.foo
+  s, e, m = current_line:find([[api%.([%w_]+)%(?]])
+  if s and s <= cursor_col and cursor_col <= e then
+    vim.cmd('h ' .. m)
+    return true
+  end
+  -- other vim.foo (e.g. vim.tbl_map, vim.lsp.foo, ...)
+  s, e, m = current_line:find([[(vim%.[%w_%.]+)%(?]])
+  if s and s <= cursor_col and cursor_col <= e then
+    vim.cmd('h ' .. m)
+    return true
+  end
+  return false
+end
+
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
@@ -38,7 +72,11 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
   vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-  vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+  vim.keymap.set('n', 'K', function() -- https://scrapbox.io/vim-jp/better_K_for_neovim_lua
+    if not lua_help() then
+      vim.lsp.buf.hover()
+    end
+  end, bufopts)
   vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
   -- vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
   -- vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
