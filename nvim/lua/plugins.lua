@@ -16,6 +16,9 @@ packer.startup(function(use)
   -- icon
   use 'kyazdani42/nvim-web-devicons'
 
+  -- ui
+  use 'stevearc/dressing.nvim'
+
   -- Fades inactive buffers
   use 'TaDaa/vimade'
 
