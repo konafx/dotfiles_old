@@ -11,6 +11,7 @@ source $HOME/.zsh/dot/dot.sh
 # fzf
 export FZF_TMUX=1 # enable
 export FZF_TMUX_OPTS='-p 80%' # popup
+export TMUX_FZF_OPTIONS='-p -w 73% -h 73% -m'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

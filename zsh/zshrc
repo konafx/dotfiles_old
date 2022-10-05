@@ -100,7 +100,7 @@ zinit snippet 'https://raw.githubusercontent.com/x-motemen/ghq/master/misc/zsh/_
 autoload -U +X bashcompinit && bashcompinit
 
 # fzf
-export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
+# export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
 # awscli
 complete -C '/usr/local/bin/aws_completer' aws
 
@@ -112,17 +112,11 @@ if [ "$DISTRO" = "ubuntu" ]; then
     cmd_fd='fdfind'
 fi
 
-# cmd_fzf='fzf'
-# if command -v tmux &> /dev/null
-# then
-#   cmd_fzf='fzf-tmux'
-# fi
-
 # ghq fzf
 function ghq-fzf() {
-    local src=$(ghq list | fzf --preview "${cmd_bat} --color=always --style=header,grid --line-range :80 $(ghq root)/{}/README.*")
+    local src=$(ghq list | fzf-tmux -p 80% --preview "${cmd_bat} --color=always --style=header,grid --line-range :80 $(ghq root)/{}/README.*")
     if [ -n "$src" ]; then
-        BUFFER="cd $(ghq root)/$src"
+        BUFFER="cd $(ghq root)/$src && tmux rename-window $(basename $src)"
         zle accept-line
     fi
     zle -R -c
@@ -131,9 +125,9 @@ zle -N ghq-fzf
 
 function ghq-updated-fzf() {
     local sorted=$(ghq list | python -c "import os; import sys; print(''.join(sorted(sys.stdin.readlines(), key=lambda path: os.stat(f'$(ghq root)/{path.strip()}').st_mtime, reverse=True)))")
-    local src=$(echo $sorted | fzf --preview "${cmd_bat} --color=always --style=header,grid --line-range :80 $(ghq root)/{}/README.*")
+    local src=$(echo $sorted | fzf-tmux -p 80% --preview "${cmd_bat} --color=always --style=header,grid --line-range :80 $(ghq root)/{}/README.*")
     if [ -n "$src" ]; then
-        BUFFER="cd $(ghq root)/$src"
+        BUFFER="cd $(ghq root)/$src && tmux rename-window $(basename $src)"
         zle accept-line
     fi
     zle -R -c
@@ -149,42 +143,16 @@ function git-status() {
 }
 zle -N git-status
 
-function fzf-open() {
-    local src=$(git ls-files | fzf --query "$LBUFFER" --prompt "edit>")
-    if [ -n "$src" ]; then
-        BUFFER="${EDITOR} $src"
-        zle accept-line
-    fi
-    zle -R -c
+# fzf-select-ghq-tmux
+function ghq-tmux() {
+  local selected_dir=$(ghq list -p | fzf-tmux -p 80% --reverse --query "$LBUFFER" --preview "${cmd_bat} --color=always --style=plain \$(find {} -maxdepth 1 | grep -i -e 'readme\(.\.*\)\?')")
+  if [ -n "$selected_dir" ]; then
+    local repo=$(basename ${selected_dir})
+    BUFFER="tmux neww -S -n $repo -c $selected_dir"
+    zle accept-line
+  fi
 }
-zle -N fzf-open
-
-# function tmux-tree() {
-#     tmux ls -F'#{session_id}:#{session_name}: #{T:tree_mode_format}' | while read -r s; do
-#         session_info=$(echo "$s" | cut -d ':' -f 1)
-#         session_name=$(echo "$s" | cut -d ':' -f 2)
-#         if [[ -n "$1" ]] && [[ "$1" == "$session_name" ]]; then
-#             echo -e "${ESC}[1;34m$session_info${ESC}[0m"
-#         else
-#             echo -e "${ESC}[1m$session_info${ESC}[0m"
-#         fi
-#         tmux lsw -t"$session_info" -F'[#{window_id}]#{T:tree_mode_format}' | while read -r w; do
-#             echo "  ﬌ $w"
-#         done
-#     done
-# }
-# 
-# zle -N tmux-tree
-# function tmux-fzf() {
-#     ESC='\033'
-#     tree = "${functions[tmux-tree]}"
-#     bat=${commands[bat]:-"batcat"}
-#     session=$(tmux list-sessions -F "#{session_name}" 2>/dev/null |
-#         fzf --exit-0 --preview="${tree} {} | ${bat} --theme TwoDark --style plain")
-#     echo "$session"
-# }
-# zle -N tmux-fzf
-# bindkey '^t' tmux-fzf
+zle -N ghq-tmux
 
 # yq
 yq() {
@@ -206,11 +174,14 @@ autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
 add-zsh-hook chpwd chpwd_recent_dirs
 
 # cdr の設定
+local cache_dir="$HOME/.cache/shell"
+local chpwd_recent_dirs="$cache_dir/chpwd-recent-dirs"
 zstyle ':completion:*' recent-dirs-insert both
 zstyle ':chpwd:*' recent-dirs-max 500
 zstyle ':chpwd:*' recent-dirs-default true
-zstyle ':chpwd:*' recent-dirs-file "$HOME/.cache/shell/chpwd-recent-dirs"
+zstyle ':chpwd:*' recent-dirs-file $chpwd_recent_dirs
 zstyle ':chpwd:*' recent-dirs-pushd true
+[ ! -e $chpwd_recent_dirs ] && mkdir -p $cache_dir; touch $chpwd_recent_dirs
 
 complete -o nospace -C /usr/bin/terraform terraform
 
@@ -221,32 +192,30 @@ bindkey -d
 bindkey -e
 # ghq
 bindkey '^g^g' ghq-fzf
-bindkey '^gg' ghq-fzf
-# ghq sorted
-bindkey '^g^h' ghq-updated-fzf
-bindkey '^gh' ghq-updated-fzf
+bindkey '^gg' ghq-updated-fzf
+bindkey '^g^t' ghq-tmux
+bindkey '^gt' ghq-tmux
 # git staths
 bindkey '^g^z' git-status
 bindkey '^gz' git-status
-bindkey '^f^f' fzf-open
-bindkey '^ff' fzf-open
 # util key
 bindkey '^[[H' beginning-of-line
 bindkey '^[[F' end-of-line
 bindkey '^[[3~' delete-char
 # zaw
 bindkey '^@' zaw-cdr
-bindkey '^R' zaw-history
-bindkey '^X^F' zaw-git-files
-bindkey '^X^B' zaw-git-branches
-bindkey '^X^P' zaw-process
-bindkey '^T' zaw-tmux
+bindkey '^r' zaw-history
+bindkey '^f^f' zaw-git-files
+bindkey '^ff' zaw-git-files
+bindkey '^f^b' zaw-git-branches
+bindkey '^fb' zaw-git-branches
+bindkey '^f^p' zaw-process
+bindkey '^fp' zaw-process
+bindkey '^t' zaw-tmux
 # }}}
 
 # tabtab source for packages
 # uninstall by removing these lines
 [[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
-
-export PATH="$HOME/.poetry/bin:$PATH"
 
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
