@@ -48,8 +48,8 @@ opt.pumblend = 5
 
 opt.belloff = 'all'
 
-opt.foldmethod = 'expr'
-opt.foldexpr = 'nvim_treesitter#foldexpr()'
+opt.foldmethod = 'marker'
+-- opt.foldexpr = 'nvim_treesitter#foldexpr()'
 
 -- Highlight {{{
 -- 特殊文字をわかりやすくする

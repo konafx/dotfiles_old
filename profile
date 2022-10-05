@@ -32,8 +32,7 @@ if [ -d "$HOME/.cargo" ] ; then
 fi
 
 if [ -f "$HOME/.cargo/env" ] ; then
-    source "$HOME/.cargo/env"
-fi
+    fi
 
 if command -v bat &> /dev/null
 then
@@ -43,3 +42,4 @@ fi
 export PATH="$HOME/.poetry/bin:$PATH"
 
 export EDITOR=/usr/bin/nvim
+. "$HOME/.cargo/env"
