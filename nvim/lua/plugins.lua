@@ -10,9 +10,10 @@ vim.cmd('packadd packer.nvim')
 packer.startup(function(use)
   use 'wbthomason/packer.nvim'
 
-  -- utility
+  -- utility {{{2
   -- use 'nvim-lua/plenary.nvim'
   -- use 'vim-denops/denops.vim'
+  -- 2}}}
 
   -- icon
   use 'kyazdani42/nvim-web-devicons'
@@ -120,6 +121,7 @@ packer.startup(function(use)
       vim.g.clever_f_not_overwrites_standard_mappings = 1
     end
   }
+  use 'hrsh7th/vim-searchx'
 
   -- fuzzy finder
   use {
@@ -134,6 +136,13 @@ packer.startup(function(use)
     requires = { 'vim-denops/denops.vim' },
     config = function()
       vim.g.fuzzy_motion_auto_jump = false
+      vim.keymap.set('n', '[motion]<Space>', '<Cmd>FuzzyMotion<CR>')
+    end
+  }
+  use {
+    'skanehira/jumpcursor.vim',
+    config = function()
+      vim.keymap.set('n', '[motion]j', '<Plug>(jumpcursor-jump)')
     end
   }
 
@@ -211,8 +220,20 @@ packer.startup(function(use)
 
   -- GitHub
   use {
+    'pwntester/octo.nvim',
+    requires = {
+      'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope.nvim',
+      'kyazdani42/nvim-web-devicons',
+    },
+    config = function()
+      require('octo').setup()
+    end
+  }
+  use {
     'skanehira/denops-gh.vim',
     requires = { 'vim-denops/denops.vim' },
+    disable = true,
   }
 
   -- CheatSheet
@@ -241,5 +262,6 @@ packer.startup(function(use)
 
   -- colorscheme
   use 'EdenEast/nightfox.nvim'
+  use 'arcticicestudio/nord-vim'
 end)
 -- }}}

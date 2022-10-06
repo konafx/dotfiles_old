@@ -57,3 +57,8 @@ keymap.set('n', '[tab]e', '<Cmd>tabedit<CR>', { silent = true })
 keymap.set('n', '[tab]c', '<Cmd>tabclose<CR>', { silent = true })
 keymap.set('n', '[tab]o', '<Cmd>tabonly<CR>', { silent = true })
 -- }}}
+
+-- [motion] {{{
+keymap.set('', '[motion]', '<Nop>')
+keymap.set('n', ']', '[motion]', { remap = true })
+-- }}}
