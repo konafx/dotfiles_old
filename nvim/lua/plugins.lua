@@ -4,14 +4,15 @@ if not ok then
   return
 end
 
+-- packer {{{
 vim.cmd('packadd packer.nvim')
 
 packer.startup(function(use)
   use 'wbthomason/packer.nvim'
 
   -- utility
-  use 'nvim-lua/plenary.nvim'
-  use 'vim-denops/denops.vim'
+  -- use 'nvim-lua/plenary.nvim'
+  -- use 'vim-denops/denops.vim'
 
   -- icon
   use 'kyazdani42/nvim-web-devicons'
@@ -19,30 +20,32 @@ packer.startup(function(use)
   -- ui
   use 'stevearc/dressing.nvim'
 
-  -- Fades inactive buffers
-  use 'TaDaa/vimade'
+  if vim.fn.has('python') == 1 or vim.fn.has('python3') then
+    -- fades inactive buffers
+    use 'tadaa/vimade'
+  end
 
-  -- Filer
+  -- filer
   use 'lambdalisue/fern.vim'
   use 'lambdalisue/nerdfont.vim'
   use 'lambdalisue/fern-renderer-nerdfont.vim'
 
-  -- LSP manager
+  -- lsp manager
   use {
     'williamboman/mason.nvim',
     config = function() require('mason').setup() end,
   }
   use {
     'williamboman/mason-lspconfig.nvim',
-    requires = { 'williamboman/mason.nvim',
-
+    requires = {
+      'williamboman/mason.nvim',
       'hrsh7th/nvim-cmp',
       'neovim/nvim-lspconfig'
     },
     -- after = { 'mason.nvim', 'nvim-cmp', 'nvim-lspconfig' },
     config = function() require('mason-lspconfig').setup() end,
   }
-  -- LSP
+  -- lsp
   use 'neovim/nvim-lspconfig'
   -- pictogram
   use 'onsails/lspkind.nvim'
@@ -50,29 +53,29 @@ packer.startup(function(use)
   use 'kkharji/lspsaga.nvim'
 
   -- snippet engine
-  use 'L3MON4D3/LuaSnip'
+  use 'l3mon4d3/luasnip'
   use 'rafamadriz/friendly-snippets'
   use 'saadparwaiz1/cmp_luasnip'
   -- complete
   use {
     'hrsh7th/nvim-cmp',
-    requires = { 'L3MON4D3/LuaSnip' }
+    requires = { 'l3mon4d3/luasnip' }
   }
   use { 'hrsh7th/cmp-nvim-lsp' }
   use { 'hrsh7th/cmp-buffer' }
   use { 'hrsh7th/cmp-path' }
   use { 'hrsh7th/cmp-cmdline' }
 
-  -- Linter
+  -- linter
   use 'jose-elias-alvarez/null-ls.nvim'
 
   -- treesitter
   use {
     'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate'
+    run = ':tsupdate'
   }
 
-  -- Autotag
+  -- autotag
   use {
     'windwp/nvim-ts-autotag',
     config = function() require('nvim-ts-autotag').setup() end
@@ -81,7 +84,7 @@ packer.startup(function(use)
     'windwp/nvim-autopairs',
     config = function()
       require('nvim-autopairs').setup({
-        disable_filetype = { 'TelescopePrompt', 'vim', 'fern' }
+        disable_filetype = { 'telescopeprompt', 'vim', 'fern' }
       })
     end
   }
@@ -93,7 +96,7 @@ packer.startup(function(use)
   -- small implement lexima
   use 'mattn/vim-lexiv'
 
-  -- Operator
+  -- operator
   use 'kana/vim-operator-user'
   use {
     'kana/vim-operator-replace',
@@ -104,11 +107,11 @@ packer.startup(function(use)
     requires = 'kana/vim-operator-user',
   }
 
-  -- Comment
+  -- comment
   -- use 'tyru/caw.vim'
   use 'tpope/vim-commentary'
 
-  -- Search
+  -- search
   -- " e.g.) maekawa -> 前川
   use 'osyo-manga/vim-vigemo'
   use {
@@ -206,6 +209,37 @@ packer.startup(function(use)
     requires = 'mattn/webapi-vim'
   }
 
+  -- GitHub
+  use {
+    'skanehira/denops-gh.vim',
+    requires = { 'vim-denops/denops.vim' },
+  }
+
+  -- CheatSheet
+  use {
+    'reireias/vim-cheatsheet',
+    config = function()
+      vim.g['cheatsheet#cheat_file'] = '~/.config/nvim/cheatsheet.md'
+      vim.g['cheatsheet#float_window'] = 1
+      vim.g['cheatsheet#float_window_width_ratio'] = 0.8
+      vim.g['cheatsheet#float_window_height_ratio'] = 0.9
+      vim.api.nvim_create_user_command('CheatEdit', 'edit ~/.config/nvim/cheatsheet.md', {})
+      vim.keymap.set('n', '<leader>?', '<Cmd>Cheat<CR>', {})
+    end
+  }
+  -- Lua
+  use {
+    'folke/which-key.nvim',
+    config = function()
+      require("which-key").setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      }
+    end
+  }
+
   -- colorscheme
   use 'EdenEast/nightfox.nvim'
 end)
+-- }}}

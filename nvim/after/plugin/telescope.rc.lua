@@ -61,6 +61,9 @@ vim.keymap.set('n', '[telescope]f',
       hidden = true
     })
   end)
+vim.keymap.set('n', '[telescope]F', function()
+  builtin.builtin()
+end)
 vim.keymap.set('n', '[telescope]g', function()
   builtin.live_grep()
 end)

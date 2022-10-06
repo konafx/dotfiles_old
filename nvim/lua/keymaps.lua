@@ -12,11 +12,12 @@ keymap.set('v', '<', '<gv')
 keymap.set('v', '>', '>gv')
 keymap.set('v', '=', '=gv')
 
--- `*`検索の初回移動無効
+-- `*`検索の初回移動無効{{{
 keymap.set('n', '*', function()
   return vim.v.count >= 1 and '*'
       or [[<Cmd>sil exe "keepj norm! *" <Bar> call winrestview(]] .. vim.fn.string(vim.fn.winsaveview()) .. ')<CR>'
 end, { silent = true, expr = true })
+-- }}}
 
 -- save
 keymap.set('n', '<Leader>w', '<Cmd>w<CR>', { silent = true })
@@ -24,7 +25,7 @@ keymap.set('n', '<Leader>w', '<Cmd>w<CR>', { silent = true })
 -- clear hylight
 keymap.set('n', '<Esc><Esc>', '<Cmd>nohlsearch<CR>', { noremap = false })
 
--- Make inputting a character by code easily.
+-- Make inputting a character by code easily.{{{
 keymap.set('i',
   '<Plug>(vimrc-input-char-by-code)',
   [[<C-r>=nr2char(eval(input('char? ', '0x')))<CR>]],
@@ -33,8 +34,9 @@ keymap.set('i',
 keymap.set('i', '<C-v>x', '<Plug>(vimrc-input-char-by-code)', { noremap = false })
 keymap.set('i', '<C-v>u', '<Plug>(vimrc-input-char-by-code)', { noremap = false })
 keymap.set('i', '<C-v>U', '<Plug>(vimrc-input-char-by-code)', { noremap = false })
+-- }}}
 
--- Toggle quickfix window
+-- Toggle quickfix window {{{
 keymap.set('n', '<Leader>q', function()
   local nr = vim.fn.winnr('$')
   vim.cmd('cwindow')
@@ -43,6 +45,7 @@ keymap.set('n', '<Leader>q', function()
     vim.cmd('cclose')
   end
 end, { silent = true })
+-- }}}
 
 -- [tab] {{{
 keymap.set('', '[tab]', '<Nop>')
