@@ -12,7 +12,7 @@ null_ls.setup({
     --     return utils.root_has_file({".rubocop.yml"})
     --   end
     -- }),
-    null_ls.builtins.diagnostics.eslint,
+    -- null_ls.builtins.diagnostics.eslint,
     null_ls.builtins.formatting.prettier.with {
       condition = function(utils)
         return utils.has_file { '.prettierrc', '.prettierrc.js', '.prettierrc.yaml' }
