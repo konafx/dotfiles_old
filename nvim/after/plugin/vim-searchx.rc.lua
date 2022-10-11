@@ -1,7 +1,7 @@
 -- Overwrite / and ?.
 vim.keymap.set({ 'n', 'x' }, '?', [[<Cmd>call searchx#start({ 'dir': 0 })<CR>]])
 vim.keymap.set({ 'n', 'x' }, '/', [[<Cmd>call searchx#start({ 'dir': 1 })<CR>]])
-vim.keymap.set('c', ';', '<Cmd>call searchx#select()<CR>')
+-- vim.keymap.set('c', ';', '<Cmd>call searchx#select()<CR>')
 
 -- Move to next/prev match.
 vim.keymap.set({ 'n', 'x' }, 'N', '<Cmd>call searchx#prev_dir()<CR>')

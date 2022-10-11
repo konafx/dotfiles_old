@@ -4,7 +4,7 @@ vim.scriptencoding = 'utf-8'
 vim.opt.encoding = 'utf-8'
 vim.opt.fileencoding = 'utf-8'
 
-local disable_plugins = {
+local disable_plugins = { -- {{{
   -- Disable TOhtml.
   'loaded_2html_plugin',
 
@@ -42,7 +42,7 @@ local disable_plugins = {
   'did_indent_on',
   'did_load_ftplugin',
   'loaded_rrhelper',
-}
+} -- }}}
 
 for _, name in pairs(disable_plugins) do
   vim.g[name] = 1
