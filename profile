@@ -42,4 +42,6 @@ fi
 export PATH="$HOME/.poetry/bin:$PATH"
 
 export EDITOR=/usr/bin/nvim
-. "$HOME/.cargo/env"
+#. "$HOME/.cargo/env"
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
