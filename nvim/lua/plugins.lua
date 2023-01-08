@@ -73,7 +73,7 @@ packer.startup(function(use)
   -- treesitter
   use {
     'nvim-treesitter/nvim-treesitter',
-    run = ':tsupdate'
+    run = ':TSUpdate'
   }
 
   -- autotag
