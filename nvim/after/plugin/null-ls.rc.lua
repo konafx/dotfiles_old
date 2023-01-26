@@ -1,6 +1,6 @@
-local ok, null_ls = pcall(require, "null-ls")
+local ok, null_ls = pcall(require, 'null-ls')
 if not ok then
-	print("null-ls is not installed")
+	print('null-ls is not installed')
 	return
 end
 
@@ -17,9 +17,9 @@ null_ls.setup({
 		-- null_ls.builtins.diagnostics.eslint,
 		null_ls.builtins.formatting.prettier.with({
 			condition = function(utils)
-				return utils.has_file({ ".prettierrc", ".prettierrc.js", ".prettierrc.yaml" })
+				return utils.has_file({ '.prettierrc', '.prettierrc.js', '.prettierrc.yaml' })
 			end,
-			prefer_local = "node_modules/.bin",
+			prefer_local = 'node_modules/.bin',
 		}),
 		-- null_ls.builtins.diagnostics.luacheck.with({
 		--   extra_args = {'--globals', 'vim', '--globals', 'awesome'},

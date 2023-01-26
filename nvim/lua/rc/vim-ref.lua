@@ -1,4 +1,4 @@
-vim.cmd [[
+vim.cmd([[
 let g:ref_source_webdict_sites = {
 \   'wikipedia': {
 \     'url': 'http://ja.wikipedia.org/wiki/%s'
@@ -10,4 +10,4 @@ let g:ref_source_webdict_sites = {
 function! g:ref_source_webdict_sites.weblio.filter(output)
   return join(split(a:output, "\n")[18 :], "\n")
 endfunction
-]]
+]])

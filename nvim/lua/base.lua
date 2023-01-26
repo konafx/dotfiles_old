@@ -38,8 +38,8 @@ opt.breakindent = true
 opt.tabstop = 2
 opt.wrap = false -- No Wrap lines
 opt.backspace = { 'start', 'eol', 'indent' }
-opt.path:append { '**' } -- Finding files - Search down into subfolders
-opt.wildignore:append { '*/node_modules/*' }
+opt.path:append({ '**' }) -- Finding files - Search down into subfolders
+opt.wildignore:append({ '*/node_modules/*' })
 opt.cursorline = true
 opt.termguicolors = true
 opt.winblend = 0
@@ -74,20 +74,20 @@ opt.wildmode = 'list:longest'
 
 -- Undercurl
 local cmd = vim.cmd
-cmd [[let &t_Cs = "\e[4:3m"]]
-cmd [[let &t_Ce = "\e[4:0m"]]
+cmd([[let &t_Cs = "\e[4:3m"]])
+cmd([[let &t_Ce = "\e[4:0m"]])
 
 -- Suppress autoindent pasting clipboard
 vim.keymap.set('n', '<F10>', [[<C-u>exe "normal" (getline(".")==""?"I":"o")<CR>i<C-o>:set paste<CR>]], {})
 vim.api.nvim_create_autocmd('InsertLeave', {
-  pattern = '*',
-  callback = function()
-    vim.opt.paste = false
-  end
+	pattern = '*',
+	callback = function()
+		vim.opt.paste = false
+	end,
 })
 
 -- Add asterisks in block comments
-opt.formatoptions:append { 'r' }
+opt.formatoptions:append({ 'r' })
 
 -- mapleader
 local g = vim.g
@@ -95,4 +95,4 @@ g.mapleader = ','
 
 -- colorscheme
 opt.background = 'dark'
-cmd [[colorscheme nightfox]]
+cmd([[colorscheme nightfox]])
