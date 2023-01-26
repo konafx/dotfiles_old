@@ -3,10 +3,15 @@
     - `Ctrl-W`: delete word (back cursor)
 - In CommandLine mode
     - `Ctrl-R` + `register`: paster resigter
-- `,␣`: **FuzzyMotion**
+- `]␣`: **FuzzyMotion**
 
 ## memo
 - `zo`, `zO`: opening the fold
+
+## new plugins [2023/01/26]
+- `<C-a>`,`<C-x>`強化: `monaqa/dial.nvim`
+- overviewer `stevearc/aerial.nvim` `:AerialOpen`
+- `thinca/vim-partedit` `:<range>Partedit`
 
 ## cmp
 - `<C-l>`: complete

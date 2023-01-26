@@ -76,6 +76,12 @@ packer.startup(function(use)
     run = ':TSUpdate'
   }
 
+  -- overview
+  use {
+    'stevearc/aerial.nvim',
+    config = function() require('aerial').setup() end
+  }
+
   -- autotag
   use {
     'windwp/nvim-ts-autotag',
@@ -115,6 +121,31 @@ packer.startup(function(use)
   -- comment
   -- use 'tyru/caw.vim'
   use 'tpope/vim-commentary'
+
+  -- dial, cycle
+  use {
+    'monaqa/dial.nvim',
+    config = function()
+      -- override keymap
+      local dialmap = require('dial.map')
+      vim.keymap.set('n', '<C-a>', dialmap.inc_normal(), {noremap = true})
+      vim.keymap.set('n', '<C-x>', dialmap.dec_normal(), {noremap = true})
+      vim.keymap.set('v', '<C-a>', dialmap.inc_visual(), {noremap = true})
+      vim.keymap.set('v', '<C-x>', dialmap.dec_visual(), {noremap = true})
+      vim.keymap.set('v', 'g<C-a>',dialmap.inc_gvisual(), {noremap = true})
+      vim.keymap.set('v', 'g<C-x>',dialmap.dec_gvisual(), {noremap = true})
+
+      local augend = require('dial.augend')
+      require("dial.config").augends:register_group{
+        -- default augends used when no group name is specified
+        default = {
+          augend.integer.alias.decimal,   -- nonnegative decimal number (0, 1, 2, 3, ...)
+          augend.integer.alias.hex,       -- nonnegative hex number  (0x01, 0x1a1f, etc.)
+          augend.date.alias["%Y/%m/%d"],  -- date (2022/02/19, etc.)
+        },
+      }
+    end
+  }
 
   -- search
   -- " e.g.) maekawa -> 前川
@@ -185,6 +216,10 @@ packer.startup(function(use)
       vim.g.buffergator_viewport_split_policy = "N"
     end
   }
+
+  -- 一部切り抜いて編集
+  use 'thinca/vim-partedit'
+
 
   use {
     'bkad/CamelCaseMotion',
@@ -257,6 +292,7 @@ packer.startup(function(use)
     'folke/which-key.nvim',
     config = function()
       require("which-key").setup {
+        -- [TODO]
         -- your configuration comes here
         -- or leave it empty to use the default settings
         -- refer to the configuration section below
