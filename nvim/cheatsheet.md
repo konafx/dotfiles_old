@@ -5,6 +5,9 @@
     - `Ctrl-R` + `register`: paster resigter
 - `,␣`: **FuzzyMotion**
 
+## memo
+- `zo`, `zO`: opening the fold
+
 ## cmp
 - `<C-l>`: complete
 - `<C-e>`: close
@@ -17,3 +20,5 @@
 - `,fF`: **telescope** builtin
 - `sf`: file browser
 
+## quickfix
+- `:lua vim.diagnostic.setqflist()`

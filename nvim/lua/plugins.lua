@@ -107,6 +107,10 @@ packer.startup(function(use)
     'rhysd/vim-operator-surround',
     requires = 'kana/vim-operator-user',
   }
+  use {
+    'mopp/vim-operator-convert-case',
+    requires = 'kana/vim-operator-user',
+  }
 
   -- comment
   -- use 'tyru/caw.vim'
@@ -233,7 +237,7 @@ packer.startup(function(use)
   use {
     'skanehira/denops-gh.vim',
     requires = { 'vim-denops/denops.vim' },
-    disable = true,
+    -- disable = true,
   }
 
   -- CheatSheet

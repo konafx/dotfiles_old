@@ -86,8 +86,12 @@ vim.keymap.set("n", "sf", function()
     respect_gitignore = false,
     hidden = true,
     grouped = true,
-    previewer = false,
-    initial_mode = "normal",
-    layout_config = { height = 40 }
+    layout_strategy = 'horizontal',
+    collapse_dirs = true,
+    layout_config = {
+      prompt_position = 'top',
+      height = 0.85,
+      width = 0.85
+    }
   })
 end)
