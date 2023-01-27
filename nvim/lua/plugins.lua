@@ -7,37 +7,37 @@ end
 vim.cmd('packadd packer.nvim')
 
 packer.startup(function(use)
-	use('wbthomason/packer.nvim')
+	use 'wbthomason/packer.nvim'
 
 	-- utility {{{2
-	-- use 'nvim-lua/plenary.nvim'
+	-- use 'nvim-lua/plenary.nvim
 	-- use 'vim-denops/denops.vim'
 	-- 2}}}
 
 	-- icon
-	use('kyazdani42/nvim-web-devicons')
+	use 'kyazdani42/nvim-web-devicons'
 
 	-- ui
-	use('stevearc/dressing.nvim')
+	use 'stevearc/dressing.nvim'
 
 	if vim.fn.has('python') == 1 or vim.fn.has('python3') then
 		-- fades inactive buffers
-		use('tadaa/vimade')
+		use 'tadaa/vimade'
 	end
 
-	-- filer
-	use('lambdalisue/fern.vim')
-	use('lambdalisue/nerdfont.vim')
-	use('lambdalisue/fern-renderer-nerdfont.vim')
+	-- filter
+	use 'lambdalisue/fern.vim'
+	use 'lambdalisue/nerdfont.vim'
+	use 'lambdalisue/fern-renderer-nerdfont.vim'
 
 	-- lsp manager
-	use({
+	use {
 		'williamboman/mason.nvim',
 		config = function()
 			require('mason').setup()
 		end,
-	})
-	use({
+	}
+	use {
 		'williamboman/mason-lspconfig.nvim',
 		requires = {
 			'williamboman/mason.nvim',
@@ -48,32 +48,33 @@ packer.startup(function(use)
 		config = function()
 			require('mason-lspconfig').setup()
 		end,
-	})
+	}
 	-- lsp
-	use('neovim/nvim-lspconfig')
+	use 'neovim/nvim-lspconfig'
 	-- pictogram
-	use('onsails/lspkind.nvim')
+	use 'onsails/lspkind.nvim'
 	-- rich lsp
-	use('kkharji/lspsaga.nvim')
+	use 'kkharji/lspsaga.nvim'
 
 	-- snippet engine
-	use('l3mon4d3/luasnip')
-	use('rafamadriz/friendly-snippets')
-	use('saadparwaiz1/cmp_luasnip')
+	use 'l3mon4d3/luasnip'
+	use 'rafamadriz/friendly-snippets'
+	use 'saadparwaiz1/cmp_luasnip'
 	-- complete
-	use({
+	use {
 		'hrsh7th/nvim-cmp',
 		requires = { 'l3mon4d3/luasnip' },
-	})
-	use({ 'hrsh7th/cmp-nvim-lsp' })
-	use({ 'hrsh7th/cmp-buffer' })
-	use({ 'hrsh7th/cmp-path' })
-	use({ 'hrsh7th/cmp-cmdline' })
+	}
+
+	use 'hrsh7th/cmp-nvim-lsp'
+  use 'hrsh7th/cmp-buffer'
+  use 'hrsh7th/cmp-path'
+  use 'hrsh7th/cmp-cmdline'
 
 	-- linter formatter
-	use('jose-elias-alvarez/null-ls.nvim')
+	use 'jose-elias-alvarez/null-ls.nvim'
 
-	use({
+	use {
 		'jay-babu/mason-null-ls.nvim',
 		after = {
 			'mason.nvim',
@@ -86,74 +87,74 @@ packer.startup(function(use)
 				automatic_setup = true,
 			})
 		end,
-	})
+	}
 
-	use({
+	use {
 		'folke/trouble.nvim',
 		requires = 'nvim-tree/nvim-web-devicons',
 		config = function()
 			require('trouble').setup({})
 		end,
-	})
+	}
 
 	-- treesitter
-	use({
+	use {
 		'nvim-treesitter/nvim-treesitter',
 		run = ':TSUpdate',
-	})
+	}
 
 	-- overview
-	use({
+	use {
 		'stevearc/aerial.nvim',
 		config = function()
 			require('aerial').setup()
 		end,
-	})
+	}
 
 	-- autotag
-	use({
+	use {
 		'windwp/nvim-ts-autotag',
 		config = function()
 			require('nvim-ts-autotag').setup()
 		end,
-	})
-	use({
+	}
+	use {
 		'windwp/nvim-autopairs',
 		config = function()
 			require('nvim-autopairs').setup({
 				disable_filetype = { 'telescopeprompt', 'vim', 'fern' },
 			})
 		end,
-	})
+	}
 	-- auto closer
-	use({
+	use {
 		'cohama/lexima.vim',
 		disable = true,
-	})
+	}
 	-- small implement lexima
-	use('mattn/vim-lexiv')
+	use 'mattn/vim-lexiv'
 
 	-- operator
-	use('kana/vim-operator-user')
-	use({
-		'kana/vim-operator-replace',
+	use 'kana/vim-operator-user'
+	use {
+    'kana/vim-operator-replace',
 		requires = 'kana/vim-operator-user',
-	})
-	use({
-		'rhysd/vim-operator-surround',
+	}
+	use {
+    'rhysd/vim-operator-surround',
 		requires = 'kana/vim-operator-user',
-	})
-	use({
-		'mopp/vim-operator-convert-case',
+	}
+	use {
+    'mopp/vim-operator-convert-case',
 		requires = 'kana/vim-operator-user',
-	})
+	}
 
 	-- comment
 	-- use 'tyru/caw.vim'
-	use('tpope/vim-commentary')
+	use 'tpope/vim-commentary'
 
 	-- dial, cycle
-	use({
+	use {
 		'monaqa/dial.nvim',
 		config = function()
 			-- override keymap
@@ -175,119 +176,119 @@ packer.startup(function(use)
 				},
 			})
 		end,
-	})
+	}
 
 	-- search
 	-- " e.g.) maekawa -> 前川
-	use('osyo-manga/vim-vigemo')
-	use({
+	use 'osyo-manga/vim-vigemo'
+	use {
 		'rhysd/clever-f.vim',
 		config = function()
 			vim.g.clever_f_not_overwrites_standard_mappings = 1
 		end,
-	})
-	use('hrsh7th/vim-searchx')
+	}
+	use 'hrsh7th/vim-searchx'
 
 	-- fuzzy finder
-	use({
+	use {
 		'nvim-telescope/telescope.nvim',
 		requires = { 'nvim-lua/plenary.nvim' },
-	})
-	use('nvim-telescope/telescope-file-browser.nvim')
+	}
+	use 'nvim-telescope/telescope-file-browser.nvim'
 
 	-- easy motions
-	use({
+	use {
 		'yuki-yano/fuzzy-motion.vim',
 		requires = { 'vim-denops/denops.vim' },
 		config = function()
 			vim.g.fuzzy_motion_auto_jump = false
 			vim.keymap.set('n', '[motion]<Space>', '<Cmd>FuzzyMotion<CR>')
 		end,
-	})
-	use({
+	}
+	use {
 		'skanehira/jumpcursor.vim',
 		config = function()
 			vim.keymap.set('n', '[motion]j', '<Plug>(jumpcursor-jump)')
 		end,
-	})
+	}
 
 	-- statusline
-	use({
+	use {
 		'nvim-lualine/lualine.nvim',
 		requires = { 'kyazdani42/nvim-web-devicons' },
-	})
+	}
 
 	-- git plugins
-	use({
+	use {
 		'TimUntersberger/neogit',
 		requires = { 'nvim-lua/plenary.nvim', 'sindrets/diffview.nvim' },
-	})
-	use({
+	}
+	use {
 		'sindrets/diffview.nvim',
 		requires = 'nvim-lua/plenary.nvim',
-	})
-	use({
+	}
+	use {
 		'lambdalisue/gina.vim',
 		opt = true,
 		cmd = { 'Gina' },
-	})
-	use({
+	}
+	use {
 		'lewis6991/gitsigns.nvim',
 		config = function()
 			require('rc/gitsigns')
 		end,
-	})
+	}
 
 	-- buffers
-	use({
+	use {
 		'jeetsukumaran/vim-buffergator',
 		config = function()
 			vim.g.buffergator_suppress_keymaps = 1
 			vim.g.buffergator_viewport_split_policy = 'N'
 		end,
-	})
+	}
 
 	-- 一部切り抜いて編集
-	use('thinca/vim-partedit')
+	use 'thinca/vim-partedit'
 
-	use({
+	use {
 		'bkad/CamelCaseMotion',
 		config = function()
 			vim.g.camelcasemotion_key = '<Space>'
 		end,
-	})
+	}
 
 	-- Markdown
-	use({
+	use {
 		'iamcco/markdown-preview.nvim',
 		run = 'cd app && yarn install',
 		-- { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug'] }
-	})
+	}
 
 	-- 翻訳
-	use({
+	use {
 		'skanehira/denops-translate.vim',
 		requires = { 'vim-denops/denops.vim' },
-	})
+	}
 
-	use('thinca/vim-quickrun')
+	use 'thinca/vim-quickrun'
 
 	-- 辞書
-	use({
+	use {
 		'thinca/vim-ref',
 		config = function()
 			require('rc/vim-ref')
 		end,
-	})
+	}
 
 	-- Gist
-	use({
+	use {
 		'mattn/vim-gist',
 		requires = 'mattn/webapi-vim',
-	})
+	}
 
 	-- GitHub
-	use({
+	use {
 		'pwntester/octo.nvim',
 		requires = {
 			'nvim-lua/plenary.nvim',
@@ -297,15 +298,15 @@ packer.startup(function(use)
 		config = function()
 			require('octo').setup()
 		end,
-	})
-	use({
+	}
+	use {
 		'skanehira/denops-gh.vim',
 		requires = { 'vim-denops/denops.vim' },
 		-- disable = true,
-	})
+	}
 
 	-- CheatSheet
-	use({
+	use {
 		'reireias/vim-cheatsheet',
 		config = function()
 			vim.g['cheatsheet#cheat_file'] = '~/.config/nvim/cheatsheet.md'
@@ -315,9 +316,9 @@ packer.startup(function(use)
 			vim.api.nvim_create_user_command('CheatEdit', 'edit ~/.config/nvim/cheatsheet.md', {})
 			vim.keymap.set('n', '<leader>?', '<Cmd>Cheat<CR>', {})
 		end,
-	})
+	}
 	-- Lua
-	use({
+	use {
 		'folke/which-key.nvim',
 		config = function()
       vim.opt.timeout = true
@@ -328,11 +329,11 @@ packer.startup(function(use)
 				-- refer to the configuration section below
 			})
 		end,
-	})
+	}
 
 	-- colorscheme
-	use('EdenEast/nightfox.nvim')
-	use('arcticicestudio/nord-vim')
+	use 'EdenEast/nightfox.nvim'
+	use 'arcticicestudio/nord-vim'
   use 'Yazeed1s/oh-lucy.nvim'
   use 'sainnhe/gruvbox-material'
   use 'AlexvZyl/nordic.nvim'
