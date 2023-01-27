@@ -44,7 +44,7 @@ packer.startup(function(use)
 			'hrsh7th/nvim-cmp',
 			'neovim/nvim-lspconfig',
 		},
-		-- after = { 'mason.nvim', 'nvim-cmp', 'nvim-lspconfig' },
+		wants = { 'mason.nvim', 'nvim-cmp', 'nvim-lspconfig' },
 		config = function()
 			require('mason-lspconfig').setup()
 		end,
@@ -64,6 +64,7 @@ packer.startup(function(use)
 	use {
 		'hrsh7th/nvim-cmp',
 		requires = { 'l3mon4d3/luasnip' },
+    wants = { 'luasnip' }
 	}
 
 	use 'hrsh7th/cmp-nvim-lsp'
@@ -76,10 +77,7 @@ packer.startup(function(use)
 
 	use {
 		'jay-babu/mason-null-ls.nvim',
-		after = {
-			'mason.nvim',
-			'null-ls.nvim',
-		},
+		wants = { 'mason.nvim', 'null-ls.nvim' },
 		config = function()
 			require('mason-null-ls').setup({
 				ensure_installed = { 'prettier', 'stylua' },
@@ -91,7 +89,7 @@ packer.startup(function(use)
 
 	use {
 		'folke/trouble.nvim',
-		requires = 'nvim-tree/nvim-web-devicons',
+		requires = { 'nvim-tree/nvim-web-devicons' },
 		config = function()
 			require('trouble').setup({})
 		end,
@@ -139,14 +137,17 @@ packer.startup(function(use)
 	use {
     'kana/vim-operator-replace',
 		requires = 'kana/vim-operator-user',
+    wants = 'vim-operator-user'
 	}
 	use {
     'rhysd/vim-operator-surround',
 		requires = 'kana/vim-operator-user',
+    wants = 'vim-operator-user'
 	}
 	use {
     'mopp/vim-operator-convert-case',
 		requires = 'kana/vim-operator-user',
+    wants = 'vim-operator-user'
 	}
 
 	-- comment
@@ -200,6 +201,7 @@ packer.startup(function(use)
 	use {
 		'yuki-yano/fuzzy-motion.vim',
 		requires = { 'vim-denops/denops.vim' },
+    wants = { 'denops.vim' },
 		config = function()
 			vim.g.fuzzy_motion_auto_jump = false
 			vim.keymap.set('n', '[motion]<Space>', '<Cmd>FuzzyMotion<CR>')
@@ -222,10 +224,12 @@ packer.startup(function(use)
 	use {
 		'TimUntersberger/neogit',
 		requires = { 'nvim-lua/plenary.nvim', 'sindrets/diffview.nvim' },
+    wants = { 'plenary.nvim', 'diffview.nvim' }
 	}
 	use {
 		'sindrets/diffview.nvim',
 		requires = 'nvim-lua/plenary.nvim',
+    wants = { 'plenary.nvim' }
 	}
 	use {
 		'lambdalisue/gina.vim',
@@ -262,6 +266,11 @@ packer.startup(function(use)
 	use {
 		'iamcco/markdown-preview.nvim',
 		run = 'cd app && yarn install',
+    setup = function()
+      vim.g.mkdp_filetypes = { "markdown" }
+    end,
+    ft = { "markdown" },
+    opt = true,
 		-- { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug'] }
 	}
 
@@ -269,6 +278,7 @@ packer.startup(function(use)
 	use {
 		'skanehira/denops-translate.vim',
 		requires = { 'vim-denops/denops.vim' },
+    wants = { 'denops.vim' }
 	}
 
 	use 'thinca/vim-quickrun'
@@ -285,6 +295,9 @@ packer.startup(function(use)
 	use {
 		'mattn/vim-gist',
 		requires = 'mattn/webapi-vim',
+    wants = { 'webapi-vim' },
+    cmd = { 'Gist' },
+    opt = true,
 	}
 
 	-- GitHub
@@ -302,6 +315,7 @@ packer.startup(function(use)
 	use {
 		'skanehira/denops-gh.vim',
 		requires = { 'vim-denops/denops.vim' },
+    wants = { 'denops.vim' }
 		-- disable = true,
 	}
 
@@ -316,6 +330,8 @@ packer.startup(function(use)
 			vim.api.nvim_create_user_command('CheatEdit', 'edit ~/.config/nvim/cheatsheet.md', {})
 			vim.keymap.set('n', '<leader>?', '<Cmd>Cheat<CR>', {})
 		end,
+    cmd = { 'Cheat', 'CheatEdit' },
+    opt = true,
 	}
 	-- Lua
 	use {
