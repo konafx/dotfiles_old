@@ -6,6 +6,7 @@ vim.api.nvim_create_autocmd('filetype', {
 	pattern = 'fern',
 	callback = function()
 		vim.opt_local.number = false
+		vim.opt_local.relativenumber  = false
 	end,
 })
 

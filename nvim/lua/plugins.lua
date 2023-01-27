@@ -4,7 +4,6 @@ if not ok then
 	return
 end
 
--- packer {{{
 vim.cmd('packadd packer.nvim')
 
 packer.startup(function(use)
@@ -321,8 +320,9 @@ packer.startup(function(use)
 	use({
 		'folke/which-key.nvim',
 		config = function()
+      vim.opt.timeout = true
+      vim.opt.timeoutlen = 300
 			require('which-key').setup({
-				-- [TODO]
 				-- your configuration comes here
 				-- or leave it empty to use the default settings
 				-- refer to the configuration section below
@@ -333,5 +333,8 @@ packer.startup(function(use)
 	-- colorscheme
 	use('EdenEast/nightfox.nvim')
 	use('arcticicestudio/nord-vim')
+  use 'Yazeed1s/oh-lucy.nvim'
+  use 'sainnhe/gruvbox-material'
+  use 'AlexvZyl/nordic.nvim'
+  use 'RRethy/nvim-base16'
 end)
--- }}}

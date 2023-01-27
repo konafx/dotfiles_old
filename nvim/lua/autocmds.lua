@@ -34,11 +34,11 @@ if vim.env.TRANSPARENT_TERM == '1' then
 		group = vim.api.nvim_create_augroup('TransparentBackground', {}),
 		pattern = '*',
 		callback = function()
-			vim.api.nvim_set_hl(0, 'Normal', { ctermbg = 'NONE' })
-			vim.api.nvim_set_hl(0, 'NonText', { ctermbg = 'NONE' })
-			vim.api.nvim_set_hl(0, 'LineNr', { ctermbg = 'NONE' })
-			vim.api.nvim_set_hl(0, 'Folded', { ctermbg = 'NONE' })
-			vim.api.nvim_set_hl(0, 'EndOfBuffer', { ctermbg = 'NONE' })
+			vim.api.nvim_set_hl(0, 'Normal', { ctermbg = 'NONE', guibg = 'NONE' })
+			vim.api.nvim_set_hl(0, 'NonText', { ctermbg = 'NONE', guibg = 'NONE' })
+			vim.api.nvim_set_hl(0, 'LineNr', { ctermbg = 'NONE', guibg = 'NONE' })
+			vim.api.nvim_set_hl(0, 'Folded', { ctermbg = 'NONE', guibg = 'NONE' })
+			vim.api.nvim_set_hl(0, 'EndOfBuffer', { ctermbg = 'NONE', guibg = 'NONE' })
 		end,
 	})
 end -- }}}
