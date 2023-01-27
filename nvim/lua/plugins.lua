@@ -331,6 +331,15 @@ packer.startup(function(use)
 		end,
 	}
 
+  -- sl
+  use {
+    'eandrju/cellular-automaton.nvim',
+    opt = true,
+    cmd = {
+      'CellularAutomaton'
+    }
+  }
+
 	-- colorscheme
 	use 'EdenEast/nightfox.nvim'
 	use 'arcticicestudio/nord-vim'

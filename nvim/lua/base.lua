@@ -96,4 +96,4 @@ g.mapleader = ','
 
 -- colorscheme
 opt.background = 'dark'
-cmd([[colorscheme oh-lucy]])
+cmd([[colorscheme nordic]])
