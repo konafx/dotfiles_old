@@ -57,8 +57,8 @@ opt.foldmethod = 'marker'
 opt.list = true
 opt.listchars = [[tab:▸-,trail:-,extends:»,precedes:«]]
 -- ↑の付随: Grey rbg(95, 95, 135)にする
--- vim.api.nvim_set_hl(0, 'NonText', { ctermfg = 59 })
--- vim.api.nvim_set_hl(0, 'SpecialKey', { ctermfg = 59 })
+vim.api.nvim_set_hl(0, 'NonText', { ctermfg = 59 })
+vim.api.nvim_set_hl(0, 'SpecialKey', { ctermfg = 59 })
 -- hi.create: https://www.reddit.com/r/neovim/comments/me35u9/comment/gsgfcya/?utm_source=reddit&utm_medium=web2x&context=3
 -- }}}
 
@@ -93,7 +93,3 @@ opt.formatoptions:append({ 'r' })
 -- mapleader
 local g = vim.g
 g.mapleader = ','
-
--- colorscheme
-opt.background = 'dark'
-cmd([[colorscheme nordic]])

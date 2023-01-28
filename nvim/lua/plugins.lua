@@ -1,162 +1,257 @@
-local ok, packer = pcall(require, 'packer')
-if not ok then
-	print('Packer is not installed')
-	return
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
 end
+vim.opt.rtp:prepend(lazypath)
 
-vim.cmd('packadd packer.nvim')
-
-packer.startup(function(use)
-	use 'wbthomason/packer.nvim'
-
+local ok, lazy = pcall(require, 'lazy')
+if not ok then
+  print('lazy.nvim is not installed')
+  return
+end
+lazy.setup({
 	-- utility {{{2
-	-- use 'nvim-lua/plenary.nvim
-	-- use 'vim-denops/denops.vim'
+	-- 'nvim-lua/plenary.nvim,
+  {
+    'vim-denops/denops.vim',
+    -- カーソルが暫く動かなかった時や、別のウィンドウ・ペインに移動した時に
+    -- 裏で読み込んでおきます。
+    event = {'CursorHold', 'FocusLost' },
+  },
 	-- 2}}}
 
 	-- icon
-	use 'kyazdani42/nvim-web-devicons'
+	'nvim-tree/nvim-web-devicons',
 
 	-- ui
-	use 'stevearc/dressing.nvim'
+  {
+    'stevearc/dressing.nvim',
+    lazy = false,
+  },
 
-	if vim.fn.has('python') == 1 or vim.fn.has('python3') then
-		-- fades inactive buffers
-		use 'tadaa/vimade'
-	end
+
+	-- statusline
+	{
+		'nvim-lualine/lualine.nvim',
+    lazy = false,
+		dependencies = { 'nvim-tree/nvim-web-devicons' },
+	},
+
+	-- fades inactive buffers
+	{
+    'tadaa/vimade',
+    event = {
+      'WinEnter',
+      'WinNew',
+    },
+    enabled = function ()
+      return vim.fn.has('python') == 1 or vim.fn.has('python3')
+    end
+  },
 
 	-- filter
-	use 'lambdalisue/fern.vim'
-	use 'lambdalisue/nerdfont.vim'
-	use 'lambdalisue/fern-renderer-nerdfont.vim'
+	{
+    'lambdalisue/fern.vim',
+    dependencies = {
+      'lambdalisue/nerdfont.vim',
+      'lambdalisue/fern-renderer-nerdfont.vim',
+    },
+    cmd = 'Fern',
+    -- todo: add <Plug>(fern-*) ※いまは:Fernのみ
+  },
 
 	-- lsp manager
-	use {
+	{
 		'williamboman/mason.nvim',
-		config = function()
-			require('mason').setup()
-		end,
-	}
-	use {
-		'williamboman/mason-lspconfig.nvim',
-		requires = {
-			'williamboman/mason.nvim',
-			'hrsh7th/nvim-cmp',
-			'neovim/nvim-lspconfig',
-		},
-		wants = { 'mason.nvim', 'nvim-cmp', 'nvim-lspconfig' },
-		config = function()
-			require('mason-lspconfig').setup()
-		end,
-	}
+    lazy = false,
+    priority = 100, -- lsp, null-ls両方の依存先なので早めにload
+		config = true,
+  },
+
 	-- lsp
-	use 'neovim/nvim-lspconfig'
-	-- pictogram
-	use 'onsails/lspkind.nvim'
-	-- rich lsp
-	use 'kkharji/lspsaga.nvim'
+  {
+    'neovim/nvim-lspconfig',
+    lazy = false,
+    dependencies = {
+      'williamboman/mason-lspconfig.nvim',
+		  -- 'williamboman/mason.nvim',
+    }
+  },
 
-	-- snippet engine
-	use 'l3mon4d3/luasnip'
-	use 'rafamadriz/friendly-snippets'
-	use 'saadparwaiz1/cmp_luasnip'
+	-- rich lsp ui
+  {
+    'glepnir/lspsaga.nvim',
+    event = 'BufRead',
+    config = true,
+    dependencies = {
+      'nvim-tree/nvim-web-devicons'
+    }
+  },
+
 	-- complete
-	use {
+	{
 		'hrsh7th/nvim-cmp',
-		requires = { 'l3mon4d3/luasnip' },
-    wants = { 'luasnip' }
-	}
+    event = 'InsertEnter',
+		dependencies = {
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-path',
+      'hrsh7th/cmp-cmdline',
+	    -- snippet engine
+      'l3mon4d3/luasnip',
+      'rafamadriz/friendly-snippets',
+      'saadparwaiz1/cmp_luasnip',
+      -- pictogram
+      'onsails/lspkind.nvim',
+    },
+	},
 
-	use 'hrsh7th/cmp-nvim-lsp'
-  use 'hrsh7th/cmp-buffer'
-  use 'hrsh7th/cmp-path'
-  use 'hrsh7th/cmp-cmdline'
 
 	-- linter formatter
-	use 'jose-elias-alvarez/null-ls.nvim'
-
-	use {
+	{
 		'jay-babu/mason-null-ls.nvim',
-		wants = { 'mason.nvim', 'null-ls.nvim' },
+    lazy = false,
+    dependencies = {
+	    'jose-elias-alvarez/null-ls.nvim',
+		  -- 'williamboman/mason.nvim',
+    },
 		config = function()
 			require('mason-null-ls').setup({
 				ensure_installed = { 'prettier', 'stylua' },
 				automatic_installation = false,
 				automatic_setup = true,
 			})
-		end,
-	}
+      require('null-ls').setup({
+	      capabilities = vim.lsp.protocol.make_client_capabilities(),
+      })
+      require('mason-null-ls').setup_handlers()
 
-	use {
-		'folke/trouble.nvim',
-		requires = { 'nvim-tree/nvim-web-devicons' },
-		config = function()
-			require('trouble').setup({})
+      vim.keymap.set('n', '<Plug>(lsp)f', function()
+        vim.lsp.buf.format({ name = 'null-ls' })
+      end)
 		end,
-	}
+	},
+
+	{
+		'folke/trouble.nvim',
+		dependencies = { 'nvim-tree/nvim-web-devicons' },
+    cmd = {
+      'Trouble',
+      'TroubleToggle'
+    },
+		config = true,
+	},
 
 	-- treesitter
-	use {
+	{
 		'nvim-treesitter/nvim-treesitter',
-		run = ':TSUpdate',
-	}
+    event = 'BufReadPost',
+		build = ':TSUpdate',
+	},
 
 	-- overview
-	use {
+	{
 		'stevearc/aerial.nvim',
-		config = function()
-			require('aerial').setup()
-		end,
-	}
+		config = true,
+    cmd = {
+      'AerialToggle',
+      'AerialOpen',
+      'AerialOpenAll',
+      'AerialGo',
+      'AerialInfo',
+    }
+    -- support api on lazy
+	},
 
 	-- autotag
-	use {
+	{
 		'windwp/nvim-ts-autotag',
 		config = function()
 			require('nvim-ts-autotag').setup()
 		end,
-	}
-	use {
+	},
+
+	{
 		'windwp/nvim-autopairs',
 		config = function()
 			require('nvim-autopairs').setup({
 				disable_filetype = { 'telescopeprompt', 'vim', 'fern' },
 			})
 		end,
-	}
+	},
 	-- auto closer
-	use {
+	{
 		'cohama/lexima.vim',
-		disable = true,
-	}
+		enabled = false,
+	},
 	-- small implement lexima
-	use 'mattn/vim-lexiv'
+	{
+    'mattn/vim-lexiv',
+    lazy = false,
+  },
 
 	-- operator
-	use 'kana/vim-operator-user'
-	use {
+	'kana/vim-operator-user',
+	{
     'kana/vim-operator-replace',
-		requires = 'kana/vim-operator-user',
-    wants = 'vim-operator-user'
-	}
-	use {
+    keys = '<Plug>(operator-replace)',
+		dependencies = 'kana/vim-operator-user',
+	},
+	{
     'rhysd/vim-operator-surround',
-		requires = 'kana/vim-operator-user',
-    wants = 'vim-operator-user'
-	}
-	use {
+    keys = {
+      '<Plug>(operator-surround-append)',
+      '<Plug>(operator-surround-delete)',
+      '<Plug>(operator-surround-replace)'
+    },
+		dependencies = 'kana/vim-operator-user',
+	},
+	{
     'mopp/vim-operator-convert-case',
-		requires = 'kana/vim-operator-user',
-    wants = 'vim-operator-user'
-	}
+    keys = {
+      '<Plug>(operator-convert-case-lowe-camel)',
+      '<Plug>(operator-convert-case-upper-camel)',
+      '<Plug>(operator-convert-case-lower-snake)',
+      '<Plug>(operator-convert-case-upper-snake)',
+      '<Plug>(operator-convert-case-toggle-upper-lower)',
+      '<Plug>(operator-convert-case-loop)',
+      '<Plug>(operator-convert-case-convert)',
+    },
+    cmd = {
+      'ToggleUpperLower',
+      'ConvertCase',
+    },
+		dependencies = 'kana/vim-operator-user',
+	},
 
 	-- comment
-	-- use 'tyru/caw.vim'
-	use 'tpope/vim-commentary'
+	-- 'tyru/caw.vim',
+	{
+    'tpope/vim-commentary',
+    -- after/plugin/commentary.rc.lua
+    keys = {
+      '<Plug>Commentary',
+      '<Plug>CommentaryLine',
+    },
+  },
 
 	-- dial, cycle
-	use {
+	{
 		'monaqa/dial.nvim',
+    keys = {
+      { '<C-a>', nil, {'n', 'v'} },
+      { '<C-x>', nil, {'n', 'v'} },
+      { '<C-x>', nil, {'n', 'v'} },
+      { 'g<C-a>', nil, 'v'},
+      { 'g<C-x>', nil, 'v'},
+    },
 		config = function()
 			-- override keymap
 			local dialmap = require('dial.map')
@@ -177,148 +272,171 @@ packer.startup(function(use)
 				},
 			})
 		end,
-	}
+	},
 
 	-- search
-	-- " e.g.) maekawa -> 前川
-	use 'osyo-manga/vim-vigemo'
-	use {
+  {
+	  -- " e.g.) maekawa -> 前川
+    'osyo-manga/vim-vigemo',
+    keys = '<Plug>(vigemo-search)',
+    cmd = 'VigemoSearch',
+  },
+
+	{
 		'rhysd/clever-f.vim',
-		config = function()
+    keys = {'<Plug>(clever-f-f)', '<Plug>(clever-f-F)'},
+		init = function()
+      vim.keymap.set({ 'n', 'x', 'o' }, 'f', '<Plug>(clever-f-f)', { noremap = false })
+      vim.keymap.set({ 'n', 'x', 'o' }, 'F', '<Plug>(clever-f-F)', { noremap = false })
 			vim.g.clever_f_not_overwrites_standard_mappings = 1
 		end,
-	}
-	use 'hrsh7th/vim-searchx'
+	},
+
+  {
+    -- enhanced search
+    'hrsh7th/vim-searchx',
+    lazy = false,
+  },
 
 	-- fuzzy finder
-	use {
+	{
 		'nvim-telescope/telescope.nvim',
-		requires = { 'nvim-lua/plenary.nvim' },
-	}
-	use 'nvim-telescope/telescope-file-browser.nvim'
+    lazy = false, -- file-browser hijacks netrw
+		dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope-file-browser.nvim',
+      'tsakirist/telescope-lazy.nvim',
+    },
+    init = function ()
+      require('rc/telescope').init()
+    end,
+    config = function ()
+      require('rc/telescope').config()
+    end
+	},
+
 
 	-- easy motions
-	use {
+	{
 		'yuki-yano/fuzzy-motion.vim',
-		requires = { 'vim-denops/denops.vim' },
-    wants = { 'denops.vim' },
-		config = function()
+		dependencies = { 'vim-denops/denops.vim' },
+    cmd = 'FuzzyMotion',
+		init = function()
 			vim.g.fuzzy_motion_auto_jump = false
 			vim.keymap.set('n', '[motion]<Space>', '<Cmd>FuzzyMotion<CR>')
 		end,
-	}
-	use {
+	},
+
+	{
 		'skanehira/jumpcursor.vim',
-		config = function()
+    keys = '<Plug>(jumpcursor-jump)',
+		init = function()
 			vim.keymap.set('n', '[motion]j', '<Plug>(jumpcursor-jump)')
 		end,
-	}
-
-	-- statusline
-	use {
-		'nvim-lualine/lualine.nvim',
-		requires = { 'kyazdani42/nvim-web-devicons' },
-	}
+	},
 
 	-- git plugins
-	use {
+	{
 		'TimUntersberger/neogit',
-		requires = { 'nvim-lua/plenary.nvim', 'sindrets/diffview.nvim' },
-    wants = { 'plenary.nvim', 'diffview.nvim' }
-	}
-	use {
-		'sindrets/diffview.nvim',
-		requires = 'nvim-lua/plenary.nvim',
-    wants = { 'plenary.nvim' }
-	}
-	use {
+    keys = '[git]',
+		dependencies = { 'nvim-lua/plenary.nvim', 'sindrets/diffview.nvim' },
+	},
+
+	{
 		'lambdalisue/gina.vim',
 		cmd = { 'Gina' },
-	}
-	use {
+	},
+
+	{
 		'lewis6991/gitsigns.nvim',
 		config = function()
 			require('rc/gitsigns')
 		end,
-	}
+	},
 
 	-- buffers
-	use {
+	{
 		'jeetsukumaran/vim-buffergator',
 		config = function()
 			vim.g.buffergator_suppress_keymaps = 1
 			vim.g.buffergator_viewport_split_policy = 'N'
 		end,
-	}
+	},
 
 	-- 一部切り抜いて編集
-	use 'thinca/vim-partedit'
+	{
+    'thinca/vim-partedit',
+    cmd = 'Parsedit',
+  },
 
-	use {
+	{
 		'bkad/CamelCaseMotion',
+    lazy = false, -- TODO: true
 		config = function()
 			vim.g.camelcasemotion_key = '<Space>'
 		end,
-	}
+	},
 
 	-- Markdown
-	use {
+	{
 		'iamcco/markdown-preview.nvim',
-		run = 'cd app && yarn install',
-    setup = function()
+		build = 'cd app && yarn install',
+    init = function()
       vim.g.mkdp_filetypes = { "markdown" }
     end,
     ft = { "markdown" },
 		-- { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug'] }
-	}
+	},
 
 	-- 翻訳
-	use {
+	{
 		'skanehira/denops-translate.vim',
-		requires = { 'vim-denops/denops.vim' },
-    wants = { 'denops.vim' }
-	}
+		dependencies = { 'vim-denops/denops.vim' },
+    cmd = 'Translate'
+	},
 
-	use 'thinca/vim-quickrun'
+	{
+    'thinca/vim-quickrun',
+    cmd = 'QuickRun',
+  },
 
 	-- 辞書
-	use {
+	{
 		'thinca/vim-ref',
 		config = function()
 			require('rc/vim-ref')
 		end,
-	}
+    cmd = 'Ref',
+	},
 
 	-- Gist
-	use {
+	{
 		'mattn/vim-gist',
-		requires = 'mattn/webapi-vim',
-    wants = { 'webapi-vim' },
+		dependencies = 'mattn/webapi-vim',
     cmd = { 'Gist' },
-	}
+	},
 
 	-- GitHub
-	use {
+	{
 		'pwntester/octo.nvim',
-		requires = {
+		dependencies = {
 			'nvim-lua/plenary.nvim',
 			'nvim-telescope/telescope.nvim',
-			'kyazdani42/nvim-web-devicons',
+			'nvim-tree/nvim-web-devicons',
 		},
     cmd = { 'Octo' },
-		config = function()
-			require('octo').setup()
-		end,
-	}
-	use {
+		config = true,
+  },
+
+	{
 		'skanehira/denops-gh.vim',
-		requires = { 'vim-denops/denops.vim' },
-    wants = { 'denops.vim' }
+		dependencies = { 'vim-denops/denops.vim' },
+    lazy = false, -- todo: true
 		-- disable = true,
-	}
+	},
 
 	-- CheatSheet
-	use {
+	{
 		'reireias/vim-cheatsheet',
 		config = function()
 			vim.g['cheatsheet#cheat_file'] = '~/.config/nvim/cheatsheet.md'
@@ -329,34 +447,42 @@ packer.startup(function(use)
 			vim.keymap.set('n', '<leader>?', '<Cmd>Cheat<CR>', {})
 		end,
     cmd = { 'Cheat', 'CheatEdit' },
-	}
-	-- Lua
-	use {
+	},
+
+	{
 		'folke/which-key.nvim',
-		config = function()
+    lazy = false,
+    -- event = 'CursorHold',
+    init = function ()
       vim.opt.timeout = true
       vim.opt.timeoutlen = 300
-			require('which-key').setup({
-				-- your configuration comes here
-				-- or leave it empty to use the default settings
-				-- refer to the configuration section below
-			})
-		end,
-	}
+    end,
+		config = true,
+	},
 
   -- sl
-  use {
+  {
     'eandrju/cellular-automaton.nvim',
     cmd = {
       'CellularAutomaton'
     }
-  }
+  },
 
 	-- colorscheme
-	use 'EdenEast/nightfox.nvim'
-	use 'arcticicestudio/nord-vim'
-  use 'Yazeed1s/oh-lucy.nvim'
-  use 'sainnhe/gruvbox-material'
-  use 'AlexvZyl/nordic.nvim'
-  use 'RRethy/nvim-base16'
-end)
+  {
+    'EdenEast/nightfox.nvim',
+    'arcticicestudio/nord-vim',
+    'Yazeed1s/oh-lucy.nvim',
+    'sainnhe/gruvbox-material',
+    'AlexvZyl/nordic.nvim',
+    'RRethy/nvim-base16',
+  }
+}, {
+  defaults = {
+    lazy = true, -- should plugins be lazy-loaded?
+  }
+})
+
+-- colorscheme
+vim.opt.background = 'dark'
+vim.cmd([[colorscheme nordic]])

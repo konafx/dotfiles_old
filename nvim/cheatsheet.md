@@ -36,3 +36,6 @@
 ## quickfix
 
 - `:lua vim.diagnostic.setqflist()`
+
+## TODO
+- [ ] 

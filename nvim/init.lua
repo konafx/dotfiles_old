@@ -48,8 +48,8 @@ for _, name in pairs(disable_plugins) do
 	vim.g[name] = 1
 end
 
-require('plugins')
 require('base')
+require('plugins')
 require('extensions')
 require('keymaps')
 require('autocmds')
