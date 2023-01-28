@@ -83,7 +83,13 @@ lazy.setup({
   {
     'glepnir/lspsaga.nvim',
     event = 'BufRead',
-    config = true,
+    config = function ()
+      require('lspsaga').setup({
+        symbol_in_winbar = {
+          enable = false,
+        }
+      })
+    end,
     dependencies = {
       'nvim-tree/nvim-web-devicons'
     }
@@ -127,7 +133,7 @@ lazy.setup({
       })
       require('mason-null-ls').setup_handlers()
 
-      vim.keymap.set('n', '<Plug>(lsp)f', function()
+      vim.keymap.set('n', '[lsp]F', function()
         vim.lsp.buf.format({ name = 'null-ls' })
       end)
 		end,
@@ -352,7 +358,13 @@ lazy.setup({
 	-- buffers
 	{
 		'jeetsukumaran/vim-buffergator',
-		config = function()
+    cmd = {
+      'BuffergatorOpen',
+      'BuffergatorToggle',
+      'BuffergatorTabsOpen',
+      'BuffergatorTabsToggle'
+    },
+		init = function()
 			vim.g.buffergator_suppress_keymaps = 1
 			vim.g.buffergator_viewport_split_policy = 'N'
 		end,

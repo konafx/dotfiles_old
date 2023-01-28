@@ -4,16 +4,6 @@ if not ok then
 	return
 end
 
--- Mappings. {{{
--- See `:help vim.diagnostic.*` for documentation on any of the below functions
-local opts = { noremap = true, silent = true }
-vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
-vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
-
---- }}}
-
 local ok, mason_lspconfig = pcall(require, 'mason-lspconfig')
 if not ok then
 	print('mson-lspconfig is not installed')
@@ -60,6 +50,15 @@ local function lua_help()
 	return false
 end
 
+-- Mappings. {{{
+-- See `:help vim.diagnostic.*` for documentation on any of the below functions
+-- local opts = { noremap = true, silent = true }
+-- vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
+-- vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
+-- vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+-- vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
+--- }}}
+
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
@@ -79,9 +78,13 @@ local on_attach = function(client, bufnr)
 	-- Mappings.
 	-- See `:help vim.lsp.*` for documentation on any of the below functions
 	local bufopts = { noremap = true, silent = true, buffer = bufnr }
-	vim.keymap.set('n', '<Plug>(lsp)D', vim.lsp.buf.declaration, bufopts)
-	vim.keymap.set('n', '<Plug>(lsp)d', vim.lsp.buf.definition, bufopts)
-	vim.keymap.set('n', '<Plug>(lsp)i', vim.lsp.buf.implementation, bufopts)
+  vim.keymap.set('n', '[lsp][', '<Cmd>Lspsaga diagnostic_jump_prev<CR>', bufopts)
+  vim.keymap.set('n', '[lsp]]', '<Cmd>Lspsaga diagnostic_jump_next<CR>', bufopts)
+	vim.keymap.set('n', '[lsp]D', vim.lsp.buf.declaration, bufopts)
+	-- vim.keymap.set('n', '[lsp]d', vim.lsp.buf.definition, bufopts)
+	vim.keymap.set('n', '[lsp]d', '<Cmd>Lspsaga peek_definition<CR>', bufopts)
+	vim.keymap.set('n', '[lsp]i', vim.lsp.buf.implementation, bufopts)
+  vim.keymap.set('n', '[lsp]f', '<Cmd>Lspsaga lsp_finder<CR>', bufopts)
 	vim.keymap.set('n', 'K', function() -- https://scrapbox.io/vim-jp/better_K_for_neovim_lua
 		if not lua_help() then
 			vim.lsp.buf.hover()
@@ -93,10 +96,12 @@ local on_attach = function(client, bufnr)
 	-- vim.keymap.set('n', '<space>wl', function()
 	--   print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 	-- end, bufopts)
-	vim.keymap.set('n', '<Plug>(lsp)tD', vim.lsp.buf.type_definition, bufopts)
+	-- vim.keymap.set('n', '[lsp]tD', vim.lsp.buf.type_definition, bufopts)
 	-- vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
+	vim.keymap.set('n', '[lsp]r', '<Cmd>Lspsaga rename<CR>', bufopts)
 	-- vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
-	vim.keymap.set('n', '<Plug>(lsp)r', vim.lsp.buf.references, bufopts)
+	vim.keymap.set('n', '[lsp]c', '<Cmd>Lspsaga code_action<CR>', bufopts)
+	-- vim.keymap.set('n', '[lsp]r', vim.lsp.buf.references, bufopts)
 	-- vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
 end
 --- }}}

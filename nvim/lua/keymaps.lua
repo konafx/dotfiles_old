@@ -79,10 +79,10 @@ keymap.set('n', '[tab]o', '<Cmd>tabonly<CR>', { silent = true })
 
 -- [motion] {{{
 keymap.set('', '[motion]', '<Nop>')
-keymap.set('n', ']', '[motion]', { remap = true })
+keymap.set('n', 'm', '[motion]', { remap = true })
 -- }}}
 
 -- <Plug>(lsp) {{{
-keymap.set('', '<Plug>(lsp)', '<Nop>')
-keymap.set('n', 'm', '<Plug>(lsp)', { remap = true })
+keymap.set('', '[lsp]', '<Nop>')
+keymap.set('n', ']', '[lsp]', { remap = true })
 -- }}}
