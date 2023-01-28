@@ -17,18 +17,12 @@ if not ok then
   return
 end
 lazy.setup({
-	-- utility {{{2
-	-- 'nvim-lua/plenary.nvim,
-  {
-    'vim-denops/denops.vim',
-    -- カーソルが暫く動かなかった時や、別のウィンドウ・ペインに移動した時に
-    -- 裏で読み込んでおきます。
-    event = {'CursorHold', 'FocusLost' },
-  },
-	-- 2}}}
+  -- utility
+  -- 'nvim-lua/plenary.nvim,
+  --  'vim-denops/denops.vim',
 
-	-- icon
-	'nvim-tree/nvim-web-devicons',
+  -- icon
+  'nvim-tree/nvim-web-devicons',
 
 	-- ui
   {
@@ -320,7 +314,8 @@ lazy.setup({
 	{
 		'yuki-yano/fuzzy-motion.vim',
 		dependencies = { 'vim-denops/denops.vim' },
-    cmd = 'FuzzyMotion',
+    lazy = false,
+    -- cmd = 'FuzzyMotion',
 		init = function()
 			vim.g.fuzzy_motion_auto_jump = false
 			vim.keymap.set('n', '[motion]<Space>', '<Cmd>FuzzyMotion<CR>')
@@ -391,8 +386,9 @@ lazy.setup({
 	-- 翻訳
 	{
 		'skanehira/denops-translate.vim',
+    lazy = false,
 		dependencies = { 'vim-denops/denops.vim' },
-    cmd = 'Translate'
+    -- cmd = 'Translate'
 	},
 
 	{
