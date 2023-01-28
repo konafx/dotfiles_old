@@ -233,7 +233,6 @@ packer.startup(function(use)
 	}
 	use {
 		'lambdalisue/gina.vim',
-		opt = true,
 		cmd = { 'Gina' },
 	}
 	use {
@@ -270,7 +269,6 @@ packer.startup(function(use)
       vim.g.mkdp_filetypes = { "markdown" }
     end,
     ft = { "markdown" },
-    opt = true,
 		-- { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug'] }
 	}
 
@@ -297,7 +295,6 @@ packer.startup(function(use)
 		requires = 'mattn/webapi-vim',
     wants = { 'webapi-vim' },
     cmd = { 'Gist' },
-    opt = true,
 	}
 
 	-- GitHub
@@ -308,6 +305,7 @@ packer.startup(function(use)
 			'nvim-telescope/telescope.nvim',
 			'kyazdani42/nvim-web-devicons',
 		},
+    cmd = { 'Octo' },
 		config = function()
 			require('octo').setup()
 		end,
@@ -331,7 +329,6 @@ packer.startup(function(use)
 			vim.keymap.set('n', '<leader>?', '<Cmd>Cheat<CR>', {})
 		end,
     cmd = { 'Cheat', 'CheatEdit' },
-    opt = true,
 	}
 	-- Lua
 	use {
@@ -350,7 +347,6 @@ packer.startup(function(use)
   -- sl
   use {
     'eandrju/cellular-automaton.nvim',
-    opt = true,
     cmd = {
       'CellularAutomaton'
     }
