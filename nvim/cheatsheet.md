@@ -10,6 +10,8 @@
 ## memo
 
 - `zo`, `zO`: opening the fold
+- `,tt`: termianl open
+- `,r`: source myvimrc
 
 ## new plugins [2023/01/26]
 

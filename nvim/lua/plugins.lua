@@ -341,6 +341,22 @@ lazy.setup({
 		'TimUntersberger/neogit',
     keys = '[git]',
 		dependencies = { 'nvim-lua/plenary.nvim', 'sindrets/diffview.nvim' },
+    init = function ()
+      local function open(opt)
+        return function()
+          return require('neogit').open(opt or {})
+        end
+      end
+
+      vim.keymap.set('n', '[git]', '<Nop>')
+      vim.keymap.set('n', '<Leader>g', '[git]', { remap = true })
+
+      -- keymap.set('n', '[git]f', '<Cmd>Clap git_files<CR>', { silent = true })
+      local silent = { silent = true }
+      vim.keymap.set('n', '[git]s', open({ kind = 'replace' }), silent)
+      vim.keymap.set('n', '[git]b', open({'branch', kind = 'split' }), silent)
+      vim.keymap.set('n', '[git]l', open({ 'log' }), silent)
+    end
 	},
 
 	{
@@ -446,7 +462,7 @@ lazy.setup({
 	-- CheatSheet
 	{
 		'reireias/vim-cheatsheet',
-		config = function()
+		init = function()
 			vim.g['cheatsheet#cheat_file'] = '~/.config/nvim/cheatsheet.md'
 			vim.g['cheatsheet#float_window'] = 1
 			vim.g['cheatsheet#float_window_width_ratio'] = 0.8

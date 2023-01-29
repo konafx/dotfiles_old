@@ -80,14 +80,16 @@ local on_attach = function(client, bufnr)
 	local bufopts = { noremap = true, silent = true, buffer = bufnr }
   vim.keymap.set('n', '[lsp][', '<Cmd>Lspsaga diagnostic_jump_prev<CR>', bufopts)
   vim.keymap.set('n', '[lsp]]', '<Cmd>Lspsaga diagnostic_jump_next<CR>', bufopts)
+  vim.keymap.set('n', '[lsp]e', '<Cmd>Lspsaga show_cursor_diagnostics<CR>', bufopts)
 	vim.keymap.set('n', '[lsp]D', vim.lsp.buf.declaration, bufopts)
-	-- vim.keymap.set('n', '[lsp]d', vim.lsp.buf.definition, bufopts)
+	-- vim.keymap.set('n', '[lsp]<C-d>', vim.lsp.buf.definition, bufopts)
 	vim.keymap.set('n', '[lsp]d', '<Cmd>Lspsaga peek_definition<CR>', bufopts)
 	vim.keymap.set('n', '[lsp]i', vim.lsp.buf.implementation, bufopts)
   vim.keymap.set('n', '[lsp]f', '<Cmd>Lspsaga lsp_finder<CR>', bufopts)
 	vim.keymap.set('n', 'K', function() -- https://scrapbox.io/vim-jp/better_K_for_neovim_lua
 		if not lua_help() then
-			vim.lsp.buf.hover()
+      require('lspsaga.hover'):render_hover_doc()
+			-- vim.lsp.buf.hover()
 		end
 	end, bufopts)
 	vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)

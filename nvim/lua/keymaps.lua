@@ -66,6 +66,9 @@ keymap.set('n', '<Leader>q', function()
 end, { silent = true })
 -- }}}
 
+-- reload myvimrc
+keymap.set('n', '<Leader>r', [[<Cmd>source $MYVIMRC<CR>]], { noremap = false })
+
 -- [tab] {{{
 keymap.set('', '[tab]', '<Nop>')
 keymap.set('n', 't', '[tab]', { remap = true })
@@ -82,7 +85,13 @@ keymap.set('', '[motion]', '<Nop>')
 keymap.set('n', 'm', '[motion]', { remap = true })
 -- }}}
 
--- <Plug>(lsp) {{{
+-- [lsp] {{{
 keymap.set('', '[lsp]', '<Nop>')
 keymap.set('n', ']', '[lsp]', { remap = true })
+-- }}}
+
+-- [term] {{{
+keymap.set('', '[term]', '<Nop>')
+keymap.set('n', '<Leader>t', '[term]', { remap = true })
+keymap.set('n', '[term]t', '<Cmd>Lspsaga term_toggle<CR>', { silent = true })
 -- }}}
