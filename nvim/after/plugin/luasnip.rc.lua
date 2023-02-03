@@ -17,4 +17,12 @@ luasnip.add_snippets('markdown', {
 		i(1),
 		t([[?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>]]),
 	}),
+	s('album', {
+		t([[https://open.spotify.com/album/]]),
+		i(1),
+	}),
+	s('track', {
+		t([[https://open.spotify.com/track/]]),
+		i(1),
+	}),
 })

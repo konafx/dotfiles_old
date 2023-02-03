@@ -63,9 +63,6 @@ function M.config()
 
   local actions = require('telescope.actions')
 
-  telescope.load_extension('file_browser')
-  telescope.load_extension('lazy')
-
   local fb_actions = telescope.extensions.file_browser.actions
   telescope.setup({
     defaults = {
@@ -129,6 +126,9 @@ function M.config()
       }
     },
   })
+
+  telescope.load_extension('file_browser')
+  telescope.load_extension('lazy')
 end
 
 return M
