@@ -96,6 +96,8 @@ zinit snippet 'https://raw.githubusercontent.com/docker/compose/master/contrib/c
 zinit ice as"completion"
 zinit snippet 'https://raw.githubusercontent.com/x-motemen/ghq/master/misc/zsh/_ghq'
 
+zinit light asdf-vm/asdf
+
 # for bash_completion
 autoload -U +X bashcompinit && bashcompinit
 
