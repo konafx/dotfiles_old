@@ -45,9 +45,16 @@ lazy.setup({
       'WinEnter',
       'WinNew',
     },
-    enabled = function ()
-      return vim.fn.has('python') == 1 or vim.fn.has('python3')
-    end
+    enabled = false,
+    -- enabled = function ()
+    --   return vim.fn.has('python') == 1 or vim.fn.has('python3')
+    -- end
+  },
+
+  {
+    'levouh/tint.nvim',
+    lazy = false,
+    config = true,
   },
 
 	-- filter
@@ -151,7 +158,6 @@ lazy.setup({
       require('null-ls').setup({
 	      capabilities = vim.lsp.protocol.make_client_capabilities(),
       })
-      require('mason-null-ls').setup_handlers()
 
       vim.keymap.set('n', '[lsp]F', function()
         vim.lsp.buf.format({ name = 'null-ls' })
