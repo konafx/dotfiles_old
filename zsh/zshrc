@@ -96,6 +96,7 @@ zinit snippet 'https://raw.githubusercontent.com/docker/compose/master/contrib/c
 zinit ice as"completion"
 zinit snippet 'https://raw.githubusercontent.com/x-motemen/ghq/master/misc/zsh/_ghq'
 
+zinit ice lucid wait="0" pick="asdf.sh"
 zinit light asdf-vm/asdf
 
 # for bash_completion
@@ -221,3 +222,4 @@ bindkey '^t' zaw-tmux
 [[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
 
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
+function gi() { curl -sLw "\n" https://www.toptal.com/developers/gitignore/api/$@ ;}

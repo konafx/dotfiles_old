@@ -99,7 +99,8 @@ lazy.setup({
     end,
     dependencies = {
       'nvim-tree/nvim-web-devicons'
-    }
+    },
+enabled = false,
   },
 
 	-- complete
