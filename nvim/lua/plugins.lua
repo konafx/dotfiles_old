@@ -224,6 +224,13 @@ enabled = false,
     lazy = false,
   },
 
+	-- terminal
+  {
+    'voldikss/vim-floaterm',
+    -- TODO: should be lazy
+    lazy =false,
+  },
+
 	-- operator
 	'kana/vim-operator-user',
 	{
@@ -483,6 +490,7 @@ enabled = false,
 		},
     cmd = { 'Octo' },
 		config = true,
+    enabled = false,
   },
 
 	{

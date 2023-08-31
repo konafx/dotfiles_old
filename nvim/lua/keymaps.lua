@@ -93,7 +93,7 @@ keymap.set('n', ']', '[lsp]', { remap = true })
 -- [term] {{{
 keymap.set('', '[term]', '<Nop>')
 keymap.set('n', '<Leader>t', '[term]', { remap = true })
-keymap.set('n', '[term]t', '<Cmd>Lspsaga term_toggle<CR>', { silent = true })
+--keymap.set('n', '[term]t', '<Cmd>Lspsaga term_toggle<CR>', { silent = true })
 -- }}}
 
 -- disabled {{{
