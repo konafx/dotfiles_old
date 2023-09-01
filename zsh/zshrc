@@ -99,10 +99,12 @@ zinit snippet 'https://raw.githubusercontent.com/x-motemen/ghq/master/misc/zsh/_
 zinit ice lucid wait="0" pick="asdf.sh"
 zinit light asdf-vm/asdf
 
-# programs
+# ripgrep
 zinit ice as"program" from"gh-r" mv"ripgrep* -> rg" pick"rg/rg"
-zinit ice as"completion" mv"complete/_rg"
 zinit light BurntSushi/ripgrep
+
+zinit ice as"completion"
+zinit snippet "https://raw.githubusercontent.com/BurntSushi/ripgrep/master/complete/_rg"
 
 zinit ice as"program" from"gh-r" mv"exa* -> exa"
 zinit light ogham/exa
