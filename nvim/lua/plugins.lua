@@ -228,7 +228,12 @@ enabled = false,
   {
     'voldikss/vim-floaterm',
     -- TODO: should be lazy
-    lazy =false,
+    cmd = {
+      'FloatermNew',
+      'FloatermPrev',
+      'FloatermNext',
+      'FloatermToggle',
+    },
   },
 
 	-- operator

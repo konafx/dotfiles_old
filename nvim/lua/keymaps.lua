@@ -92,8 +92,19 @@ keymap.set('n', ']', '[lsp]', { remap = true })
 
 -- [term] {{{
 keymap.set('', '[term]', '<Nop>')
-keymap.set('n', '<Leader>t', '[term]', { remap = true })
---keymap.set('n', '[term]t', '<Cmd>Lspsaga term_toggle<CR>', { silent = true })
+keymap.set({'n', 't'}, '<Leader>t', '[term]', { remap = true })
+-- https://zenn.dev/fuzmare/articles/vim-term-escape
+keymap.set('t', '<ESC>', '<C-\\><C-n><Plug>(esc)', { noremap = true })
+keymap.set('n', '<Plug>(esc)<ESC>', 'i<ESC>', { noremap = true })
+-- floaterm
+keymap.set('n', '[term]c', '<Cmd>FloatermNew<CR>', { silent = true })
+keymap.set('t', '[term]c', '<ESC><Cmd>FloatermNew<CR>', { silent = true })
+keymap.set('n', '[term]p', '<Cmd>FloatermPrev<CR>', { silent = true })
+keymap.set('t', '[term]p', '<ESC><Cmd>FloatermPrev<CR>', { silent = true })
+keymap.set('n', '[term]n', '<Cmd>FloatermNext<CR>', { silent = true })
+keymap.set('t', '[term]n', '<ESC><Cmd>FloatermNext<CR>', { silent = true })
+keymap.set('n', '[term]t', '<Cmd>FloatermToggle<CR>', { silent = true })
+keymap.set('t', '[term]t', '<ESC><Cmd>FloatermToggle<CR>', { silent = true })
 -- }}}
 
 -- disabled {{{

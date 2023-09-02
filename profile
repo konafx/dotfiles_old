@@ -22,10 +22,10 @@ if [ -d "$HOME/go/bin" ] ; then
     PATH="$HOME/go/bin:$PATH"
 fi
 
-if [ -d "$HOME/.deno" ] ; then
-    DENO_INSTALL="$HOME/.deno"
-    PATH="$DENO_INSTALL/bin:$PATH"
-fi
+# if [ -d "$HOME/.deno" ] ; then
+#     DENO_INSTALL="$HOME/.deno"
+#     PATH="$DENO_INSTALL/bin:$PATH"
+# fi
 
 if [ -d "$HOME/.cargo" ] ; then
     PATH="$HOME/.cargo/bin:$PATH"

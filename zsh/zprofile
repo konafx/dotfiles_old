@@ -1,8 +1,5 @@
 source "$HOME/.profile"
 
-export DENO_INSTALL="$HOME/.deno"
-path=($DENO_INSTALL/bin(N-) $path)
-
 export DOT_REPO="https://github.com/konafx/dotfiles.git"
 export DOT_DIR="$HOME/.dotfiles"
 fpath=($HOME/.zsh/dot $fpath)
