@@ -99,21 +99,44 @@ zinit snippet 'https://raw.githubusercontent.com/x-motemen/ghq/master/misc/zsh/_
 zinit ice lucid wait="0" pick="asdf.sh"
 zinit light asdf-vm/asdf
 
-# ripgrep
-zinit ice as"program" from"gh-r" mv"ripgrep* -> rg" pick"rg/rg"
-zinit light microsoft/ripgrep-prebuilt
+# zinit pack-ice requires `jq`
+zinit for \
+  from'gh-r' \
+  sbin'* -> jq' \
+  nocompile \
+  @jqlang/jq
 
-zinit ice as"completion"
-zinit snippet "https://raw.githubusercontent.com/BurntSushi/ripgrep/master/complete/_rg"
+zinit for \
+  atclone'cp -vf completions/exa.zsh _exa' \
+  from'gh-r' \
+  sbin'**/exa -> exa' \
+  ogham/exa
 
-# zinit ice as"program" from"gh-r" bpick"linux-x86_64" mv"exa* -> exa"
-# zinit light ogham/exa
+zinit for \
+  from'gh-r' \
+  lbin'!' \
+  id-as \
+  null \
+  @sharkdp/fd
 
-zinit ice as"program" from"gh-r" mv"bat* -> bat" pick"bat/bat"
-zinit light sharkdp/bat
+zinit for \
+  from'gh-r' \
+  sbin'**/gh' \
+  cli/cli
 
-zinit ice as"program" from"gh-r" mv"fd* -> fd" pick"fd/fd"
-zinit light sharkdp/fd
+zinit for \
+  from'gh-r' \
+  sbin'**/rg -> rg' \
+  BurntSushi/ripgrep
+
+zi for \
+  from'gh-r' \
+  lbin'!' \
+  id-as \
+  null \
+  @sharkdp/bat
+
+zinit pack'binary' for fzf
 
 # for bash_completion
 autoload -U +X bashcompinit && bashcompinit
