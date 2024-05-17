@@ -1,0 +1,4 @@
+/.vscode
+
+# anyenv local version
+.*-version

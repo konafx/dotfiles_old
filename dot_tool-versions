@@ -3,3 +3,4 @@ rust 1.78.0
 nodejs 22.2.0
 deno 1.43.4
 github-cli 2.49.2
+bun 1.1.8
