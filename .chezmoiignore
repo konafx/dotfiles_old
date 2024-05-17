@@ -1,0 +1,9 @@
+README.md
+
+*.txt
+*.md
+
+dosbin/**
+
+# temp
+cheatsheet/**

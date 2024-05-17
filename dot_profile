@@ -31,9 +31,6 @@ if [ -d "$HOME/.cargo" ] ; then
     PATH="$HOME/.cargo/bin:$PATH"
 fi
 
-if [ -f "$HOME/.cargo/env" ] ; then
-    fi
-
 if command -v bat &> /dev/null
 then
     export MANPAGER="sh -c 'col -bx | bat -l man -p'"
