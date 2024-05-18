@@ -1,11 +1,5 @@
 source "$HOME/.profile"
 
-export DOT_REPO="https://github.com/konafx/dotfiles.git"
-export DOT_DIR="$HOME/.dotfiles"
-fpath=($HOME/.zsh/dot $fpath)
-fpath=($HOME/.zsh/dot(N-/) $fpath)
-[[ -f  $HOME/.zsh/dot/dot.sh ]] && source $HOME/.zsh/dot/dot.sh
-
 # fzf
 export FZF_TMUX=1 # enable
 export FZF_TMUX_OPTS='-p 80%' # popup

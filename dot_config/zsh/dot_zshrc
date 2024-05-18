@@ -99,7 +99,7 @@ zinit wait"1c" lucid \
 # rust
 zinit wait"0a" lucid \
 	id-as"rust" rustup as"command" \
-	pick"bin/rustc" \
+	sbin"bin/rustc" \
 	atload="export CARGO_HOME=$PWD RUSTUP_HOME=$PWD/rustup" \
 	for @zdharma-continuum/null
 
@@ -127,10 +127,10 @@ zinit from"gh-r" lbin"!" nocompile aliases \
 
 # enhanced `cd`
 zinit wait"1c" lucid \
-	from"gh-r" as"program" \
+	from"gh-r" \
 	atclone"./zoxide init --cmd j zsh > init.zsh" \
 	atpull"%atclone" \
-	src"init.zsh" nocompile"!" \
+	src"init.zsh" nocompile"!" lbin"!" \
 	light-mode for @ajeetdsouza/zoxide
 
 zinit wait"2" lucid \
@@ -147,7 +147,7 @@ zinit wait"0c" lucid \
 # alt `find`
 zinit wait"1c" lucid \
 	blockf nocompletions \
-	from"gh-r" as"program" mv"fd* -> fd" \
+	from"gh-r" mv"fd* -> fd" \
 	sbin"fd/fd" \
 	atclone'
 		chown -R $(id -nu):$(id -nu) .;
@@ -160,8 +160,8 @@ zinit wait"1c" lucid \
 # alt `cat`
 zinit wait"1c" lucid \
 	blockf nocompletions nocompile aliases \
-	from"gh-r" as"program" mv"bat* -> bat" \
-	pick"bat/bat" cp"bat/autocomplete/bat.zsh -> _bat" \
+	from"gh-r" mv"bat* -> bat" \
+	sbin"bat/bat" cp"bat/autocomplete/bat.zsh -> _bat" \
 	atload"
 		setopt no_aliases;
 		alias cat=bat" \
@@ -169,9 +169,9 @@ zinit wait"1c" lucid \
 
 zinit wait"1c" lucid \
 	blockf nocompletions \
-	from"gh-r" as"program" \
+	from"gh-r" \
 	mv"gh* -> gh" \
-	pick"gh/bin/gh" \
+	sbin"gh/bin/gh" \
 	atclone'
 		mkdir -p $ZPFX/man/man1;
 		cp -vf gh/share/man/man1/* $ZPFX/man/man1;' \
@@ -182,8 +182,8 @@ zinit wait"1c" lucid \
 # alt `grep`
 zinit wait"1c" lucid \
 	blockf nocompletions \
-	from"gh-r" as"program" mv"ripgrep* -> rg" \
-	pick"rg/rg" cp"rg/complete/_rg -> _rg" \
+	from"gh-r" mv"ripgrep* -> rg" \
+	sbin"rg/rg" cp"rg/complete/_rg -> _rg" \
 	atclone'
 		chown -R $(id -nu):$(id -nu) .;
 		zinit creinstall -q BurntSushi/ripgrep;' \
