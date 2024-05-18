@@ -511,6 +511,7 @@ lazy.setup({
 		dependencies = { 'vim-denops/denops.vim' },
     lazy = false, -- todo: true
 		-- disable = true,
+    enabled = false,
 	},
 
 	-- CheatSheet

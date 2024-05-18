@@ -8,15 +8,17 @@ opt.title = true
 opt.relativenumber = true
 
 -- Indent {{{
--- tab to space
-opt.expandtab = true
+-- tab to space if true
+opt.expandtab = false
 -- 4 spaces are tab
 opt.tabstop = 4
 -- Tab押下→space何個, 0→tabstopの値を参照
 opt.softtabstop = 0
 -- インデントに使う空白の数
-opt.shiftwidth = 2
+opt.shiftwidth = 4
 opt.smartindent = true
+-- Insert indent
+opt.smarttab = true
 -- indentを守る
 opt.autoindent = true
 --- }}}
@@ -34,9 +36,7 @@ opt.scrolloff = 10
 opt.backupskip = { '/tmp/*', '/private/tmp/*' }
 opt.inccommand = 'split'
 opt.ignorecase = true -- Case insensitive searching UNLESS /C or capital in search
-opt.smarttab = true
 opt.breakindent = true
-opt.tabstop = 2
 opt.wrap = false -- No Wrap lines
 opt.backspace = { 'start', 'eol', 'indent' }
 opt.path:append({ '**' }) -- Finding files - Search down into subfolders

@@ -3,6 +3,9 @@ README.md
 *.txt
 *.md
 
+# nvim lazy lock
+**/nvim/lazy-lock.json
+
 dosbin/**
 
 # temp
