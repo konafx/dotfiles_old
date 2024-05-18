@@ -55,7 +55,5 @@
     defaultBranch = main
 [credential "https://github.com"]
 	helper = 
-	helper = !/home/konafx/.asdf/installs/github-cli/2.49.2/bin/gh auth git-credential
 [credential "https://gist.github.com"]
 	helper = 
-	helper = !/home/konafx/.asdf/installs/github-cli/2.49.2/bin/gh auth git-credential
