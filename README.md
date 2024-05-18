@@ -37,5 +37,5 @@ zsh plugin manager
 
 Install
 ```
-AFX_BIN_DIR="${LOCAL_BIN_DIR:-$HOME/.local/bin}" curl -sL https://raw.githubusercontent.com/b4b4r07/afx/HEAD/hack/install | bash
+curl -sL https://raw.githubusercontent.com/b4b4r07/afx/HEAD/hack/install | AFX_BIN_DIR="${LOCAL_BIN_DIR:-$HOME/.local/bin}" bash
 ```
