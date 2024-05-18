@@ -1,25 +1,31 @@
+# Prevent logging out with `Ctrl-D`
 setopt IGNOREEOF
 
-# 環境変数 {{{
+# Env {{{
 # export TRANSPARENT_TERM=1
-# }}}
+local cache_dir=${XDG_CACHE_HOME:-$HOME/.cache}
+mkdir -p $cache_dir
+# End of Env }}}
 
 # LOCALE {{{
 # export LC_TIME=en_US.utf-8
 # export LANG=ja_JP.utf-8
-# }}}
+# End of LOCALE }}}
 
 # Colored
-autoload -Uz colors
-colors
+autoload -Uz colors && colors
 
-# completion
-autoload -Uz compinit
-compinit
+# Completion {{{
+# Activate shell completion
+autoload -Uz compinit && compinit
 
+# menued and select prompt
 zstyle ':completion:*' menu true select
+# do not auto-complete
 zstyle ':completion:*:rm:*' menu false
-
+# match lower and upper
+zstyle ':completion:*:(cd|less):*' matcher 'm:{a-z}={A-Z}'
+# End of Completion }}}
 
 # 他のターミナルとヒストリーを共有
 setopt share_history
@@ -43,28 +49,28 @@ setopt pushd_ignore_dups
 # コマンドミスを修正
 setopt correct
 
-# alias {{{
+# Alias {{{
 alias -g @l='| less'
 alias -g @h='| head'
 alias -g @g='| grep'
 alias -g @gi='| grep -ri'
 
 source $HOME/.aliases
-# }}}
+# End of Alias }}}
 
 # cdの後にlsを実行
-chpwd() { ls -ltr --color=auto }
+# chpwd() { ls -ltr --color=auto }
 
 # どこからでも参照できるディレクトリパス
 cdpath=(~)
 
 ### Added by Zinit's installer {{{
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
-    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
-    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
-    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.zinit/bin" && \
-        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
-        print -P "%F{160}▓▒░ The clone has failed.%f%b"
+	print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
+	command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
+	command git clone --depth 1 https://github.com/zdharma-continuum/zinit "$HOME/.zinit/bin" && \
+		print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
+		print -P "%F{160}▓▒░ The clone has failed.%f%b"
 fi
 
 source "$HOME/.zinit/bin/zinit.zsh"
@@ -74,69 +80,130 @@ autoload -Uz _zinit
 # Load a few important annexes, without Turbo
 # (this is currently required for annexes)
 zinit light-mode for \
-    zdharma-continuum/z-a-rust \
-    zdharma-continuum/z-a-as-monitor \
-    zdharma-continuum/z-a-patch-dl \
-    zdharma-continuum/z-a-bin-gem-node
+	@zdharma-continuum/zinit-annex-rust \
+	@zdharma-continuum/zinit-annex-readurl \
+	@zdharma-continuum/zinit-annex-patch-dl \
+	@zdharma-continuum/zinit-annex-bin-gem-node \
+	@zdharma-continuum/zinit-annex-binary-symlink
 
 ### End of Zinit's installer chunk }}}
 
-zinit ice pick"async.zsh" src"pure.zsh"
-zinit light sindresorhus/pure
+zinit wait"1c" lucid \
+	blockf light-mode for \
+	@zsh-users/zsh-completions \
+	@zsh-users/zsh-autosuggestions \
+	@zsh-users/zaw \
+	@zdharma-continuum/history-search-multi-word
 
-zinit ice blockf
-zinit light zsh-users/zsh-completions
-zinit light zsh-users/zsh-autosuggestions
-zinit light zsh-users/zaw
-zinit light zdharma-continuum/history-search-multi-word
 
-zinit ice as"completion"
-zinit snippet 'https://raw.githubusercontent.com/docker/compose/master/contrib/completion/zsh/_docker-compose'
+# rust
+zinit wait"0a" lucid \
+	id-as"rust" rustup as"command" \
+	pick"bin/rustc" \
+	atload="export CARGO_HOME=$PWD RUSTUP_HOME=$PWD/rustup" \
+	for @zdharma-continuum/null
 
-zinit ice as"completion"
-zinit snippet 'https://raw.githubusercontent.com/x-motemen/ghq/master/misc/zsh/_ghq'
-
-zinit ice lucid wait="0" pick="asdf.sh"
-zinit light asdf-vm/asdf
+# minimum propmt
+zinit \
+	compile"(pure|async).zsh" pick"async.zsh" src"pure.zsh" \
+	for @sindresorhus/pure
 
 # zinit pack-ice requires `jq`
-zinit for \
-  from'gh-r' \
-  sbin'* -> jq' \
-  nocompile \
-  @jqlang/jq
+zinit wait"0a" lucid \
+	from"gh-r" sbin"* -> jq" nocompile \
+	for @jqlang/jq
 
-zinit for \
-  atclone'cp -vf completions/exa.zsh _exa' \
-  from'gh-r' \
-  sbin'**/exa -> exa' \
-  ogham/exa
+# alt `ls`, `tree`
+zinit from"gh-r" lbin"!" nocompile aliases \
+	atload"!(){
+		setopt no_aliases;
+		alias l='eza -blF';
+		alias la='eza -abghilmu';
+		alias ll='eza -al';
+		alias ls='eza --git --group-directories-first';
+		alias tree='eza --tree'}" \
+	if"[[ $VENDOR != apple ]]" \
+	light-mode for @eza-community/eza
 
-zinit for \
-  from'gh-r' \
-  lbin'!' \
-  id-as \
-  null \
-  @sharkdp/fd
+# enhanced `cd`
+zinit wait"1c" lucid \
+	from"gh-r" as"program" \
+	atclone"./zoxide init --cmd j zsh > init.zsh" \
+	atpull"%atclone" \
+	src"init.zsh" nocompile"!" \
+	light-mode for @ajeetdsouza/zoxide
 
-zinit for \
-  from'gh-r' \
-  sbin'**/gh' \
-  cli/cli
+zinit wait"2" lucid \
+	as"completion" for \
+	src"contrib/completion/zsh/_docker" depth"1" @docker/cli
 
-zinit for \
-  from'gh-r' \
-  sbin'**/rg -> rg' \
-  BurntSushi/ripgrep
+# git repository manager
+zinit wait"0c" lucid \
+	from"gh-r" mv"ghq* -> ghq" sbin"ghq" \
+	cp"misc/zsh/_ghq -> _ghq" \
+	light-mode for @x-motemen/ghq
 
-zi for \
-  from'gh-r' \
-  lbin'!' \
-  id-as \
-  null \
-  @sharkdp/bat
 
-zinit pack'binary' for fzf
+# alt `find`
+zinit wait"1c" lucid \
+	blockf nocompletions \
+	from"gh-r" as"program" mv"fd* -> fd" \
+	sbin"fd/fd" \
+	atclone'
+		chown -R $(id -nu):$(id -nu) .;
+		zinit creinstall -q sharkdp/fd;' \
+	for @sharkdp/fd
+#		mkdir -p $ZPFX/{bin,man/man1};
+#		cp -vf fd/autocomplete/_fd _fd;
+#		cp -vf fd/fd.1 $ZPFX/man/man1/fd.1;}' \
+
+# alt `cat`
+zinit wait"1c" lucid \
+	blockf nocompletions nocompile aliases \
+	from"gh-r" as"program" mv"bat* -> bat" \
+	pick"bat/bat" cp"bat/autocomplete/bat.zsh -> _bat" \
+	atload"
+		setopt no_aliases;
+		alias cat=bat" \
+	for @sharkdp/bat
+
+zinit wait"1c" lucid \
+	blockf nocompletions \
+	from"gh-r" as"program" \
+	mv"gh* -> gh" \
+	pick"gh/bin/gh" \
+	atclone'
+		mkdir -p $ZPFX/man/man1;
+		cp -vf gh/share/man/man1/* $ZPFX/man/man1;' \
+	atload'eval "$(gh completion -s zsh)"' \
+	for @cli/cli
+# TODO: cached completion file
+
+# alt `grep`
+zinit wait"1c" lucid \
+	blockf nocompletions \
+	from"gh-r" as"program" mv"ripgrep* -> rg" \
+	pick"rg/rg" cp"rg/complete/_rg -> _rg" \
+	atclone'
+		chown -R $(id -nu):$(id -nu) .;
+		zinit creinstall -q BurntSushi/ripgrep;' \
+	atpull'%atclone' \
+	for @BurntSushi/ripgrep
+
+zinit wait lucid \
+	configure"--disable-utf8proc" make \
+	for @tmux/tmux
+
+# tmux plugin manager
+zinit wait lucid \
+	as"null" id-as"tpm" \
+	atclone"!(){
+		mkdir -p $HOME/.tmux/plugins;
+		ln -sf $ZINIT[PLUGINS_DIR]/tpm $HOME/.tmux/plugins/tpm;}" \
+	atpull'%atclone' \
+	for @tmux-plugins/tpm
+
+zinit wait"2" pack"bgn" for fzf
 
 # for bash_completion
 autoload -U +X bashcompinit && bashcompinit
@@ -147,41 +214,35 @@ autoload -U +X bashcompinit && bashcompinit
 complete -C '/usr/local/bin/aws_completer' aws
 
 DISTRO=$(awk -F= '/^ID=/{print $2}' /etc/os-release)
-cmd_bat='bat'
-cmd_fd='fd'
-if [ "$DISTRO" = "ubuntu" ]; then
-    cmd_bat='batcat'
-    cmd_fd='fdfind'
-fi
 
 # ghq fzf
 function ghq-fzf() {
-    local src=$(ghq list | fzf-tmux -p 80% --preview "${cmd_bat} --color=always --style=header,grid --line-range :80 $(ghq root)/{}/README.*")
-    if [ -n "$src" ]; then
-        BUFFER="cd $(ghq root)/$src && tmux rename-window $(basename $src)"
-        zle accept-line
-    fi
-    zle -R -c
+	local src=$(ghq list | fzf-tmux -p 80% --preview "${cmd_bat} --color=always --style=header,grid --line-range :80 $(ghq root)/{}/README.*")
+	if [ -n "$src" ]; then
+		BUFFER="cd $(ghq root)/$src && tmux rename-window $(basename $src)"
+		zle accept-line
+	fi
+	zle -R -c
 }
 zle -N ghq-fzf
 
 function ghq-updated-fzf() {
-    local sorted=$(ghq list | python -c "import os; import sys; print(''.join(sorted(sys.stdin.readlines(), key=lambda path: os.stat(f'$(ghq root)/{path.strip()}').st_mtime, reverse=True)))")
-    local src=$(echo $sorted | fzf-tmux -p 80% --preview "${cmd_bat} --color=always --style=header,grid --line-range :80 $(ghq root)/{}/README.*")
-    if [ -n "$src" ]; then
-        BUFFER="cd $(ghq root)/$src && tmux rename-window $(basename $src)"
-        zle accept-line
-    fi
-    zle -R -c
+	local sorted=$(ghq list | python -c "import os; import sys; print(''.join(sorted(sys.stdin.readlines(), key=lambda path: os.stat(f'$(ghq root)/{path.strip()}').st_mtime, reverse=True)))")
+	local src=$(echo $sorted | fzf-tmux -p 80% --preview "${cmd_bat} --color=always --style=header,grid --line-range :80 $(ghq root)/{}/README.*")
+	if [ -n "$src" ]; then
+		BUFFER="cd $(ghq root)/$src && tmux rename-window $(basename $src)"
+		zle accept-line
+	fi
+	zle -R -c
 }
 zle -N ghq-updated-fzf
 
 function git-status() {
-    if [ "$(git rev-parse --is-inside-work-tree 2> /dev/null)" = 'true' ]; then
-        echo git status -sb
-        git status -sb
-    fi
-    zle -R
+	if [ "$(git rev-parse --is-inside-work-tree 2> /dev/null)" = 'true' ]; then
+		echo git status -sb
+		git status -sb
+	fi
+	zle -R
 }
 zle -N git-status
 
@@ -189,16 +250,16 @@ zle -N git-status
 function ghq-tmux() {
   local selected_dir=$(ghq list -p | fzf-tmux -p 80% --reverse --query "$LBUFFER" --preview "${cmd_bat} --color=always --style=plain \$(find {} -maxdepth 1 | grep -i -e 'readme\(.\.*\)\?')")
   if [ -n "$selected_dir" ]; then
-    local repo=$(basename ${selected_dir})
-    BUFFER="tmux neww -S -n $repo -c $selected_dir"
-    zle accept-line
+	local repo=$(basename ${selected_dir})
+	BUFFER="tmux neww -S -n $repo -c $selected_dir"
+	zle accept-line
   fi
 }
 zle -N ghq-tmux
 
 # yq
 yq() {
-    docker run --rm -i -v "${PWD}":/workdir mikefarah/yq "$@"
+	docker run --rm -i -v "${PWD}":/workdir mikefarah/yq "$@"
 }
 
 # tty
@@ -212,18 +273,18 @@ if [ -f '$HOME/.cache/paru/clone/google-cloud-sdk/pkg/google-cloud-sdk/opt/googl
 if [ -f '$HOME/.cache/paru/clone/google-cloud-sdk/pkg/google-cloud-sdk/opt/google-cloud-sdk/completion.zsh.inc' ]; then . '$HOME/.cache/paru/clone/google-cloud-sdk/pkg/google-cloud-sdk/opt/google-cloud-sdk/completion.zsh.inc'; fi
 
 # cdr, add-zsh-hook を有効にする
-autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
-add-zsh-hook chpwd chpwd_recent_dirs
+autoload -Uz chpwd_recent_dirs cdr add-zsh-hook && add-zsh-hook chpwd chpwd_recent_dirs
 
 # cdr の設定
-local cache_dir="$HOME/.cache/shell"
-local chpwd_recent_dirs="$cache_dir/chpwd-recent-dirs"
+shell_cache_dir="$cache_dir/shell"
+chpwd_recent_dirs="$shell_cache_dir/chpwd-recent-dirs"
 zstyle ':completion:*' recent-dirs-insert both
 zstyle ':chpwd:*' recent-dirs-max 500
 zstyle ':chpwd:*' recent-dirs-default true
 zstyle ':chpwd:*' recent-dirs-file $chpwd_recent_dirs
 zstyle ':chpwd:*' recent-dirs-pushd true
 [ ! -e $chpwd_recent_dirs ] && mkdir -p $cache_dir; touch $chpwd_recent_dirs
+unset shell_cashe_dir chpwd_recent_dirs
 
 complete -o nospace -C /usr/bin/terraform terraform
 
