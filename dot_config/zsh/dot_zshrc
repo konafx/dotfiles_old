@@ -311,3 +311,9 @@ bindkey '^t' zaw-tmux
 
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 function gi() { curl -sLw "\n" https://www.toptal.com/developers/gitignore/api/$@ ;}
+
+
+zinit wait lucid \
+	as"null" id-as"mise" \
+	atload"source $ZRCDIR/pluginconfig/mise.zsh" \
+	light-mode for @zdharma-continuum/null

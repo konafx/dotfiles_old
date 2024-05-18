@@ -1,0 +1,5 @@
+[tools]
+node = "20"
+deno = "latest"
+bun = "latest"
+python = "3"

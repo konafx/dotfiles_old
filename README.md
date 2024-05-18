@@ -30,12 +30,23 @@ zsh plugin manager
 [zdharma-continuum/zinit: 🌻 Flexible and fast ZSH plugin manager](https://github.com/zdharma-continuum/zinit)
 
 
+## mise
+[mise-en-place](https://mise.jdx.dev/)
+
+```
+curl https://mise.run | MISE_INSTALL_PATH="${LOCAL_BIN_DIR:-$HOME/.local/bin}" sh
+```
+
+<!--
 ## afx
 [WIP]
+
 [AFX](https://babarot.me/afx/)
 
 
 Install
 ```
 curl -sL https://raw.githubusercontent.com/b4b4r07/afx/HEAD/hack/install | AFX_BIN_DIR="${LOCAL_BIN_DIR:-$HOME/.local/bin}" bash
+mkdir -p $XDG_CONFIG_HOME/afx
 ```
+-->

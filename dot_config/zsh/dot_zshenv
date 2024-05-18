@@ -38,6 +38,7 @@ export EDITOR=/usr/bin/nvim
 path=(
 	$GOPATH/bin(N-/)
 	$LOCAL_BIN_DIR(N-/)
+	$XDG_DATA_HOME/mise/shims(N-/)
 	$path
 )
 export PATH
