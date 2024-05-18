@@ -39,8 +39,6 @@
     gpgsign = false
 [pull]
     rebase = true
-[include]
-    path = ~/.gitconfig.local
 [url "https://github.com/"]
     pushInsteadOf = git@github.com:
 [diff]
@@ -57,3 +55,5 @@
 	helper = 
 [credential "https://gist.github.com"]
 	helper = 
+[include]
+    path = ~/.gitconfig.local
