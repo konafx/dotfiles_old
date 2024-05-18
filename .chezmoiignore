@@ -5,6 +5,7 @@ README.md
 
 # nvim lazy lock
 **/nvim/lazy-lock.json
+dot_config/zsh/completions.local/*
 
 dosbin/**
 

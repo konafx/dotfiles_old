@@ -1,7 +1,33 @@
+export LC_ALL="${LC_ALL:-ja_JP.UTF-8}"
+export LANG="${LANG:-ja_JP.UTF-8}"
+
 # Export the following environment variable in */etc/zsh/zshenv*
 # export ZDOTDIR="$HOME"/.config/zsh
+export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
+export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
 
-export XDG_DATA_HOME=$HOME/.local/share
-export XDG_CONFIG_HOME=$HOME/.config/
-export XDG_STATE_HOME=$HOME/.local/state
-export XDG_CACHE_HOME=$HOME/.cache
+export ZDOTDIR=${ZDOTDIR:-"$HOME"/.config/zsh}
+export ZHOMEDIR=${ZDOTDIR:-"$HOME"/.config/zsh}
+export ZSTATEDIR=$XDG_STATE_HOME/zsh
+export ZDATADIR=$XDG_DATA_HOME/zsh
+export ZCACHEDIR=$XDG_CACHE_HOME/zsh
+
+export ZRCDIR=$ZHOMEDIR/rc
+
+export EDITOR=/usr/bin/nvim
+
+path=(
+	$path
+)
+export PATH
+typeset -U PATH
+
+fpath=(
+	$ZHOMEDIR/completions.local(N-/)
+	$ZHOMEDIR/completions(N-/)
+	$fpath
+)
+export FPATH
+typeset -U FPATH

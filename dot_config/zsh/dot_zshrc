@@ -1,11 +1,10 @@
-# Prevent logging out with `Ctrl-D`
-setopt IGNOREEOF
+# mkdir xdg's
+[[ -n $ZDATADIR ]] && mkdir -p "$ZDATADIR"
+[[ -n $ZSTATEDIR ]] && mkdir -p "$ZSTATEDIR"
+[[ -n $ZCACHEDIR ]] && mkdir -p "$ZCACHEDIR"
 
-# Env {{{
-# export TRANSPARENT_TERM=1
-local cache_dir=${XDG_CACHE_HOME:-$HOME/.cache}
-mkdir -p $cache_dir
-# End of Env }}}
+# Prevent logging out with `Ctrl-D`
+setopt IGNORE_EOF
 
 # LOCALE {{{
 # export LC_TIME=en_US.utf-8
@@ -27,27 +26,28 @@ zstyle ':completion:*:rm:*' menu false
 zstyle ':completion:*:(cd|less):*' matcher 'm:{a-z}={A-Z}'
 # End of Completion }}}
 
-# 他のターミナルとヒストリーを共有
-setopt share_history
-
-# ヒストリーに重複を表示しない
-setopt histignorealldups
-
-HISTFILE=~/.zsh_history
-HISTSIZE=10000
-SAVEHIST=10000
+# History {{{
+HISTFILE=$ZSTATEDIR/history
+(( HISTSIZE = (2 ** 31) -1 ))
+(( SAVEHIST = (2 ** 31) -1 ))
+# Write to the history file immediately, not when the shell exits
+setopt INC_APPEND_HISTORY
+# Share history between all session
+setopt SHARE_HISTORY
+# Deduplicate
+setopt HIST_IGNORE_ALL_DUPS
+# Ignore commands starting with space
+setopt HIST_IGNORE_SPACE
+# End of History }}}
 
 # cdコマンドを省略して、ディレクトリ名のみの入力で移動
-setopt auto_cd
-
+setopt AUTO_CD
 # 自動でpushdを実行
-setopt auto_pushd
-
+setopt AUTO_PUSHD
 # pushdから重複を削除
-setopt pushd_ignore_dups
-
+setopt PUSHD_IGNORE_DUPS
 # コマンドミスを修正
-setopt correct
+setopt CORRECT
 
 # Alias {{{
 alias -g @l='| less'
@@ -64,18 +64,21 @@ source $HOME/.aliases
 # どこからでも参照できるディレクトリパス
 cdpath=(~)
 
-### Added by Zinit's installer {{{
-if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
-	print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
-	command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
-	command git clone --depth 1 https://github.com/zdharma-continuum/zinit "$HOME/.zinit/bin" && \
+### Zinit install {{{
+ZINIT_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/zinit/zinit.git"
+if [[ ! -d $ZINIT_HOME ]]; then
+	print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
+	command mkdir -p "$(dirname $ZINIT_HOME)" && command chmod g-rwX "$(dirname $ZINIT_HOME)"
+	[[ ! -d $ZINIT_HOME/.git ]] && \
+		command git clone --depth 1 https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME" && \
 		print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
 		print -P "%F{160}▓▒░ The clone has failed.%f%b"
 fi
 
-source "$HOME/.zinit/bin/zinit.zsh"
+source "$ZINIT_HOME/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
+### End of Zinit install }}}
 
 # Load a few important annexes, without Turbo
 # (this is currently required for annexes)
@@ -95,17 +98,16 @@ zinit wait"1c" lucid \
 	@zsh-users/zaw \
 	@zdharma-continuum/history-search-multi-word
 
-
 # rust
 zinit wait"0a" lucid \
-	id-as"rust" rustup as"command" \
+	if"! command -v rustc >/dev/null" id-as"rust" rustup as"command" \
 	sbin"bin/rustc" \
 	atload="export CARGO_HOME=$PWD RUSTUP_HOME=$PWD/rustup" \
 	for @zdharma-continuum/null
 
 # minimum propmt
 zinit \
-	compile"(pure|async).zsh" pick"async.zsh" src"pure.zsh" \
+	compile"(pure|async).zsh" multisrc"(pure|async).zsh" \
 	for @sindresorhus/pure
 
 # zinit pack-ice requires `jq`
@@ -114,15 +116,10 @@ zinit wait"0a" lucid \
 	for @jqlang/jq
 
 # alt `ls`, `tree`
-zinit from"gh-r" lbin"!" nocompile aliases \
-	atload"!(){
-		setopt no_aliases;
-		alias l='eza -blF';
-		alias la='eza -abghilmu';
-		alias ll='eza -al';
-		alias ls='eza --git --group-directories-first';
-		alias tree='eza --tree'}" \
-	if"[[ $VENDOR != apple ]]" \
+zinit wait"1" lucid \
+	from"gh-r" aliases \
+	atload"source $ZRCDIR/pluginconfig/eza_atload.zsh" \
+	lbin"!" \
 	light-mode for @eza-community/eza
 
 # enhanced `cd`
@@ -143,7 +140,6 @@ zinit wait"0c" lucid \
 	cp"misc/zsh/_ghq -> _ghq" \
 	light-mode for @x-motemen/ghq
 
-
 # alt `find`
 zinit wait"1c" lucid \
 	blockf nocompletions \
@@ -153,19 +149,24 @@ zinit wait"1c" lucid \
 		chown -R $(id -nu):$(id -nu) .;
 		zinit creinstall -q sharkdp/fd;' \
 	for @sharkdp/fd
-#		mkdir -p $ZPFX/{bin,man/man1};
-#		cp -vf fd/autocomplete/_fd _fd;
-#		cp -vf fd/fd.1 $ZPFX/man/man1/fd.1;}' \
 
 # alt `cat`
 zinit wait"1c" lucid \
 	blockf nocompletions nocompile aliases \
 	from"gh-r" mv"bat* -> bat" \
 	sbin"bat/bat" cp"bat/autocomplete/bat.zsh -> _bat" \
-	atload"
-		setopt no_aliases;
-		alias cat=bat" \
+	atclone'
+		chown -R $(id -nu):$(id -nu) .;
+		zinit creinstall -q sharkdp/bat;' \
+	atload"source $ZRCDIR/pluginconfig/bat_atload.zsh" \
 	for @sharkdp/bat
+
+# alt `grep`
+zinit wait"1c" lucid \
+	blockf completions \
+	from"gh-r" mv"ripgrep* -> rg" \
+	sbin"rg/rg" \
+	for @BurntSushi/ripgrep
 
 zinit wait"1c" lucid \
 	blockf nocompletions \
@@ -175,20 +176,8 @@ zinit wait"1c" lucid \
 	atclone'
 		mkdir -p $ZPFX/man/man1;
 		cp -vf gh/share/man/man1/* $ZPFX/man/man1;' \
-	atload'eval "$(gh completion -s zsh)"' \
+	atload"source $ZRCDIR/pluginconfig/gh_atload.zsh" \
 	for @cli/cli
-# TODO: cached completion file
-
-# alt `grep`
-zinit wait"1c" lucid \
-	blockf nocompletions \
-	from"gh-r" mv"ripgrep* -> rg" \
-	sbin"rg/rg" cp"rg/complete/_rg -> _rg" \
-	atclone'
-		chown -R $(id -nu):$(id -nu) .;
-		zinit creinstall -q BurntSushi/ripgrep;' \
-	atpull'%atclone' \
-	for @BurntSushi/ripgrep
 
 zinit wait lucid \
 	configure"--disable-utf8proc" make \
@@ -197,9 +186,9 @@ zinit wait lucid \
 # tmux plugin manager
 zinit wait lucid \
 	as"null" id-as"tpm" \
-	atclone"!(){
-		mkdir -p $HOME/.tmux/plugins;
-		ln -sf $ZINIT[PLUGINS_DIR]/tpm $HOME/.tmux/plugins/tpm;}" \
+	atclone"
+		mkdir -p \$XDG_DATA_HOME/tmux/plugins;
+		ln -sf \$ZINIT[PLUGINS_DIR]/tpm \$XDG_DATA_HOME/tmux/plugins/tpm;" \
 	atpull'%atclone' \
 	for @tmux-plugins/tpm
 
@@ -276,15 +265,14 @@ if [ -f '$HOME/.cache/paru/clone/google-cloud-sdk/pkg/google-cloud-sdk/opt/googl
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook && add-zsh-hook chpwd chpwd_recent_dirs
 
 # cdr の設定
-shell_cache_dir="$cache_dir/shell"
-chpwd_recent_dirs="$shell_cache_dir/chpwd-recent-dirs"
+chpwd_recent_dirs="$ZCACHEDIR/chpwd-recent-dirs"
 zstyle ':completion:*' recent-dirs-insert both
 zstyle ':chpwd:*' recent-dirs-max 500
 zstyle ':chpwd:*' recent-dirs-default true
 zstyle ':chpwd:*' recent-dirs-file $chpwd_recent_dirs
 zstyle ':chpwd:*' recent-dirs-pushd true
-[ ! -e $chpwd_recent_dirs ] && mkdir -p $cache_dir; touch $chpwd_recent_dirs
-unset shell_cashe_dir chpwd_recent_dirs
+[ ! -e $chpwd_recent_dirs ] &&  touch $chpwd_recent_dirs
+unset chpwd_recent_dirs
 
 complete -o nospace -C /usr/bin/terraform terraform
 

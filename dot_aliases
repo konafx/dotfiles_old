@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # ls {{{
+# avoid record
 alias ls='ls --color=auto'
 alias lst='ls -ltr'
 alias l='ls'
@@ -34,15 +35,7 @@ alias t='tmux'
 alias d='docker'
 alias dc='docker-compose'
 
-DISTRO=$(awk -F= '/^ID=/{print $2}' /etc/os-release)
-if [ "$DISTRO" = "arch" ]; then
-    alias pc='pacman'
-fi
-
-if [ "$DISTRO" = "ubuntu" ]; then
-    alias bat='batcat'
-    alias fd='fdfind'
-fi
+#DISTRO=$(awk -F= '/^ID=/{print $2}' /etc/os-release)
 
 alias tf='terraform'
 
