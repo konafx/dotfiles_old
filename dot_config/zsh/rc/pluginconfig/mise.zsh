@@ -1,6 +1,4 @@
 # TODO: Follow changes in mise
-if [[ ! -r $ZHOMEDIR/completion.local/_mise ]]; then
-	command -v $LOCAL_BIN_DIR/mise && \
-		command $LOCAL_BIN_DIR/mise activate zsh \
-		> $ZHOMEDIR/completion.local/_mise
+if [[ ! -r $ZHOMEDIR/completions.local/_mise ]]; then
+	mise completion zsh > $ZHOMEDIR/completions.local/_mise
 fi
