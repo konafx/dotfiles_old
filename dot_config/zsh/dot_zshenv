@@ -1,11 +1,25 @@
-# LC {{{
-export LC_ALL="${LC_ALL:-ja_JP.UTF-8}"
+# Locale {{{
+unset LC_ALL
 export LANG="${LANG:-ja_JP.UTF-8}"
-# End of LC }}}
+# Defined by POSIX
+unset LC_COLLATE
+export LC_TIME="${LC_TIME:-C.UTF-8}"
+export LC_CTYPE="${LC_CTYPE:-ja_JP.UTF-8}"
+export LC_MESSAGE="${LC_MESSAGE:-C.UTF-8}"
+export LC_MONETARY="${LC_MONETARY:-C.UTF-8}"
+export LC_NUMERIC="${LC_NUMERIC:C.UTF-8}"
+# GNU C library supports the following nonstandard categories
+unset LC_PAPER
+unset LC_NAME
+unset LC_ADDRESS
+unset LC_TELEPHONE
+unset LC_MEASUREMENT
+unset LC_IDENTIFICATION
+# End of Locale }}}
 
 # XDG Base Directory {{{
 # Export the following environment variable in */etc/zsh/zshenv*
-# export ZDOTDIR="$HOME"/.config/zsh
+#   export ZDOTDIR="$HOME"/.config/zsh
 export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
