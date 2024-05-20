@@ -281,33 +281,49 @@ lazy.setup({
 	-- comment
 	-- 'tyru/caw.vim',
 	{
-    'tpope/vim-commentary',
-    -- after/plugin/commentary.rc.lua
-    keys = {
-      '<Plug>Commentary',
-      '<Plug>CommentaryLine',
-    },
-  },
-
+		'tpope/vim-commentary',
+		-- after/plugin/commentary.rc.lua
+		keys = {
+			'<Plug>Commentary',
+			'<Plug>CommentaryLine',
+		},
+	},
 	-- dial, cycle
 	{
 		'monaqa/dial.nvim',
-    keys = {
-      { '<C-a>', nil, {'n', 'v'} },
-      { '<C-x>', nil, {'n', 'v'} },
-      { '<C-x>', nil, {'n', 'v'} },
-      { 'g<C-a>', nil, 'v'},
-      { 'g<C-x>', nil, 'v'},
-    },
+		keys = {
+			{ '<C-a>', nil, {'n', 'v'} },
+			{ '<C-x>', nil, {'n', 'v'} },
+			{ 'g<C-a>', nil, {'n', 'v'}},
+			{ 'g<C-x>', nil, {'n', 'v'}},
+		},
 		config = function()
 			-- override keymap
 			local dialmap = require('dial.map')
-			vim.keymap.set('n', '<C-a>', dialmap.inc_normal(), { noremap = true })
-			vim.keymap.set('n', '<C-x>', dialmap.dec_normal(), { noremap = true })
-			vim.keymap.set('v', '<C-a>', dialmap.inc_visual(), { noremap = true })
-			vim.keymap.set('v', '<C-x>', dialmap.dec_visual(), { noremap = true })
-			vim.keymap.set('v', 'g<C-a>', dialmap.inc_gvisual(), { noremap = true })
-			vim.keymap.set('v', 'g<C-x>', dialmap.dec_gvisual(), { noremap = true })
+			vim.keymap.set('n', '<C-a>', function ()
+				dialmap.manipulate('increment', 'normal')
+			end)
+			vim.keymap.set('n', '<C-x>',  function ()
+				dialmap.manipulate('decrement', 'normal')
+			end)
+			vim.keymap.set('v', '<C-a>',  function ()
+				dialmap.manipulate('increment', 'visual')
+			end)
+			vim.keymap.set('v', '<C-x>',  function ()
+				dialmap.manipulate('decrement', 'visual')
+			end)
+			vim.keymap.set('n', 'g<C-a>', function ()
+				 dialmap.manipulate('increment', 'gnormal')
+			end)
+			vim.keymap.set('n', 'g<C-x>', function ()
+				 dialmap.manipulate('decrement', 'gnormal')
+			end)
+			vim.keymap.set('v', 'g<C-a>', function ()
+				 dialmap.manipulate('increment', 'gvisual')
+			end)
+			vim.keymap.set('v', 'g<C-x>', function ()
+				 dialmap.manipulate('decrement', 'gvisual')
+			end)
 
 			local augend = require('dial.augend')
 			require('dial.config').augends:register_group({
@@ -315,8 +331,26 @@ lazy.setup({
 				default = {
 					augend.integer.alias.decimal, -- nonnegative decimal number (0, 1, 2, 3, ...)
 					augend.integer.alias.hex, -- nonnegative hex number  (0x01, 0x1a1f, etc.)
-					augend.date.alias['%Y/%m/%d'], -- date (2022/02/19, etc.)
-				},
+					augend.constant.alias.bool,    -- boolean value (true <-> false)
+					augend.date.new({
+						pattern = '%Y/%m/%d',
+						default_kind = 'day',
+					}), -- date (2022/02/19, etc.)
+					augend.date.new({
+						pattern = "%Y-%m-%d",
+						default_kind = "day",
+					}),
+					augend.date.new({
+						pattern = "%m/%d",
+						default_kind = "day",
+						only_valid = true,
+					}),
+					augend.date.new({
+						pattern = "%H:%M",
+						only_valid = true,
+					}),
+					augend.constant.alias.ja_weekday_full,
+				}
 			})
 		end,
 	},
