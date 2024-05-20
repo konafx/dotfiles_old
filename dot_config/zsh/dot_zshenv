@@ -1,20 +1,20 @@
 # Locale {{{
-unset LC_ALL
+unset LC_ALL &> /dev/null
 export LANG="${LANG:-ja_JP.UTF-8}"
 # Defined by POSIX
-unset LC_COLLATE
+unset LC_COLLATE &> /dev/null
 export LC_TIME="${LC_TIME:-C.UTF-8}"
 export LC_CTYPE="${LC_CTYPE:-ja_JP.UTF-8}"
 export LC_MESSAGE="${LC_MESSAGE:-C.UTF-8}"
 export LC_MONETARY="${LC_MONETARY:-C.UTF-8}"
-export LC_NUMERIC="${LC_NUMERIC:C.UTF-8}"
+export LC_NUMERIC="${LC_NUMERIC:-C.UTF-8}"
 # GNU C library supports the following nonstandard categories
-unset LC_PAPER
-unset LC_NAME
-unset LC_ADDRESS
-unset LC_TELEPHONE
-unset LC_MEASUREMENT
-unset LC_IDENTIFICATION
+unset LC_PAPER &> /dev/null
+unset LC_NAME &> /dev/null
+unset LC_ADDRESS &> /dev/null
+unset LC_TELEPHONE &> /dev/null
+unset LC_MEASUREMENT &> /dev/null
+unset LC_IDENTIFICATION &> /dev/null
 # End of Locale }}}
 
 # XDG Base Directory {{{
