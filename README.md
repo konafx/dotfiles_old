@@ -35,7 +35,7 @@ zsh plugin manager
 
 Install
 ```sh
-curl https://mise.run | MISE_INSTALL_PATH="${LOCAL_BIN_DIR:-$HOME/.local/bin}" sh
+curl https://mise.run | MISE_INSTALL_PATH="${LOCAL_BIN_DIR:-$HOME/.local/bin}/mise" sh
 ```
 
 Usage
