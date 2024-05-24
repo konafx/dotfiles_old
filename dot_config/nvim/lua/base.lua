@@ -10,11 +10,11 @@ opt.relativenumber = true
 -- Indent {{{
 -- tab to space if true
 opt.expandtab = false
--- 4 spaces are tab
+-- n spaces are tab
 opt.tabstop = 4
--- Tab押下→space何個, 0→tabstopの値を参照
+-- replace tab to n spaces, or tabstop if this is 0
 opt.softtabstop = 0
--- インデントに使う空白の数
+-- indent is n spaces
 opt.shiftwidth = 4
 opt.smartindent = true
 -- Insert indent
