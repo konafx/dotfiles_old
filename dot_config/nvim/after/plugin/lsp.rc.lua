@@ -105,6 +105,9 @@ local on_attach = function(client, bufnr)
 	vim.keymap.set('n', '[lsp]c', '<Cmd>Lspsaga code_action<CR>', bufopts)
 	-- vim.keymap.set('n', '[lsp]r', vim.lsp.buf.references, bufopts)
 	-- vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
+	vim.keymap.set('n', '[lsp]F', function()
+		vim.lsp.buf.format({ async = true })
+	end)
 end
 --- }}}
 
@@ -127,8 +130,8 @@ mason_lspconfig.setup_handlers({
 			on_attach = on_attach,
 		})
 	end,
-	['sumneko_lua'] = function()
-		lspconfig.sumneko_lua.setup({
+	['lua_ls'] = function()
+		lspconfig.lua_ls.setup({
 			on_attach = on_attach,
 			settings = {
 				Lua = {

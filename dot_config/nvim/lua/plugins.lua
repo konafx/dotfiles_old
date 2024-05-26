@@ -164,13 +164,9 @@ lazy.setup({
 				automatic_installation = false,
 				automatic_setup = true,
 			})
-      require('null-ls').setup({
-	      capabilities = vim.lsp.protocol.make_client_capabilities(),
-      })
-
-      vim.keymap.set('n', '[lsp]F', function()
-        vim.lsp.buf.format({ name = 'none-ls' })
-      end)
+			require('null-ls').setup({
+				capabilities = vim.lsp.protocol.make_client_capabilities(),
+			})
 		end,
 	},
 
