@@ -35,9 +35,9 @@ opt.laststatus = 2
 opt.scrolloff = 10
 opt.backupskip = { '/tmp/*', '/private/tmp/*' }
 opt.inccommand = 'split'
-opt.ignorecase = true -- Case insensitive searching UNLESS /C or capital in search
+opt.ignorecase = true     -- Case insensitive searching UNLESS /C or capital in search
 opt.breakindent = true
-opt.wrap = false -- No Wrap lines
+opt.wrap = false          -- No Wrap lines
 opt.backspace = { 'start', 'eol', 'indent' }
 opt.path:append({ '**' }) -- Finding files - Search down into subfolders
 opt.wildignore:append({ '*/node_modules/*' })

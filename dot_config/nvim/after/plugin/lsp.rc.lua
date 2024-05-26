@@ -85,10 +85,10 @@ local on_attach = function(client, bufnr)
 	vim.keymap.set('n', '[lsp]<C-d>', vim.lsp.buf.definition, bufopts)
 	vim.keymap.set('n', '[lsp]d', '<Cmd>Lspsaga peek_definition<CR>', bufopts)
 	vim.keymap.set('n', '[lsp]i', vim.lsp.buf.implementation, bufopts)
-  vim.keymap.set('n', '[lsp]f', '<Cmd>Lspsaga lsp_finder<CR>', bufopts)
+	vim.keymap.set('n', '[lsp]f', '<Cmd>Lspsaga lsp_finder<CR>', bufopts)
 	vim.keymap.set('n', 'K', function() -- https://scrapbox.io/vim-jp/better_K_for_neovim_lua
 		if not lua_help() then
-      require('lspsaga.hover'):render_hover_doc()
+			require('lspsaga.hover'):render_hover_doc()
 			-- vim.lsp.buf.hover()
 		end
 	end, bufopts)
@@ -140,6 +140,7 @@ mason_lspconfig.setup_handlers({
 			},
 		})
 	end,
+
 	['tsserver'] = function()
 		lspconfig.tsserver.setup({
 			on_attach = on_attach,

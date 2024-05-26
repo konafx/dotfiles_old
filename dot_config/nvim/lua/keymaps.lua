@@ -32,8 +32,8 @@ keymap.set('v', '=', '=gv')
 keymap.set('n', '*', function()
 	return vim.v.count >= 1 and '*'
 		or [[<Cmd>sil exe "keepj norm! *" <Bar> call winrestview(]]
-			.. vim.fn.string(vim.fn.winsaveview())
-			.. ')<CR>'
+		.. vim.fn.string(vim.fn.winsaveview())
+		.. ')<CR>'
 end, { silent = true, expr = true })
 -- }}}
 
@@ -92,7 +92,7 @@ keymap.set('n', ']', '[lsp]', { remap = true })
 
 -- [term] {{{
 keymap.set('', '[term]', '<Nop>')
-keymap.set({'n', 't'}, '<Leader>t', '[term]', { remap = true })
+keymap.set({ 'n', 't' }, '<Leader>t', '[term]', { remap = true })
 -- https://zenn.dev/fuzmare/articles/vim-term-escape
 keymap.set('t', '<ESC>', '<C-\\><C-n><Plug>(esc)', { noremap = true })
 keymap.set('n', '<Plug>(esc)<ESC>', 'i<ESC>', { noremap = true })
