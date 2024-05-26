@@ -78,9 +78,9 @@ local on_attach = function(client, bufnr)
 	-- Mappings.
 	-- See `:help vim.lsp.*` for documentation on any of the below functions
 	local bufopts = { noremap = true, silent = true, buffer = bufnr }
-  vim.keymap.set('n', '[lsp][', '<Cmd>Lspsaga diagnostic_jump_prev<CR>', bufopts)
-  vim.keymap.set('n', '[lsp]]', '<Cmd>Lspsaga diagnostic_jump_next<CR>', bufopts)
-  vim.keymap.set('n', '[lsp]e', '<Cmd>Lspsaga show_cursor_diagnostics<CR>', bufopts)
+	vim.keymap.set('n', '[lsp][', '<Cmd>Lspsaga diagnostic_jump_prev<CR>', bufopts)
+	vim.keymap.set('n', '[lsp]]', '<Cmd>Lspsaga diagnostic_jump_next<CR>', bufopts)
+	vim.keymap.set('n', '[lsp]e', '<Cmd>Lspsaga show_cursor_diagnostics<CR>', bufopts)
 	vim.keymap.set('n', '[lsp]D', vim.lsp.buf.declaration, bufopts)
 	vim.keymap.set('n', '[lsp]<C-d>', vim.lsp.buf.definition, bufopts)
 	vim.keymap.set('n', '[lsp]d', '<Cmd>Lspsaga peek_definition<CR>', bufopts)

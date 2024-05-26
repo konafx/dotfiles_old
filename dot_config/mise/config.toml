@@ -1,6 +1,7 @@
 [tools]
-node = "20"
+node = "latest"
 deno = "latest"
 bun = "latest"
 python = "3"
 usage = "latest"
+yarn = "latest"

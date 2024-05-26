@@ -155,7 +155,7 @@ lazy.setup({
 		'jay-babu/mason-null-ls.nvim',
     lazy = false,
     dependencies = {
-	    'jose-elias-alvarez/null-ls.nvim',
+	    'nvimtools/none-ls.nvim',
 		  -- 'williamboman/mason.nvim',
     },
 		config = function()
@@ -169,7 +169,7 @@ lazy.setup({
       })
 
       vim.keymap.set('n', '[lsp]F', function()
-        vim.lsp.buf.format({ name = 'null-ls' })
+        vim.lsp.buf.format({ name = 'none-ls' })
       end)
 		end,
 	},
@@ -209,7 +209,18 @@ lazy.setup({
 	{
 		'windwp/nvim-ts-autotag',
 		config = function()
-			require('nvim-ts-autotag').setup()
+			require('nvim-ts-autotag').setup({
+				opts = {
+					enable_close = true,
+					enable_rename = true,
+					enable_close_on_slash = false
+				},
+				per_filetype = {
+					['html'] = {
+						enable_close = false
+					}
+				}
+			})
 		end,
 	},
 
